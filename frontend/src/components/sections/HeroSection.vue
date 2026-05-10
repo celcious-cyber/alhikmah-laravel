@@ -112,7 +112,7 @@ onMounted(() => {
         <img 
           src="/assets/images/banner.png" 
           alt="Al-Hikmah Student" 
-          class="hero-main-img relative -left-[10px] z-24 w-full max-w-[622px] h-auto object-contain transition-transform duration-700 hover:scale-105 cursor-pointer drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
+          class="hero-main-img relative -left-[20px] z-24 w-full max-w-[622px] h-auto object-contain transition-transform duration-700 hover:scale-105 cursor-pointer drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
         />
 
         <!-- Floating Assets with Mouse Parallax -->
