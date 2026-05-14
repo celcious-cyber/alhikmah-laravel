@@ -3,8 +3,37 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "mysql"
   url      = env("DATABASE_URL")
+}
+
+model Admin {
+  id        Int      @id @default(autoincrement())
+  username  String   @unique
+  password  String
+  name      String
+  createdAt DateTime @default(now())
+}
+
+model News {
+  id          Int      @id @default(autoincrement())
+  title       String
+  slug        String   @unique
+  excerpt     String   @db.Text
+  content     String   @db.LongText
+  thumbnail   String?
+  isPublished Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Gallery {
+  id        Int      @id @default(autoincrement())
+  imageUrl  String
+  caption   String?
+  category  String   @default("umum")
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
 }
 
 model Contact {
@@ -12,7 +41,8 @@ model Contact {
   name      String
   email     String
   phone     String
-  message   String
+  message   String   @db.Text
+  isRead    Boolean  @default(false)
   createdAt DateTime @default(now())
 }
 
@@ -23,6 +53,7 @@ model Registration {
   email       String
   phone       String
   grade       String
-  address     String
+  address     String   @db.Text
+  status      String   @default("pending")
   createdAt   DateTime @default(now())
 }

@@ -6,16 +6,20 @@
   "scripts": {
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
-    "build": "cd ../frontend && npm install && npm run build && cp -r dist ../backend/"
+    "build": "cd ../frontend && npm install && npm run build && cp -r dist ../backend/",
+    "seed": "node prisma/seed.js",
+    "db:push": "npx prisma db push",
+    "db:studio": "npx prisma studio"
   },
   "dependencies": {
-    "@prisma/client": "^6.19.3",
+    "@prisma/client": "^5.22.0",
+    "bcryptjs": "^2.4.3",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
-    "express": "^5.2.1",
+    "express": "^4.21.2",
     "jsonwebtoken": "^9.0.3",
-    "multer": "^2.1.1",
-    "prisma": "^6.19.3"
+    "multer": "^1.4.5-lts.1",
+    "prisma": "^5.22.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.14"
