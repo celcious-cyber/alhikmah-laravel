@@ -3,7 +3,7 @@ import { computed } from 'vue'
 import { useRoute, useRouter, RouterLink } from 'vue-router'
 import {
   LayoutDashboard, Newspaper, Image, ClipboardList,
-  MessageSquare, LogOut, Menu, X, ChevronRight
+  MessageSquare, LogOut, Menu, X, ChevronRight, GraduationCap
 } from 'lucide-vue-next'
 
 const route = useRoute()
@@ -14,6 +14,7 @@ const navItems = [
   { path: '/admin/news', label: 'Berita', icon: Newspaper },
   { path: '/admin/gallery', label: 'Galeri', icon: Image },
   { path: '/admin/registrations', label: 'Pendaftaran', icon: ClipboardList },
+  { path: '/admin/scholarships', label: 'Beasiswa', icon: GraduationCap },
   { path: '/admin/messages', label: 'Pesan Masuk', icon: MessageSquare },
 ]
 

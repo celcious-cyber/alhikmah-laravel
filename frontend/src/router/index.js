@@ -3,6 +3,7 @@ import HomePage from '../views/HomePage.vue'
 import ActivitiesPage from '../views/ActivitiesPage.vue'
 import RegistrationPage from '../views/RegistrationPage.vue'
 import GalleryPage from '../views/GalleryPage.vue'
+import ScholarshipPage from '../views/ScholarshipPage.vue'
 
 // Admin pages
 import AdminLoginPage from '../views/admin/LoginPage.vue'
@@ -11,6 +12,7 @@ import AdminNewsPage from '../views/admin/NewsPage.vue'
 import AdminGalleryPage from '../views/admin/GalleryPage.vue'
 import AdminRegistrationsPage from '../views/admin/RegistrationsPage.vue'
 import AdminMessagesPage from '../views/admin/MessagesPage.vue'
+import AdminScholarshipsPage from '../views/admin/ScholarshipsPage.vue'
 
 const routes = [
   // Public Routes
@@ -18,6 +20,7 @@ const routes = [
   { path: '/agenda', name: 'activities', component: ActivitiesPage },
   { path: '/register', name: 'register', component: RegistrationPage },
   { path: '/spsb26', name: 'spsb26', component: RegistrationPage },
+  { path: '/pbs26', name: 'pbs26', component: ScholarshipPage },
   { path: '/gallery', name: 'gallery', component: GalleryPage },
 
   // Admin Routes
@@ -55,6 +58,12 @@ const routes = [
     path: '/admin/messages',
     name: 'admin-messages',
     component: AdminMessagesPage,
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/admin/scholarships',
+    name: 'admin-scholarships',
+    component: AdminScholarshipsPage,
     meta: { requiresAuth: true }
   },
 ]

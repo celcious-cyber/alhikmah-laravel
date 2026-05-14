@@ -100,7 +100,14 @@ onMounted(() => {
               {{ $t('hero.cta_register') }}
             </BaseButton>
           </router-link>
-          <BaseButton variant="outline" size="lg" href="#program" class="!border-white !text-white hover:!bg-white hover:!text-primary px-10 min-w-[240px] justify-center h-14 !rounded-full text-lg flex items-center gap-2">
+          
+          <router-link to="/pbs26">
+            <BaseButton variant="outline" size="lg" class="!border-secondary !text-secondary hover:!bg-secondary hover:!text-primary px-10 min-w-[240px] justify-center h-14 !rounded-full text-lg flex items-center gap-2">
+              Beasiswa (PBS26)
+            </BaseButton>
+          </router-link>
+
+          <BaseButton variant="outline" size="lg" href="#program" class="!border-white/30 !text-white/60 hover:!bg-white/10 hover:!text-white px-10 min-w-[240px] justify-center h-14 !rounded-full text-lg flex items-center gap-2">
             {{ $t('hero.cta_explore') }}
           </BaseButton>
         </div>

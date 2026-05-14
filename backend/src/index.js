@@ -20,6 +20,8 @@ import authRoutes from './routes/auth.js'
 import newsRoutes from './routes/news.js'
 import galleryRoutes from './routes/gallery.js'
 import adminRegistrationRoutes from './routes/registrations.js'
+import scholarshipRoutes from './routes/scholarship.js'
+import scholarshipsAdminRoutes from './routes/scholarships_admin.js'
 
 dotenv.config()
 
@@ -72,6 +74,8 @@ app.use('/api/auth', authRoutes)
 app.use('/api/news', newsRoutes)
 app.use('/api/gallery', galleryRoutes)
 app.use('/api/registrations', adminRegistrationRoutes)
+app.use('/api/beasiswa', scholarshipRoutes)
+app.use('/api/admin/beasiswa', scholarshipsAdminRoutes)
 
 // Handle SPA routing - kirim index.html untuk semua rute non-API
 app.get('*', (req, res) => {

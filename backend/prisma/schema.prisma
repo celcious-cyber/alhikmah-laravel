@@ -112,3 +112,24 @@ model Pendaftaran {
 
   @@map("pendaftaran")
 }
+
+model Beasiswa {
+  id                    BigInt   @id @default(autoincrement())
+  no_registrasi         String?  @db.VarChar(255)
+  jenis_beasiswa        String   @db.VarChar(255) // Akademik, Non-Akademik, Tahfidz, Tidak Mampu
+  nama_lengkap          String   @db.VarChar(255)
+  email_pendaftar       String?  @db.VarChar(255)
+  telepon               String?  @db.VarChar(255)
+  asal_sekolah          String?  @db.VarChar(255)
+  prestasi_deskripsi    String?  @db.Text
+  file_sertifikat       String?  @db.VarChar(255) // Untuk Akademik/Non/Tahfidz
+  file_sk_hafalan       String?  @db.VarChar(255) // Khusus Tahfidz
+  file_sktm             String?  @db.VarChar(255) // Khusus Tidak Mampu
+  file_rekomendasi      String?  @db.VarChar(255)
+  file_komitmen         String?  @db.VarChar(255)
+  verified              Boolean  @default(false)
+  created_at            DateTime @default(now())
+  updated_at            DateTime @updatedAt
+
+  @@map("beasiswa")
+}
