@@ -2,7 +2,7 @@
 import { ref, onMounted, computed } from 'vue'
 import AdminLayout from '../../components/admin/AdminLayout.vue'
 import axios from 'axios'
-import { GraduationCap, CheckCircle, Clock, Trash2, Search, ExternalLink, X } from 'lucide-vue-next'
+import { GraduationCap, CheckCircle, Clock, Trash2, Search, ExternalLink, X, ArrowLeft } from 'lucide-vue-next'
 
 const API_URL = import.meta.env.VITE_API_URL || ''
 const token = localStorage.getItem('admin_token')
@@ -65,6 +65,12 @@ onMounted(fetchScholarships)
 
 <template>
   <AdminLayout>
+    <!-- Back Button -->
+    <router-link to="/admin/dashboard" class="inline-flex items-center gap-2 text-white/40 hover:text-white text-sm mb-6 transition-colors group">
+      <ArrowLeft :size="16" class="group-hover:-translate-x-1 transition-transform" />
+      Kembali ke Dashboard
+    </router-link>
+
     <div class="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
       <div>
         <h2 class="text-2xl font-bold text-white">Data Beasiswa (PBS26)</h2>
