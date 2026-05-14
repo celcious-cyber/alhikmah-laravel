@@ -117,28 +117,6 @@ onMounted(() => {
           alt="Al-Hikmah Student" 
           class="hero-main-img relative -left-[20px] z-24 w-full max-w-[622px] h-auto object-contain transition-transform duration-700 hover:scale-105 cursor-pointer drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
         />
-
-        <!-- Floating Assets with Mouse Parallax -->
-        <div class="parallax-layer-1 absolute inset-0 z-30 pointer-events-none">
-          <img 
-            src="/assets/images/gold-medal.png" 
-            class="floating-asset absolute top-[180px] right-[30px] w-[146px] rotate-[12.77deg] pointer-events-auto hover:scale-125 transition-transform duration-300 cursor-pointer"
-            alt="gold-medal"
-          />
-        </div>
-
-        <div class="parallax-layer-2 absolute inset-0 z-30 pointer-events-none">
-          <img 
-            src="/assets/images/approve-badge.png" 
-            class="floating-asset absolute top-[480px] right-[80px] w-[128px] rotate-[-12.77deg] pointer-events-auto hover:scale-125 transition-transform duration-300 cursor-pointer"
-            alt="approve-badge"
-          />
-          <img 
-            src="/assets/images/cursor.png" 
-            class="floating-asset absolute top-[350px] left-[30px] w-[120px] rotate-180 pointer-events-auto hover:scale-125 transition-transform duration-300 cursor-pointer"
-            alt="Cursor"
-          />
-        </div>
       </div>
     </div>
   </section>
