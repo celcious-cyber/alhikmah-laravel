@@ -67,7 +67,7 @@ app.get('/api/health', (req, res) => {
 
 // API Routes
 app.use('/api/contact', contactRoutes)
-app.use('/api/registration', registrationRoutes)
+app.use('/api/pendaftaran', registrationRoutes)
 app.use('/api/auth', authRoutes)
 app.use('/api/news', newsRoutes)
 app.use('/api/gallery', galleryRoutes)
