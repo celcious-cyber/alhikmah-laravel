@@ -24,6 +24,8 @@ const scholarshipTypes = [
 const form = reactive({
   jenis_beasiswa: '',
   nama_lengkap: '',
+  tempat_lahir: '',
+  tanggal_lahir: '',
   email_pendaftar: '',
   telepon: '',
   asal_sekolah: '',
@@ -141,6 +143,16 @@ const submitForm = async () => {
                   <div class="space-y-2">
                     <label class="text-xs font-bold text-white/40 ml-1 uppercase">Nama Lengkap</label>
                     <input v-model="form.nama_lengkap" type="text" required class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:border-secondary/50 focus:ring-4 focus:ring-secondary/10 outline-none transition-all placeholder:text-white/10" placeholder="Sesuai Ijazah">
+                  </div>
+                  <div class="grid grid-cols-2 gap-4">
+                    <div class="space-y-2">
+                      <label class="text-xs font-bold text-white/40 ml-1 uppercase">Tempat Lahir</label>
+                      <input v-model="form.tempat_lahir" type="text" required class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:border-secondary/50 focus:ring-4 focus:ring-secondary/10 outline-none transition-all placeholder:text-white/10" placeholder="Kota / Kab">
+                    </div>
+                    <div class="space-y-2">
+                      <label class="text-xs font-bold text-white/40 ml-1 uppercase">Tanggal Lahir</label>
+                      <input v-model="form.tanggal_lahir" type="date" required class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:border-secondary/50 focus:ring-4 focus:ring-secondary/10 outline-none transition-all placeholder:text-white/10">
+                    </div>
                   </div>
                   <div class="space-y-2">
                     <label class="text-xs font-bold text-white/40 ml-1 uppercase">Email Aktif</label>

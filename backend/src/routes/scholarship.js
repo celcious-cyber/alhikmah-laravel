@@ -63,6 +63,8 @@ router.post('/', upload.fields([
       no_registrasi: noRegistrasi,
       jenis_beasiswa: data.jenis_beasiswa,
       nama_lengkap: data.nama_lengkap,
+      tempat_lahir: data.tempat_lahir,
+      tanggal_lahir: data.tanggal_lahir,
       email_pendaftar: data.email_pendaftar,
       telepon: data.telepon,
       asal_sekolah: data.asal_sekolah,

@@ -118,6 +118,8 @@ model Beasiswa {
   no_registrasi         String?  @db.VarChar(255)
   jenis_beasiswa        String   @db.VarChar(255) // Akademik, Non-Akademik, Tahfidz, Tidak Mampu
   nama_lengkap          String   @db.VarChar(255)
+  tempat_lahir          String?  @db.VarChar(255)
+  tanggal_lahir         String?  @db.VarChar(255)
   email_pendaftar       String?  @db.VarChar(255)
   telepon               String?  @db.VarChar(255)
   asal_sekolah          String?  @db.VarChar(255)

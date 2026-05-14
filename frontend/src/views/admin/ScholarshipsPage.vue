@@ -132,15 +132,17 @@ onMounted(fetchScholarships)
             <button @click="selectedReg = null" class="p-2 hover:bg-white/5 rounded-full text-white/40"><X :size="24" /></button>
           </div>
 
-          <div class="p-8 overflow-y-auto space-y-6 flex-1">
-            <div class="grid grid-cols-2 gap-6">
-              <div><p class="text-[10px] text-white/40 uppercase">Nama Lengkap</p><p class="text-sm font-bold text-white">{{ selectedReg.nama_lengkap }}</p></div>
-              <div><p class="text-[10px] text-white/40 uppercase">Jenis Beasiswa</p><p class="text-sm font-bold text-secondary">{{ selectedReg.jenis_beasiswa }}</p></div>
-              <div><p class="text-[10px] text-white/40 uppercase">Email</p><p class="text-sm text-white/80">{{ selectedReg.email_pendaftar }}</p></div>
-              <div><p class="text-[10px] text-white/40 uppercase">Telepon</p><p class="text-sm text-white/80">{{ selectedReg.telepon }}</p></div>
-              <div class="col-span-2"><p class="text-[10px] text-white/40 uppercase">Asal Sekolah</p><p class="text-sm text-white/80">{{ selectedReg.asal_sekolah }}</p></div>
-              <div class="col-span-2"><p class="text-[10px] text-white/40 uppercase">Deskripsi Prestasi</p><p class="text-sm text-white/80 leading-relaxed">{{ selectedReg.prestasi_deskripsi || '-' }}</p></div>
-            </div>
+              <div class="space-y-4">
+                <h4 class="text-[10px] font-bold text-white/30 uppercase tracking-widest border-b border-white/5 pb-1">Data Personal</h4>
+                <div class="grid grid-cols-2 gap-4">
+                  <div><p class="text-[10px] text-white/40 uppercase">Nama Lengkap</p><p class="text-sm font-bold text-white">{{ selectedReg.nama_lengkap }}</p></div>
+                  <div><p class="text-[10px] text-white/40 uppercase">TTL</p><p class="text-sm text-white/80">{{ selectedReg.tempat_lahir }}, {{ selectedReg.tanggal_lahir }}</p></div>
+                  <div><p class="text-[10px] text-white/40 uppercase">Email</p><p class="text-sm text-white/80">{{ selectedReg.email_pendaftar }}</p></div>
+                  <div><p class="text-[10px] text-white/40 uppercase">Telepon</p><p class="text-sm text-white/80">{{ selectedReg.telepon }}</p></div>
+                  <div class="col-span-2"><p class="text-[10px] text-white/40 uppercase">Asal Sekolah</p><p class="text-sm text-white/80">{{ selectedReg.asal_sekolah }}</p></div>
+                  <div class="col-span-2"><p class="text-[10px] text-white/40 uppercase">Deskripsi Prestasi</p><p class="text-sm text-white/80 leading-relaxed">{{ selectedReg.prestasi_deskripsi || '-' }}</p></div>
+                </div>
+              </div>
 
             <div class="pt-6 border-t border-white/5">
               <h4 class="text-xs font-bold text-white/30 uppercase mb-4 tracking-widest">Dokumen Persyaratan</h4>
