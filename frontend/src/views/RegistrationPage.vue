@@ -421,11 +421,16 @@ const stepTitles = [
               </div>
 
               <div class="md:col-span-2 pt-4 border-t border-white/5">
-                <h4 class="text-lg font-bold text-white mb-4">Kartu Kesejahteraan (Opsional)</h4>
+                <h4 class="text-lg font-bold text-white mb-4">Kartu Keluarga Sejahtera (KKS)</h4>
               </div>
 
               <div class="space-y-2">
-                <label class="text-sm font-medium text-white/60 ml-1">Nomor KIP</label>
+                <label class="text-sm font-medium text-white/60 ml-1">Nomor KKS (Opsional)</label>
+                <input v-model="form.no_kks" type="text" class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:border-secondary/50 focus:ring-4 focus:ring-secondary/10 outline-none transition-all placeholder:text-white/10">
+              </div>
+
+              <div class="space-y-2">
+                <label class="text-sm font-medium text-white/60 ml-1">Nomor KIP (Opsional)</label>
                 <input v-model="form.no_kip" type="text" class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:border-secondary/50 focus:ring-4 focus:ring-secondary/10 outline-none transition-all placeholder:text-white/10">
               </div>
 
