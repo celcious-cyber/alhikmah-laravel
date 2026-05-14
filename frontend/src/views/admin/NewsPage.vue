@@ -170,19 +170,19 @@ onMounted(fetchNews)
           <div class="p-6 overflow-y-auto space-y-4 flex-1">
             <div>
               <label class="text-xs text-white/50 uppercase tracking-wider mb-1.5 block">Judul *</label>
-              <input v-model="form.title" type="text" placeholder="Judul berita..." class="input-field" />
+              <input v-model="form.title" type="text" placeholder="Judul berita..." class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white placeholder-white/25 focus:outline-none focus:border-amber-500/50 transition-all" />
             </div>
             <div>
               <label class="text-xs text-white/50 uppercase tracking-wider mb-1.5 block">Ringkasan *</label>
-              <textarea v-model="form.excerpt" rows="2" placeholder="Ringkasan singkat berita..." class="input-field resize-none"></textarea>
+              <textarea v-model="form.excerpt" rows="2" placeholder="Ringkasan singkat berita..." class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white placeholder-white/25 focus:outline-none focus:border-amber-500/50 transition-all resize-none"></textarea>
             </div>
             <div>
               <label class="text-xs text-white/50 uppercase tracking-wider mb-1.5 block">Isi Berita *</label>
-              <textarea v-model="form.content" rows="6" placeholder="Tulis isi berita di sini..." class="input-field resize-none"></textarea>
+              <textarea v-model="form.content" rows="6" placeholder="Tulis isi berita di sini..." class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white placeholder-white/25 focus:outline-none focus:border-amber-500/50 transition-all resize-none"></textarea>
             </div>
             <div>
               <label class="text-xs text-white/50 uppercase tracking-wider mb-1.5 block">URL Thumbnail</label>
-              <input v-model="form.thumbnail" type="text" placeholder="https://..." class="input-field" />
+              <input v-model="form.thumbnail" type="text" placeholder="https://..." class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white placeholder-white/25 focus:outline-none focus:border-amber-500/50 transition-all" />
             </div>
             <div class="flex items-center gap-3">
               <button
@@ -214,8 +214,3 @@ onMounted(fetchNews)
   </AdminLayout>
 </template>
 
-<style scoped>
-.input-field {
-  @apply w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white placeholder-white/25 focus:outline-none focus:border-amber-500/50 transition-all;
-}
-</style>
