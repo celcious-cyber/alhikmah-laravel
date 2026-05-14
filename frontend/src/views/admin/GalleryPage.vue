@@ -4,7 +4,7 @@ import AdminLayout from '../../components/admin/AdminLayout.vue'
 import axios from 'axios'
 import { Upload, Trash2, X, Image as ImageIcon } from 'lucide-vue-next'
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000'
+const API_URL = import.meta.env.VITE_API_URL || ''
 const token = localStorage.getItem('admin_token')
 const headers = { Authorization: `Bearer ${token}` }
 

@@ -11,7 +11,7 @@ const showPassword = ref(false)
 const loading = ref(false)
 const error = ref('')
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000'
+const API_URL = import.meta.env.VITE_API_URL || ''
 
 const login = async () => {
   if (!username.value || !password.value) {
