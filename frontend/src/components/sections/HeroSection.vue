@@ -94,15 +94,15 @@ onMounted(() => {
         </p>
 
         <!-- CTA Buttons -->
-        <div class="hero-btns flex flex-wrap gap-4 pt-32 lg:pt-4 items-center relative z-30">
-          <router-link to="/spsb26">
-            <BaseButton variant="primary" size="lg" class="!bg-secondary !text-[#2f2100] px-10 hover:!bg-secondary-dark min-w-[240px] justify-center h-14 !rounded-full text-lg shadow-lg shadow-secondary/20">
+        <div class="hero-btns flex flex-wrap gap-3 pt-12 lg:pt-4 items-center relative z-30">
+          <router-link to="/spsb26" class="w-full sm:w-auto">
+            <BaseButton variant="primary" size="lg" class="!bg-secondary !text-[#2f2100] px-8 sm:px-10 hover:!bg-secondary-dark min-w-[200px] sm:min-w-[240px] justify-center h-12 sm:h-14 !rounded-full text-base sm:text-lg shadow-lg shadow-secondary/20 w-full sm:w-auto">
               {{ $t('hero.cta_register') }}
             </BaseButton>
           </router-link>
           
-          <router-link to="/pbs26">
-            <BaseButton variant="outline" size="lg" class="!border-secondary !text-secondary hover:!bg-secondary hover:!text-primary px-10 min-w-[240px] justify-center h-14 !rounded-full text-lg flex items-center gap-2">
+          <router-link to="/pbs26" class="w-full sm:w-auto">
+            <BaseButton variant="outline" size="lg" class="!border-secondary !text-secondary hover:!bg-secondary hover:!text-primary px-6 sm:px-10 min-w-[180px] sm:min-w-[240px] justify-center h-10 sm:h-14 !rounded-full text-sm sm:text-lg flex items-center gap-2 w-full sm:w-auto">
               Beasiswa (PBS26)
             </BaseButton>
           </router-link>
