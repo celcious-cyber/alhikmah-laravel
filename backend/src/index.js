@@ -42,6 +42,20 @@ if (!fs.existsSync(distPath)) {
 app.use(express.static(distPath))
 app.use('/uploads', express.static(path.join(__dirname, '../uploads')))
 
+// Health check endpoint - untuk verifikasi server berjalan
+app.get('/api/health', (req, res) => {
+  res.json({ 
+    status: 'ok', 
+    message: 'Server Al-Hikmah berjalan!',
+    time: new Date().toISOString(),
+    env: {
+      port: PORT,
+      hasDB: !!process.env.DATABASE_URL,
+      hasJWT: !!process.env.JWT_SECRET,
+    }
+  })
+})
+
 // API Routes
 app.use('/api/contact', contactRoutes)
 app.use('/api/registration', registrationRoutes)
