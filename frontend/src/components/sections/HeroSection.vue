@@ -110,7 +110,7 @@ onMounted(() => {
       </div>
 
       <!-- Image Side -->
-      <div class="relative lg:h-[700px] flex items-end justify-center">
+      <div class="relative lg:h-[700px] flex items-end justify-center -mt-40 lg:mt-0 z-20">
         <!-- The Main Student Image -->
         <img 
           src="/assets/images/banner.png" 
