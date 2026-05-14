@@ -39,8 +39,8 @@ router.post('/login', async (req, res) => {
       admin: { id: admin.id, username: admin.username, name: admin.name }
     })
   } catch (err) {
-    console.error(err)
-    res.status(500).json({ message: 'Terjadi kesalahan server.' })
+    console.error('Login error:', err)
+    res.status(500).json({ message: 'Terjadi kesalahan server.', detail: err.message })
   }
 })
 

@@ -29,7 +29,7 @@ const login = async () => {
     localStorage.setItem('admin_user', JSON.stringify(res.data.admin))
     router.push('/admin/dashboard')
   } catch (err) {
-    error.value = err.response?.data?.message || 'Terjadi kesalahan. Coba lagi.'
+    error.value = err.response?.data?.detail || err.response?.data?.message || 'Terjadi kesalahan. Coba lagi.'
   } finally {
     loading.value = false
   }
