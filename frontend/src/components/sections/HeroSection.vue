@@ -95,7 +95,7 @@ onMounted(() => {
 
         <!-- CTA Buttons -->
         <div class="hero-btns flex flex-wrap gap-4 pt-4 items-center">
-          <router-link to="/register">
+          <router-link to="/spsb26">
             <BaseButton variant="primary" size="lg" class="!bg-secondary !text-[#2f2100] px-10 hover:!bg-secondary-dark min-w-[240px] justify-center h-14 !rounded-full text-lg shadow-lg shadow-secondary/20">
               {{ $t('hero.cta_register') }}
             </BaseButton>

@@ -17,6 +17,7 @@ const routes = [
   { path: '/', name: 'home', component: HomePage },
   { path: '/agenda', name: 'activities', component: ActivitiesPage },
   { path: '/register', name: 'register', component: RegistrationPage },
+  { path: '/spsb26', name: 'spsb26', component: RegistrationPage },
   { path: '/gallery', name: 'gallery', component: GalleryPage },
 
   // Admin Routes

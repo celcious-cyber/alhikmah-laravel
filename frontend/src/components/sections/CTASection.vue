@@ -21,7 +21,7 @@ const { t, tm } = useI18n()
         </p>
         
         <div class="flex flex-wrap justify-center gap-4 pt-4">
-          <router-link to="/register">
+          <router-link to="/spsb26">
             <BaseButton variant="primary" size="lg">
               {{ t('cta.register') }}
             </BaseButton>

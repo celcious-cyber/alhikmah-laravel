@@ -47,14 +47,68 @@ model Contact {
   createdAt DateTime @default(now())
 }
 
-model Registration {
-  id          Int      @id @default(autoincrement())
-  childName   String
-  parentName  String
-  email       String
-  phone       String
-  grade       String
-  address     String   @db.Text
-  status      String   @default("pending")
-  createdAt   DateTime @default(now())
+model Pendaftaran {
+  id                    BigInt   @id @default(autoincrement())
+  no_registrasi         String?  @db.VarChar(255)
+  email_pendaftar       String?  @db.VarChar(255)
+  nama_lengkap          String   @db.VarChar(255)
+  tempat_lahir          String?  @db.VarChar(255)
+  tanggal_lahir         String?  @db.VarChar(255)
+  jenis_kelamin         String?  @db.VarChar(255)
+  nisn                  String?  @db.VarChar(255)
+  nik                   String?  @db.VarChar(255)
+  agama                 String?  @db.VarChar(255)
+  hobi                  String?  @db.VarChar(255)
+  cita_cita             String?  @db.VarChar(255)
+  anak_ke               String?  @db.VarChar(255)
+  jumlah_saudara_kandung String? @db.VarChar(255)
+  alamat                String?  @db.Text
+  rt_rw                 String?  @db.VarChar(255)
+  dusun                 String?  @db.VarChar(255)
+  desa                  String?  @db.VarChar(255)
+  kecamatan             String?  @db.VarChar(255)
+  kabupaten             String?  @db.VarChar(255)
+  provinsi              String?  @db.VarChar(255)
+  kode_pos              String?  @db.VarChar(255)
+  no_kk                 String?  @db.VarChar(255)
+  kepala_keluarga       String?  @db.VarChar(255)
+  nama_ayah_kandung     String?  @db.VarChar(255)
+  status_ayah           String?  @db.VarChar(255)
+  alamat_ayah           String?  @db.VarChar(255)
+  nik_ayah              String?  @db.VarChar(255)
+  pekerjaan_ayah        String?  @db.VarChar(255)
+  nama_ibu_kandung      String?  @db.VarChar(255)
+  status_ibu            String?  @db.VarChar(255)
+  nik_ibu               String?  @db.VarChar(255)
+  pekerjaan_ibu         String?  @db.VarChar(255)
+  alamat_ibu            String?  @db.VarChar(255)
+  nama_wali             String?  @db.VarChar(255)
+  nik_wali              String?  @db.VarChar(255)
+  alamat_wali           String?  @db.VarChar(255)
+  penghasilan           String?  @db.VarChar(255)
+  no_kks                String?  @db.VarChar(255)
+  no_pkh                String?  @db.VarChar(255)
+  no_kip                String?  @db.VarChar(255)
+  asal_sekolah          String?  @db.VarChar(255)
+  npsn_sekolah          String?  @db.VarChar(255)
+  alamat_sekolah        String?  @db.VarChar(255)
+  no_surat_lulus        String?  @db.VarChar(255)
+  no_blangko_ijazah     String?  @db.VarChar(255)
+  nilai_rata2_ijazah    String?  @db.VarChar(255)
+  foto_3x4              String?  @db.VarChar(255)
+  file_ijazah           String?  @db.VarChar(255)
+  file_surat_lulus      String?  @db.VarChar(255)
+  file_akte_lahir       String?  @db.VarChar(255)
+  file_kk               String?  @db.VarChar(255)
+  file_kartu_nisn       String?  @db.VarChar(255)
+  file_kartu_kip        String?  @db.VarChar(255)
+  file_kartu_pkh        String?  @db.VarChar(255)
+  file_kartu_kks        String?  @db.VarChar(255)
+  file_foto_rapot       String?  @db.VarChar(255)
+  verified              Boolean  @default(false)
+  verified_by           String?  @db.VarChar(255)
+  created_at            DateTime @default(now())
+  updated_at            DateTime @updatedAt
+
+  @@map("pendaftaran")
 }
