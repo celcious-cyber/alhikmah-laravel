@@ -29,7 +29,13 @@ const login = async () => {
     localStorage.setItem('admin_user', JSON.stringify(res.data.admin))
     router.push('/admin/dashboard')
   } catch (err) {
-    error.value = err.response?.data?.detail || err.response?.data?.message || 'Terjadi kesalahan. Coba lagi.'
+    if (err.response) {
+      error.value = err.response.data?.detail || err.response.data?.message || `Error ${err.response.status}`
+    } else if (err.request) {
+      error.value = 'Tidak bisa terhubung ke server. Periksa koneksi.'
+    } else {
+      error.value = err.message || 'Terjadi kesalahan tidak dikenal.'
+    }
   } finally {
     loading.value = false
   }
