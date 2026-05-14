@@ -82,7 +82,7 @@ onMounted(() => {
   <section id="hero" ref="heroRef" class="relative min-h-screen flex items-center pt-36 pb-20 overflow-hidden">
     <div class="container-custom relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
       <!-- Text Side -->
-      <div class="space-y-8 py-12 relative z-10">
+      <div class="space-y-8 py-12 relative z-10 lg:z-20">
         <h1 class="text-4xl md:text-6xl lg:text-[4.8rem] font-extrabold text-white leading-[1.1] tracking-tight">
           <div class="overflow-hidden py-1 w-fit"><span class="hero-title-line block whitespace-nowrap">{{ $t('hero.text1') }} <span class="text-secondary glitch" :data-text="$t('hero.text2')">{{ $t('hero.text2') }}</span></span></div>
           <div class="overflow-hidden py-1 w-fit"><span class="hero-title-line block whitespace-nowrap"><span class="text-secondary glitch" :data-text="$t('hero.text3')">{{ $t('hero.text3') }}</span> {{ $t('hero.text4') }}</span></div>
@@ -94,7 +94,7 @@ onMounted(() => {
         </p>
 
         <!-- CTA Buttons -->
-        <div class="hero-btns flex flex-wrap gap-4 pt-4 items-center">
+        <div class="hero-btns flex flex-wrap gap-4 pt-32 lg:pt-4 items-center relative z-30">
           <router-link to="/spsb26">
             <BaseButton variant="primary" size="lg" class="!bg-secondary !text-[#2f2100] px-10 hover:!bg-secondary-dark min-w-[240px] justify-center h-14 !rounded-full text-lg shadow-lg shadow-secondary/20">
               {{ $t('hero.cta_register') }}
@@ -110,7 +110,7 @@ onMounted(() => {
       </div>
 
       <!-- Image Side -->
-      <div class="relative lg:h-[700px] flex items-end justify-center -mt-40 lg:mt-0 z-20">
+      <div class="relative lg:h-[700px] flex items-end justify-center -mt-80 lg:mt-0 z-0">
         <!-- The Main Student Image -->
         <img 
           src="/assets/images/banner.png" 
