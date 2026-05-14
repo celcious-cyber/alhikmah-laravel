@@ -14,12 +14,21 @@ console.log('📁 Working directory:', process.cwd())
 console.log('📁 Script directory:', __dirname)
 
 try {
-  console.log('🔄 Menjalankan sinkronisasi database...')
-  execSync('cd backend && npx prisma@5 db push --accept-data-loss || true', { stdio: 'inherit' })
-  execSync('cd backend && node prisma/seed.js || true', { stdio: 'inherit' })
-  console.log('✅ Sinkronisasi database selesai (atau diabaikan jika gagal)')
+  console.log('🔄 Menjalankan sinkronisasi database (Pendaftaran Baru)...')
+  // Gunakan path langsung ke prisma binary agar lebih pasti di shared hosting
+  const prismaPath = path.join(__dirname, 'backend/node_modules/.bin/prisma')
+  
+  console.log('📡 Menyingkronkan skema ke database...')
+  execSync(`cd backend && ${prismaPath} db push --accept-data-loss`, { stdio: 'inherit' })
+  
+  console.log('🌱 Menjalankan seeder...')
+  execSync('cd backend && node prisma/seed.js', { stdio: 'inherit' })
+  
+  console.log('✅ Database berhasil diperbarui ke skema pendaftaran!')
 } catch (error) {
-  console.error('⚠️ Peringatan: Gagal menjalankan skrip database', error.message)
+  console.error('❌ Gagal sinkronisasi database secara otomatis.')
+  console.error('Detail Error:', error.message)
+  console.log('💡 Tips: Pastikan DATABASE_URL di environment sudah benar.')
 }
 
 // Import dan jalankan server backend
