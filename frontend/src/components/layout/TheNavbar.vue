@@ -158,8 +158,7 @@ const toggleMobileSubmenu = (name) => {
           </router-link>
 
           <button 
-            v-if="!isSpecialPage || isMobileMenuOpen"
-            class="text-white p-2 hover:bg-white/5 rounded-lg transition-colors"
+            class="text-white p-2 hover:bg-white/5 rounded-lg transition-colors ml-1"
             @click="isMobileMenuOpen = !isMobileMenuOpen"
           >
             <Menu v-if="!isMobileMenuOpen" :size="28" />

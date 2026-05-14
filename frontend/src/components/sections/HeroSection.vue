@@ -102,7 +102,7 @@ onMounted(() => {
           </router-link>
           
           <router-link to="/pbs26" class="w-full sm:w-auto">
-            <BaseButton variant="outline" size="lg" class="!bg-white !border-secondary !text-primary hover:!bg-white/90 px-6 sm:px-10 min-w-[180px] sm:min-w-[240px] justify-center h-12 sm:h-14 !rounded-full text-base sm:text-lg flex items-center gap-2 w-full sm:w-auto shadow-xl">
+            <BaseButton variant="outline" size="lg" class="!border-secondary !text-secondary hover:!bg-secondary hover:!text-primary px-6 sm:px-10 min-w-[180px] sm:min-w-[240px] justify-center h-12 sm:h-14 !rounded-full text-base sm:text-lg flex items-center gap-2 w-full sm:w-auto shadow-xl">
               Program Beasiswa
             </BaseButton>
           </router-link>
@@ -116,6 +116,13 @@ onMounted(() => {
           src="/assets/images/banner.png" 
           alt="Al-Hikmah Student" 
           class="hero-main-img relative -left-[20px] z-24 w-full max-w-[622px] h-auto object-contain transition-transform duration-700 hover:scale-105 cursor-pointer drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
+        />
+
+        <!-- Gold Medal Asset -->
+        <img 
+          src="/assets/images/gold-medal.png" 
+          class="absolute top-[10%] right-[10%] w-24 sm:w-32 lg:w-40 rotate-[12deg] z-30 animate-bounce-slow"
+          alt="gold-medal"
         />
       </div>
     </div>
