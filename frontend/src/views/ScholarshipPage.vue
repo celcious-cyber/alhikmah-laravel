@@ -71,18 +71,8 @@ const submitForm = async () => {
 </script>
 
 <template>
-  <div class="min-h-screen bg-[#0f172a] text-white selection:bg-secondary/30">
-    <!-- Navbar / Back Button -->
-    <nav class="fixed top-0 inset-x-0 z-50 bg-black/20 backdrop-blur-md border-b border-white/5">
-      <div class="container mx-auto px-6 py-4 flex items-center gap-4">
-        <button @click="router.push('/')" class="p-2 hover:bg-white/5 rounded-full transition-colors">
-          <ArrowLeft :size="20" />
-        </button>
-        <h1 class="font-bold text-lg">Program Beasiswa Al-Hikmah 2026</h1>
-      </div>
-    </nav>
-
-    <main class="container mx-auto px-6 pt-28 pb-20 max-w-4xl">
+  <div class="min-h-screen text-white selection:bg-secondary/30">
+    <main class="container mx-auto px-6 pt-32 pb-20 max-w-4xl relative z-10">
       <!-- Success State -->
       <div v-if="isSuccess" class="text-center py-20 animate-in fade-in zoom-in duration-500">
         <div class="inline-flex items-center justify-center w-24 h-24 rounded-full bg-green-500/20 text-green-500 mb-8">
