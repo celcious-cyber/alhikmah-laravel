@@ -2,7 +2,7 @@
 import { ref, onMounted, computed } from 'vue'
 import AdminLayout from '../../components/admin/AdminLayout.vue'
 import axios from 'axios'
-import { Download, ChevronDown, X } from 'lucide-vue-next'
+import { Download, ChevronDown, X, CheckCircle, Clock, Trash2, Search, ExternalLink } from 'lucide-vue-next'
 
 const API_URL = import.meta.env.VITE_API_URL || ''
 const token = localStorage.getItem('admin_token')
@@ -10,16 +10,8 @@ const headers = { Authorization: `Bearer ${token}` }
 
 const registrations = ref([])
 const loading = ref(true)
-const filterGrade = ref('semua')
+const searchQuery = ref('')
 const selectedReg = ref(null)
-
-const grades = ['semua', 'KMI', 'SMP', 'MA']
-
-const statusColors = {
-  pending: 'bg-amber-500/10 text-amber-400 border-amber-500/20',
-  diterima: 'bg-green-500/10 text-green-400 border-green-500/20',
-  ditolak: 'bg-red-500/10 text-red-400 border-red-500/20',
-}
 
 const fetchRegistrations = async () => {
   loading.value = true
@@ -34,17 +26,35 @@ const fetchRegistrations = async () => {
 }
 
 const filtered = computed(() => {
-  if (filterGrade.value === 'semua') return registrations.value
-  return registrations.value.filter(r => r.grade === filterGrade.value)
+  if (!searchQuery.value) return registrations.value
+  const q = searchQuery.value.toLowerCase()
+  return registrations.value.filter(r => 
+    r.nama_lengkap.toLowerCase().includes(q) || 
+    (r.no_registrasi && r.no_registrasi.toLowerCase().includes(q)) ||
+    (r.nisn && r.nisn.includes(q))
+  )
 })
 
 const exportCSV = () => {
   window.open(`${API_URL}/api/registrations/export?token=${token}`, '_blank')
 }
 
-const updateStatus = async (id, status) => {
+const toggleVerify = async (id, status) => {
   try {
-    await axios.put(`${API_URL}/api/registrations/${id}/status`, { status }, { headers })
+    await axios.put(`${API_URL}/api/registrations/${id}/verify`, { verified: status }, { headers })
+    fetchRegistrations()
+    if (selectedReg.value && selectedReg.value.id === id) {
+      selectedReg.value.verified = status
+    }
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+const deleteRegistration = async (id) => {
+  if (!confirm('Apakah Anda yakin ingin menghapus data pendaftaran ini?')) return
+  try {
+    await axios.delete(`${API_URL}/api/registrations/${id}`, { headers })
     fetchRegistrations()
     selectedReg.value = null
   } catch (err) {
@@ -60,20 +70,24 @@ onMounted(fetchRegistrations)
 <template>
   <AdminLayout>
     <!-- Header -->
-    <div class="flex items-center justify-between mb-6">
+    <div class="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
       <div>
-        <h2 class="text-lg font-bold">Data Pendaftaran</h2>
+        <h2 class="text-2xl font-bold text-white">Data Pendaftaran Santri</h2>
         <p class="text-sm text-white/40">{{ filtered.length }} pendaftar ditemukan</p>
       </div>
       <div class="flex items-center gap-3">
-        <!-- Filter -->
-        <select v-model="filterGrade" class="bg-white/5 border border-white/10 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-500/50">
-          <option v-for="g in grades" :key="g" :value="g" class="bg-[#1e293b]">
-            {{ g.charAt(0).toUpperCase() + g.slice(1) }}
-          </option>
-        </select>
+        <!-- Search -->
+        <div class="relative">
+          <input 
+            v-model="searchQuery"
+            type="text" 
+            placeholder="Cari nama / no reg / NISN..."
+            class="bg-white/5 border border-white/10 rounded-xl pl-10 pr-4 py-2 text-sm text-white focus:outline-none focus:border-secondary/50 w-64"
+          >
+          <Search class="absolute left-3 top-1/2 -translate-y-1/2 text-white/40" :size="16" />
+        </div>
         <!-- Export -->
-        <button @click="exportCSV" class="flex items-center gap-2 px-4 py-2 bg-white/5 hover:bg-white/10 border border-white/10 text-sm rounded-xl transition-colors">
+        <button @click="exportCSV" class="flex items-center gap-2 px-4 py-2 bg-secondary text-primary font-bold text-sm rounded-xl hover:bg-secondary/80 transition-colors">
           <Download :size="15" />
           Export CSV
         </button>
@@ -81,38 +95,57 @@ onMounted(fetchRegistrations)
     </div>
 
     <!-- Table -->
-    <div class="bg-[#1e293b] rounded-xl border border-white/5 overflow-hidden">
-      <div v-if="loading" class="p-10 text-center text-white/30">Memuat data...</div>
-      <div v-else-if="filtered.length === 0" class="p-10 text-center text-white/30">Belum ada data pendaftaran.</div>
+    <div class="bg-[#1e293b] rounded-2xl border border-white/5 overflow-hidden shadow-xl">
+      <div v-if="loading" class="p-20 text-center">
+        <div class="inline-block animate-spin w-8 h-8 border-4 border-secondary border-t-transparent rounded-full mb-4"></div>
+        <p class="text-white/30">Memuat data pendaftar...</p>
+      </div>
+      <div v-else-if="filtered.length === 0" class="p-20 text-center text-white/30">
+        Belum ada data pendaftaran yang sesuai.
+      </div>
       <div v-else class="overflow-x-auto">
         <table class="w-full text-sm">
-          <thead class="border-b border-white/5">
-            <tr class="text-white/40 text-xs uppercase">
-              <th class="text-left px-5 py-3">Nama Santri</th>
-              <th class="text-left px-5 py-3">Orang Tua</th>
-              <th class="text-left px-5 py-3">Jenjang</th>
-              <th class="text-left px-5 py-3">Telepon</th>
-              <th class="text-left px-5 py-3">Tanggal</th>
-              <th class="text-left px-5 py-3">Status</th>
-              <th class="text-right px-5 py-3">Detail</th>
+          <thead class="bg-white/5 border-b border-white/5">
+            <tr class="text-white/40 text-xs uppercase tracking-wider">
+              <th class="text-left px-6 py-4 font-semibold">No. Reg</th>
+              <th class="text-left px-6 py-4 font-semibold">Nama Lengkap</th>
+              <th class="text-left px-6 py-4 font-semibold">NISN / NIK</th>
+              <th class="text-left px-6 py-4 font-semibold">Asal Sekolah</th>
+              <th class="text-left px-6 py-4 font-semibold">Tanggal</th>
+              <th class="text-left px-6 py-4 font-semibold">Status</th>
+              <th class="text-right px-6 py-4 font-semibold">Aksi</th>
             </tr>
           </thead>
           <tbody class="divide-y divide-white/5">
-            <tr v-for="reg in filtered" :key="reg.id" class="hover:bg-white/2 transition-colors">
-              <td class="px-5 py-3 font-medium">{{ reg.childName }}</td>
-              <td class="px-5 py-3 text-white/60">{{ reg.parentName }}</td>
-              <td class="px-5 py-3">
-                <span class="bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded-full text-xs">{{ reg.grade }}</span>
+            <tr v-for="reg in filtered" :key="reg.id" class="hover:bg-white/2 transition-colors group">
+              <td class="px-6 py-4 font-mono text-secondary text-xs">{{ reg.no_registrasi }}</td>
+              <td class="px-6 py-4">
+                <div class="font-bold text-white">{{ reg.nama_lengkap }}</div>
+                <div class="text-xs text-white/40">{{ reg.email_pendaftar }}</div>
               </td>
-              <td class="px-5 py-3 text-white/60">{{ reg.phone }}</td>
-              <td class="px-5 py-3 text-white/50 whitespace-nowrap">{{ formatDate(reg.createdAt) }}</td>
-              <td class="px-5 py-3">
-                <span :class="['px-2 py-0.5 rounded-full text-xs border', statusColors[reg.status] || statusColors.pending]">
-                  {{ reg.status }}
+              <td class="px-6 py-4">
+                <div class="text-white/70">{{ reg.nisn || '-' }}</div>
+                <div class="text-[10px] text-white/30">{{ reg.nik || '-' }}</div>
+              </td>
+              <td class="px-6 py-4 text-white/60">{{ reg.asal_sekolah || '-' }}</td>
+              <td class="px-6 py-4 text-white/50 whitespace-nowrap">{{ formatDate(reg.created_at) }}</td>
+              <td class="px-6 py-4">
+                <span v-if="reg.verified" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold bg-green-500/10 text-green-400 border border-green-500/20 uppercase tracking-tighter">
+                  <CheckCircle :size="10" /> Terverifikasi
+                </span>
+                <span v-else class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold bg-amber-500/10 text-amber-400 border border-amber-500/20 uppercase tracking-tighter">
+                  <Clock :size="10" /> Pending
                 </span>
               </td>
-              <td class="px-5 py-3 text-right">
-                <button @click="selectedReg = reg" class="text-xs text-amber-400 hover:underline">Detail</button>
+              <td class="px-6 py-4 text-right">
+                <div class="flex items-center justify-end gap-2">
+                  <button @click="selectedReg = reg" class="p-2 text-white/40 hover:text-secondary transition-colors" title="Detail">
+                    <ExternalLink :size="18" />
+                  </button>
+                  <button @click="deleteRegistration(reg.id)" class="p-2 text-white/40 hover:text-red-500 transition-colors" title="Hapus">
+                    <Trash2 :size="18" />
+                  </button>
+                </div>
               </td>
             </tr>
           </tbody>
@@ -120,32 +153,95 @@ onMounted(fetchRegistrations)
       </div>
     </div>
 
-    <!-- Detail Modal -->
+    <!-- Detail Modal (Bigger & More Detailed) -->
     <Teleport to="body">
-      <div v-if="selectedReg" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
-        <div class="bg-[#1e293b] rounded-2xl border border-white/10 w-full max-w-md shadow-2xl">
-          <div class="flex items-center justify-between px-6 py-4 border-b border-white/5">
-            <h3 class="font-semibold">Detail Pendaftar</h3>
-            <button @click="selectedReg = null" class="text-white/40 hover:text-white"><X :size="20" /></button>
-          </div>
-          <div class="p-6 space-y-3 text-sm">
-            <div class="grid grid-cols-2 gap-3">
-              <div><p class="text-xs text-white/40 mb-0.5">Nama Santri</p><p class="font-medium">{{ selectedReg.childName }}</p></div>
-              <div><p class="text-xs text-white/40 mb-0.5">Nama Orang Tua</p><p>{{ selectedReg.parentName }}</p></div>
-              <div><p class="text-xs text-white/40 mb-0.5">Email</p><p>{{ selectedReg.email }}</p></div>
-              <div><p class="text-xs text-white/40 mb-0.5">Telepon</p><p>{{ selectedReg.phone }}</p></div>
-              <div><p class="text-xs text-white/40 mb-0.5">Jenjang</p><p>{{ selectedReg.grade }}</p></div>
-              <div><p class="text-xs text-white/40 mb-0.5">Tanggal Daftar</p><p>{{ formatDate(selectedReg.createdAt) }}</p></div>
+      <div v-if="selectedReg" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+        <div class="bg-[#1e293b] rounded-3xl border border-white/10 w-full max-w-4xl max-h-[90vh] overflow-hidden shadow-2xl flex flex-col animate-in zoom-in duration-300">
+          <!-- Modal Header -->
+          <div class="flex items-center justify-between px-8 py-6 border-b border-white/5 bg-white/2">
+            <div>
+              <h3 class="text-xl font-bold text-white">Detail Calon Santri</h3>
+              <p class="text-xs text-secondary font-mono">{{ selectedReg.no_registrasi }}</p>
             </div>
-            <div><p class="text-xs text-white/40 mb-0.5">Alamat</p><p>{{ selectedReg.address }}</p></div>
-            <!-- Update Status -->
-            <div class="pt-3 border-t border-white/5">
-              <p class="text-xs text-white/40 mb-2">Update Status:</p>
-              <div class="flex gap-2">
-                <button @click="updateStatus(selectedReg.id, 'diterima')" class="flex-1 py-2 bg-green-500/10 border border-green-500/20 text-green-400 rounded-xl text-xs font-medium hover:bg-green-500/20 transition-colors">✓ Terima</button>
-                <button @click="updateStatus(selectedReg.id, 'pending')" class="flex-1 py-2 bg-amber-500/10 border border-amber-500/20 text-amber-400 rounded-xl text-xs font-medium hover:bg-amber-500/20 transition-colors">Pending</button>
-                <button @click="updateStatus(selectedReg.id, 'ditolak')" class="flex-1 py-2 bg-red-500/10 border border-red-500/20 text-red-400 rounded-xl text-xs font-medium hover:bg-red-500/20 transition-colors">✗ Tolak</button>
+            <button @click="selectedReg = null" class="p-2 bg-white/5 hover:bg-white/10 rounded-full text-white/40 hover:text-white transition-all">
+              <X :size="24" />
+            </button>
+          </div>
+
+          <!-- Modal Body -->
+          <div class="p-8 overflow-y-auto space-y-8 flex-1 custom-scrollbar">
+            <!-- Grid 1: Data Diri -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div class="space-y-4">
+                <h4 class="text-xs font-bold text-white/30 uppercase tracking-widest border-b border-white/5 pb-2">Identitas Diri</h4>
+                <div class="space-y-3">
+                  <div><p class="text-[10px] text-white/40 uppercase">Nama Lengkap</p><p class="text-sm font-bold text-white">{{ selectedReg.nama_lengkap }}</p></div>
+                  <div><p class="text-[10px] text-white/40 uppercase">TTL</p><p class="text-sm text-white/80">{{ selectedReg.tempat_lahir }}, {{ selectedReg.tanggal_lahir }}</p></div>
+                  <div><p class="text-[10px] text-white/40 uppercase">NISN / NIK</p><p class="text-sm text-white/80">{{ selectedReg.nisn }} / {{ selectedReg.nik }}</p></div>
+                  <div><p class="text-[10px] text-white/40 uppercase">Jenis Kelamin</p><p class="text-sm text-white/80">{{ selectedReg.jenis_kelamin }}</p></div>
+                </div>
               </div>
+
+              <div class="space-y-4">
+                <h4 class="text-xs font-bold text-white/30 uppercase tracking-widest border-b border-white/5 pb-2">Alamat & Kontak</h4>
+                <div class="space-y-3">
+                  <div><p class="text-[10px] text-white/40 uppercase">Email</p><p class="text-sm text-white/80">{{ selectedReg.email_pendaftar }}</p></div>
+                  <div><p class="text-[10px] text-white/40 uppercase">Alamat</p><p class="text-sm text-white/80 leading-relaxed">{{ selectedReg.alamat }}, RT {{ selectedReg.rt_rw }}, {{ selectedReg.desa }}, {{ selectedReg.kecamatan }}</p></div>
+                </div>
+              </div>
+
+              <div class="space-y-4">
+                <h4 class="text-xs font-bold text-white/30 uppercase tracking-widest border-b border-white/5 pb-2">Asal Sekolah</h4>
+                <div class="space-y-3">
+                  <div><p class="text-[10px] text-white/40 uppercase">Nama Sekolah</p><p class="text-sm text-white/80 font-bold">{{ selectedReg.asal_sekolah }}</p></div>
+                  <div><p class="text-[10px] text-white/40 uppercase">NPSN</p><p class="text-sm text-white/80">{{ selectedReg.npsn_sekolah }}</p></div>
+                  <div><p class="text-[10px] text-white/40 uppercase">Alamat Sekolah</p><p class="text-sm text-white/80 leading-relaxed">{{ selectedReg.alamat_sekolah }}</p></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Grid 2: Orang Tua -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4 border-t border-white/5">
+              <div class="space-y-4">
+                <h4 class="text-xs font-bold text-white/30 uppercase tracking-widest border-b border-white/5 pb-2">Data Orang Tua</h4>
+                <div class="grid grid-cols-2 gap-4">
+                  <div><p class="text-[10px] text-white/40 uppercase">Nama Ayah</p><p class="text-sm text-white/80 font-bold">{{ selectedReg.nama_ayah_kandung }}</p></div>
+                  <div><p class="text-[10px] text-white/40 uppercase">Pekerjaan Ayah</p><p class="text-sm text-white/80">{{ selectedReg.pekerjaan_ayah }}</p></div>
+                  <div><p class="text-[10px] text-white/40 uppercase">Nama Ibu</p><p class="text-sm text-white/80 font-bold">{{ selectedReg.nama_ibu_kandung }}</p></div>
+                  <div><p class="text-[10px] text-white/40 uppercase">Pekerjaan Ibu</p><p class="text-sm text-white/80">{{ selectedReg.pekerjaan_ibu }}</p></div>
+                </div>
+              </div>
+              <div class="space-y-4">
+                <h4 class="text-xs font-bold text-white/30 uppercase tracking-widest border-b border-white/5 pb-2">Dokumen Pendukung</h4>
+                <div class="grid grid-cols-2 gap-3">
+                  <a v-if="selectedReg.foto_3x4" :href="`${API_URL}${selectedReg.foto_3x4}`" target="_blank" class="flex items-center gap-2 p-2 bg-white/5 rounded-lg text-[10px] hover:bg-white/10 transition-all"><ExternalLink :size="12" /> Pas Foto 3x4</a>
+                  <a v-if="selectedReg.file_ijazah" :href="`${API_URL}${selectedReg.file_ijazah}`" target="_blank" class="flex items-center gap-2 p-2 bg-white/5 rounded-lg text-[10px] hover:bg-white/10 transition-all"><ExternalLink :size="12" /> Ijazah</a>
+                  <a v-if="selectedReg.file_kk" :href="`${API_URL}${selectedReg.file_kk}`" target="_blank" class="flex items-center gap-2 p-2 bg-white/5 rounded-lg text-[10px] hover:bg-white/10 transition-all"><ExternalLink :size="12" /> Kartu Keluarga</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Modal Footer -->
+          <div class="px-8 py-6 border-t border-white/5 bg-white/2 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <span class="text-xs text-white/40 italic">Mendaftar pada {{ formatDate(selectedReg.created_at) }}</span>
+            </div>
+            <div class="flex gap-4">
+              <button 
+                v-if="!selectedReg.verified"
+                @click="toggleVerify(selectedReg.id, true)" 
+                class="px-6 py-2.5 bg-green-600 hover:bg-green-700 text-white rounded-xl text-xs font-bold transition-all shadow-lg shadow-green-600/20 flex items-center gap-2"
+              >
+                <CheckCircle :size="16" /> Verifikasi Pendaftar
+              </button>
+              <button 
+                v-else
+                @click="toggleVerify(selectedReg.id, false)" 
+                class="px-6 py-2.5 bg-amber-600/20 hover:bg-amber-600/40 text-amber-400 border border-amber-600/30 rounded-xl text-xs font-bold transition-all"
+              >
+                Batalkan Verifikasi
+              </button>
             </div>
           </div>
         </div>
@@ -153,3 +249,34 @@ onMounted(fetchRegistrations)
     </Teleport>
   </AdminLayout>
 </template>
+
+<style scoped>
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.02);
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.animate-in {
+  animation: animate-in 0.3s ease-out;
+}
+
+@keyframes animate-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+</style>
