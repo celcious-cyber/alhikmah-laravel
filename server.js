@@ -13,6 +13,15 @@ console.log('🚀 Starting Al-Hikmah server...')
 console.log('📁 Working directory:', process.cwd())
 console.log('📁 Script directory:', __dirname)
 
+try {
+  console.log('🔄 Menjalankan sinkronisasi database...')
+  execSync('cd backend && npx prisma@5 db push || true', { stdio: 'inherit' })
+  execSync('cd backend && node prisma/seed.js || true', { stdio: 'inherit' })
+  console.log('✅ Sinkronisasi database selesai (atau diabaikan jika gagal)')
+} catch (error) {
+  console.error('⚠️ Peringatan: Gagal menjalankan skrip database', error.message)
+}
+
 // Import dan jalankan server backend
 import('./backend/src/index.js').catch(err => {
   console.error('❌ Failed to start server:', err)
