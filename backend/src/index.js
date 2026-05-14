@@ -35,7 +35,10 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 // Static files untuk frontend (dist) & uploads
-const distPath = path.join(__dirname, '../dist')
+let distPath = path.join(__dirname, '../dist')
+if (!fs.existsSync(distPath)) {
+  distPath = path.join(__dirname, '../../dist') // Coba di root repo
+}
 app.use(express.static(distPath))
 app.use('/uploads', express.static(path.join(__dirname, '../uploads')))
 
