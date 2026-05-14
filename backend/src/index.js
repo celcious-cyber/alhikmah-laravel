@@ -5,6 +5,15 @@ import path from 'path'
 import { fileURLToPath } from 'url'
 import fs from 'fs'
 
+// Tangkap semua error yang tidak tertangani agar server tidak crash diam-diam
+process.on('uncaughtException', (err) => {
+  console.error('❌ UNCAUGHT EXCEPTION:', err.message)
+  console.error(err.stack)
+})
+process.on('unhandledRejection', (reason) => {
+  console.error('❌ UNHANDLED REJECTION:', reason)
+})
+
 import contactRoutes from './routes/contact.js'
 import registrationRoutes from './routes/registration.js'
 import authRoutes from './routes/auth.js'
