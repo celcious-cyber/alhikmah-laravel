@@ -50,17 +50,24 @@ app.use('/api/news', newsRoutes)
 app.use('/api/gallery', galleryRoutes)
 app.use('/api/registrations', adminRegistrationRoutes)
 
-// Handle SPA routing - kirim index.html untuk semua route non-API
+// Handle SPA routing - kirim index.html untuk semua rute non-API
 app.get('*', (req, res) => {
+  // Jika ini adalah request ke API yang tidak ada, kirim JSON 404
   if (req.path.startsWith('/api')) {
     return res.status(404).json({ message: 'API endpoint not found' })
   }
+  
+  // Jika bukan API, kirim index.html (SPA Fallback)
   const indexPath = path.join(distPath, 'index.html')
-  if (fs.existsSync(indexPath)) {
-    res.sendFile(indexPath)
-  } else {
-    res.json({ message: 'Al-Hikmah API is running...', note: 'Frontend build not found. Please run build script.' })
-  }
+  res.sendFile(indexPath, (err) => {
+    if (err) {
+      res.status(500).json({ 
+        message: 'Error loading page', 
+        error: err.message,
+        path: indexPath 
+      })
+    }
+  })
 })
 
 app.listen(PORT, () => {

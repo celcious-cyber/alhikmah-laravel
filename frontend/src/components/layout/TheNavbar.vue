@@ -135,9 +135,11 @@ const toggleMobileSubmenu = (name) => {
           </div>
 
           <!-- Login Button -->
-          <BaseButton variant="primary" size="sm" class="!bg-secondary !text-primary px-6 py-2.5 !rounded-lg font-bold border-none">
-            {{ $t('nav.login') }}
-          </BaseButton>
+          <router-link to="/admin/login">
+            <BaseButton variant="primary" size="sm" class="!bg-secondary !text-primary px-6 py-2.5 !rounded-lg font-bold border-none">
+              {{ $t('nav.login') }}
+            </BaseButton>
+          </router-link>
         </div>
 
         <!-- Mobile Hamburger -->
@@ -240,9 +242,11 @@ const toggleMobileSubmenu = (name) => {
 
         <hr class="border-white/10 mt-auto" />
         
-        <BaseButton variant="primary" size="md" class="!bg-secondary !text-primary w-full !rounded-xl font-bold" @click="isMobileMenuOpen = false">
-          {{ $t('nav.login') }}
-        </BaseButton>
+        <router-link to="/admin/login" @click="isMobileMenuOpen = false">
+          <BaseButton variant="primary" size="md" class="!bg-secondary !text-primary w-full !rounded-xl font-bold">
+            {{ $t('nav.login') }}
+          </BaseButton>
+        </router-link>
       </div>
     </div>
     
