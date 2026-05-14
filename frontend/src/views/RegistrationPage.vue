@@ -200,27 +200,27 @@ const stepTitles = [
               
               <div class="space-y-2">
                 <label class="text-sm font-medium text-white/60 ml-1">Nama Lengkap (Sesuai Ijazah)</label>
-                <input v-model="form.nama_lengkap" type="text" required class="form-input" placeholder="Masukkan nama lengkap">
+                <input v-model="form.nama_lengkap" type="text" required class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:border-secondary/50 focus:ring-4 focus:ring-secondary/10 outline-none transition-all placeholder:text-white/10" placeholder="Masukkan nama lengkap">
               </div>
 
               <div class="space-y-2">
                 <label class="text-sm font-medium text-white/60 ml-1">Email Aktif</label>
-                <input v-model="form.email_pendaftar" type="email" class="form-input" placeholder="contoh@gmail.com">
+                <input v-model="form.email_pendaftar" type="email" class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:border-secondary/50 focus:ring-4 focus:ring-secondary/10 outline-none transition-all placeholder:text-white/10" placeholder="contoh@gmail.com">
               </div>
 
               <div class="space-y-2">
                 <label class="text-sm font-medium text-white/60 ml-1">Tempat Lahir</label>
-                <input v-model="form.tempat_lahir" type="text" class="form-input" placeholder="Kota/Kabupaten">
+                <input v-model="form.tempat_lahir" type="text" class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:border-secondary/50 focus:ring-4 focus:ring-secondary/10 outline-none transition-all placeholder:text-white/10" placeholder="Kota/Kabupaten">
               </div>
 
               <div class="space-y-2">
                 <label class="text-sm font-medium text-white/60 ml-1">Tanggal Lahir</label>
-                <input v-model="form.tanggal_lahir" type="date" class="form-input">
+                <input v-model="form.tanggal_lahir" type="date" class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:border-secondary/50 focus:ring-4 focus:ring-secondary/10 outline-none transition-all placeholder:text-white/10">
               </div>
 
               <div class="space-y-2">
                 <label class="text-sm font-medium text-white/60 ml-1">Jenis Kelamin</label>
-                <select v-model="form.jenis_kelamin" class="form-input appearance-none">
+                <select v-model="form.jenis_kelamin" class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:border-secondary/50 focus:ring-4 focus:ring-secondary/10 outline-none transition-all placeholder:text-white/10">
                   <option value="">Pilih Jenis Kelamin</option>
                   <option value="Laki-laki">Laki-laki</option>
                   <option value="Perempuan">Perempuan</option>
@@ -229,17 +229,17 @@ const stepTitles = [
 
               <div class="space-y-2">
                 <label class="text-sm font-medium text-white/60 ml-1">NISN</label>
-                <input v-model="form.nisn" type="text" class="form-input" placeholder="10 digit nomor NISN">
+                <input v-model="form.nisn" type="text" class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:border-secondary/50 focus:ring-4 focus:ring-secondary/10 outline-none transition-all placeholder:text-white/10" placeholder="10 digit nomor NISN">
               </div>
 
               <div class="space-y-2">
                 <label class="text-sm font-medium text-white/60 ml-1">NIK (Sesuai KK)</label>
-                <input v-model="form.nik" type="text" class="form-input" placeholder="16 digit nomor NIK">
+                <input v-model="form.nik" type="text" class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:border-secondary/50 focus:ring-4 focus:ring-secondary/10 outline-none transition-all placeholder:text-white/10" placeholder="16 digit nomor NIK">
               </div>
 
               <div class="space-y-2">
                 <label class="text-sm font-medium text-white/60 ml-1">Agama</label>
-                <select v-model="form.agama" class="form-input appearance-none">
+                <select v-model="form.agama" class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:border-secondary/50 focus:ring-4 focus:ring-secondary/10 outline-none transition-all placeholder:text-white/10">
                   <option value="Islam">Islam</option>
                   <option value="Lainnya">Lainnya</option>
                 </select>
@@ -247,22 +247,22 @@ const stepTitles = [
 
               <div class="space-y-2">
                 <label class="text-sm font-medium text-white/60 ml-1">Hobi</label>
-                <input v-model="form.hobi" type="text" class="form-input" placeholder="Olahraga, Membaca, dll">
+                <input v-model="form.hobi" type="text" class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:border-secondary/50 focus:ring-4 focus:ring-secondary/10 outline-none transition-all placeholder:text-white/10" placeholder="Olahraga, Membaca, dll">
               </div>
 
               <div class="space-y-2">
                 <label class="text-sm font-medium text-white/60 ml-1">Cita-cita</label>
-                <input v-model="form.cita_cita" type="text" class="form-input" placeholder="Guru, Dokter, Tentara, dll">
+                <input v-model="form.cita_cita" type="text" class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:border-secondary/50 focus:ring-4 focus:ring-secondary/10 outline-none transition-all placeholder:text-white/10" placeholder="Guru, Dokter, Tentara, dll">
               </div>
 
               <div class="space-y-2">
                 <label class="text-sm font-medium text-white/60 ml-1">Anak Ke-</label>
-                <input v-model="form.anak_ke" type="number" class="form-input" placeholder="1">
+                <input v-model="form.anak_ke" type="number" class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:border-secondary/50 focus:ring-4 focus:ring-secondary/10 outline-none transition-all placeholder:text-white/10" placeholder="1">
               </div>
 
               <div class="space-y-2">
                 <label class="text-sm font-medium text-white/60 ml-1">Jumlah Saudara Kandung</label>
-                <input v-model="form.jumlah_saudara_kandung" type="number" class="form-input" placeholder="0">
+                <input v-model="form.jumlah_saudara_kandung" type="number" class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:border-secondary/50 focus:ring-4 focus:ring-secondary/10 outline-none transition-all placeholder:text-white/10" placeholder="0">
               </div>
             </div>
 
@@ -274,37 +274,37 @@ const stepTitles = [
 
               <div class="md:col-span-2 space-y-2">
                 <label class="text-sm font-medium text-white/60 ml-1">Alamat Jalan / Dusun</label>
-                <textarea v-model="form.alamat" rows="2" class="form-input" placeholder="Jl. Al-Hikmah No. 01..."></textarea>
+                <textarea v-model="form.alamat" rows="2" class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:border-secondary/50 focus:ring-4 focus:ring-secondary/10 outline-none transition-all placeholder:text-white/10" placeholder="Jl. Al-Hikmah No. 01..."></textarea>
               </div>
 
               <div class="space-y-2">
                 <label class="text-sm font-medium text-white/60 ml-1">RT / RW</label>
-                <input v-model="form.rt_rw" type="text" class="form-input" placeholder="001/002">
+                <input v-model="form.rt_rw" type="text" class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:border-secondary/50 focus:ring-4 focus:ring-secondary/10 outline-none transition-all placeholder:text-white/10" placeholder="001/002">
               </div>
 
               <div class="space-y-2">
                 <label class="text-sm font-medium text-white/60 ml-1">Desa / Kelurahan</label>
-                <input v-model="form.desa" type="text" class="form-input" placeholder="Masukkan Desa">
+                <input v-model="form.desa" type="text" class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:border-secondary/50 focus:ring-4 focus:ring-secondary/10 outline-none transition-all placeholder:text-white/10" placeholder="Masukkan Desa">
               </div>
 
               <div class="space-y-2">
                 <label class="text-sm font-medium text-white/60 ml-1">Kecamatan</label>
-                <input v-model="form.kecamatan" type="text" class="form-input" placeholder="Masukkan Kecamatan">
+                <input v-model="form.kecamatan" type="text" class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:border-secondary/50 focus:ring-4 focus:ring-secondary/10 outline-none transition-all placeholder:text-white/10" placeholder="Masukkan Kecamatan">
               </div>
 
               <div class="space-y-2">
                 <label class="text-sm font-medium text-white/60 ml-1">Kabupaten / Kota</label>
-                <input v-model="form.kabupaten" type="text" class="form-input" placeholder="Masukkan Kabupaten">
+                <input v-model="form.kabupaten" type="text" class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:border-secondary/50 focus:ring-4 focus:ring-secondary/10 outline-none transition-all placeholder:text-white/10" placeholder="Masukkan Kabupaten">
               </div>
 
               <div class="space-y-2">
                 <label class="text-sm font-medium text-white/60 ml-1">Provinsi</label>
-                <input v-model="form.provinsi" type="text" class="form-input" placeholder="Masukkan Provinsi">
+                <input v-model="form.provinsi" type="text" class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:border-secondary/50 focus:ring-4 focus:ring-secondary/10 outline-none transition-all placeholder:text-white/10" placeholder="Masukkan Provinsi">
               </div>
 
               <div class="space-y-2">
                 <label class="text-sm font-medium text-white/60 ml-1">Kode Pos</label>
-                <input v-model="form.kode_pos" type="text" class="form-input" placeholder="12345">
+                <input v-model="form.kode_pos" type="text" class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:border-secondary/50 focus:ring-4 focus:ring-secondary/10 outline-none transition-all placeholder:text-white/10" placeholder="12345">
               </div>
             </div>
 
@@ -316,12 +316,12 @@ const stepTitles = [
 
               <div class="space-y-2">
                 <label class="text-sm font-medium text-white/60 ml-1">Nomor Kartu Keluarga (KK)</label>
-                <input v-model="form.no_kk" type="text" class="form-input" placeholder="16 digit No KK">
+                <input v-model="form.no_kk" type="text" class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:border-secondary/50 focus:ring-4 focus:ring-secondary/10 outline-none transition-all placeholder:text-white/10" placeholder="16 digit No KK">
               </div>
 
               <div class="space-y-2">
                 <label class="text-sm font-medium text-white/60 ml-1">Nama Kepala Keluarga</label>
-                <input v-model="form.kepala_keluarga" type="text" class="form-input" placeholder="Sesuai KK">
+                <input v-model="form.kepala_keluarga" type="text" class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:border-secondary/50 focus:ring-4 focus:ring-secondary/10 outline-none transition-all placeholder:text-white/10" placeholder="Sesuai KK">
               </div>
 
               <!-- Ayah -->
@@ -331,17 +331,17 @@ const stepTitles = [
               
               <div class="space-y-2">
                 <label class="text-sm font-medium text-white/60 ml-1">Nama Ayah Kandung</label>
-                <input v-model="form.nama_ayah_kandung" type="text" class="form-input">
+                <input v-model="form.nama_ayah_kandung" type="text" class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:border-secondary/50 focus:ring-4 focus:ring-secondary/10 outline-none transition-all placeholder:text-white/10">
               </div>
 
               <div class="space-y-2">
                 <label class="text-sm font-medium text-white/60 ml-1">NIK Ayah</label>
-                <input v-model="form.nik_ayah" type="text" class="form-input">
+                <input v-model="form.nik_ayah" type="text" class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:border-secondary/50 focus:ring-4 focus:ring-secondary/10 outline-none transition-all placeholder:text-white/10">
               </div>
 
               <div class="space-y-2">
                 <label class="text-sm font-medium text-white/60 ml-1">Status Ayah</label>
-                <select v-model="form.status_ayah" class="form-input appearance-none">
+                <select v-model="form.status_ayah" class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:border-secondary/50 focus:ring-4 focus:ring-secondary/10 outline-none transition-all placeholder:text-white/10">
                   <option value="Masih Hidup">Masih Hidup</option>
                   <option value="Meninggal">Meninggal</option>
                 </select>
@@ -349,7 +349,7 @@ const stepTitles = [
 
               <div class="space-y-2">
                 <label class="text-sm font-medium text-white/60 ml-1">Pekerjaan Ayah</label>
-                <input v-model="form.pekerjaan_ayah" type="text" class="form-input">
+                <input v-model="form.pekerjaan_ayah" type="text" class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:border-secondary/50 focus:ring-4 focus:ring-secondary/10 outline-none transition-all placeholder:text-white/10">
               </div>
 
               <!-- Ibu -->
@@ -359,22 +359,22 @@ const stepTitles = [
 
               <div class="space-y-2">
                 <label class="text-sm font-medium text-white/60 ml-1">Nama Ibu Kandung</label>
-                <input v-model="form.nama_ibu_kandung" type="text" class="form-input">
+                <input v-model="form.nama_ibu_kandung" type="text" class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:border-secondary/50 focus:ring-4 focus:ring-secondary/10 outline-none transition-all placeholder:text-white/10">
               </div>
 
               <div class="space-y-2">
                 <label class="text-sm font-medium text-white/60 ml-1">NIK Ibu</label>
-                <input v-model="form.nik_ibu" type="text" class="form-input">
+                <input v-model="form.nik_ibu" type="text" class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:border-secondary/50 focus:ring-4 focus:ring-secondary/10 outline-none transition-all placeholder:text-white/10">
               </div>
 
               <div class="space-y-2">
                 <label class="text-sm font-medium text-white/60 ml-1">Pekerjaan Ibu</label>
-                <input v-model="form.pekerjaan_ibu" type="text" class="form-input">
+                <input v-model="form.pekerjaan_ibu" type="text" class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:border-secondary/50 focus:ring-4 focus:ring-secondary/10 outline-none transition-all placeholder:text-white/10">
               </div>
 
               <div class="space-y-2">
                 <label class="text-sm font-medium text-white/60 ml-1">Penghasilan Orang Tua (Per Bulan)</label>
-                <select v-model="form.penghasilan" class="form-input appearance-none">
+                <select v-model="form.penghasilan" class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:border-secondary/50 focus:ring-4 focus:ring-secondary/10 outline-none transition-all placeholder:text-white/10">
                   <option value="">Pilih Rentang Penghasilan</option>
                   <option value="< 1.000.000">&lt; 1.000.000</option>
                   <option value="1.000.000 - 3.000.000">1.000.000 - 3.000.000</option>
@@ -392,32 +392,32 @@ const stepTitles = [
 
               <div class="space-y-2">
                 <label class="text-sm font-medium text-white/60 ml-1">Nama Sekolah Asal</label>
-                <input v-model="form.asal_sekolah" type="text" class="form-input" placeholder="SD / MI / SMP...">
+                <input v-model="form.asal_sekolah" type="text" class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:border-secondary/50 focus:ring-4 focus:ring-secondary/10 outline-none transition-all placeholder:text-white/10" placeholder="SD / MI / SMP...">
               </div>
 
               <div class="space-y-2">
                 <label class="text-sm font-medium text-white/60 ml-1">NPSN Sekolah Asal</label>
-                <input v-model="form.npsn_sekolah" type="text" class="form-input" placeholder="8 digit NPSN">
+                <input v-model="form.npsn_sekolah" type="text" class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:border-secondary/50 focus:ring-4 focus:ring-secondary/10 outline-none transition-all placeholder:text-white/10" placeholder="8 digit NPSN">
               </div>
 
               <div class="md:col-span-2 space-y-2">
                 <label class="text-sm font-medium text-white/60 ml-1">Alamat Sekolah</label>
-                <input v-model="form.alamat_sekolah" type="text" class="form-input">
+                <input v-model="form.alamat_sekolah" type="text" class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:border-secondary/50 focus:ring-4 focus:ring-secondary/10 outline-none transition-all placeholder:text-white/10">
               </div>
 
               <div class="space-y-2">
                 <label class="text-sm font-medium text-white/60 ml-1">No. Surat Keterangan Lulus</label>
-                <input v-model="form.no_surat_lulus" type="text" class="form-input">
+                <input v-model="form.no_surat_lulus" type="text" class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:border-secondary/50 focus:ring-4 focus:ring-secondary/10 outline-none transition-all placeholder:text-white/10">
               </div>
 
               <div class="space-y-2">
                 <label class="text-sm font-medium text-white/60 ml-1">No. Blangko Ijazah</label>
-                <input v-model="form.no_blangko_ijazah" type="text" class="form-input">
+                <input v-model="form.no_blangko_ijazah" type="text" class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:border-secondary/50 focus:ring-4 focus:ring-secondary/10 outline-none transition-all placeholder:text-white/10">
               </div>
 
               <div class="space-y-2">
                 <label class="text-sm font-medium text-white/60 ml-1">Nilai Rata-rata Ijazah</label>
-                <input v-model="form.nilai_rata2_ijazah" type="text" class="form-input">
+                <input v-model="form.nilai_rata2_ijazah" type="text" class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:border-secondary/50 focus:ring-4 focus:ring-secondary/10 outline-none transition-all placeholder:text-white/10">
               </div>
 
               <div class="md:col-span-2 pt-4 border-t border-white/5">
@@ -426,12 +426,12 @@ const stepTitles = [
 
               <div class="space-y-2">
                 <label class="text-sm font-medium text-white/60 ml-1">Nomor KIP</label>
-                <input v-model="form.no_kip" type="text" class="form-input">
+                <input v-model="form.no_kip" type="text" class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:border-secondary/50 focus:ring-4 focus:ring-secondary/10 outline-none transition-all placeholder:text-white/10">
               </div>
 
               <div class="space-y-2">
                 <label class="text-sm font-medium text-white/60 ml-1">Nomor PKH</label>
-                <input v-model="form.no_pkh" type="text" class="form-input">
+                <input v-model="form.no_pkh" type="text" class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:border-secondary/50 focus:ring-4 focus:ring-secondary/10 outline-none transition-all placeholder:text-white/10">
               </div>
             </div>
 
@@ -533,20 +533,12 @@ const stepTitles = [
 </template>
 
 <style scoped>
-.form-input {
-  @apply w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:border-secondary/50 focus:ring-4 focus:ring-secondary/10 outline-none transition-all placeholder:text-white/10;
-}
-
 /* Custom style for select arrow */
 select {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='rgba(255,255,255,0.3)'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 1.5rem center;
   background-size: 1.2rem;
-}
-
-.form-input option {
-  @apply bg-[#081a24] text-white;
 }
 
 /* Transitions */
