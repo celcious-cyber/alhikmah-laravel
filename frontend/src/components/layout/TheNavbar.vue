@@ -1,14 +1,18 @@
 <script setup>
 import { ref, onMounted, onUnmounted, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { Menu, X, Search, Globe, Sun, Moon, ChevronDown } from 'lucide-vue-next'
+import { useRoute } from 'vue-router'
+import { Menu, X, Search, Globe, Sun, Moon, ChevronDown, ArrowLeft } from 'lucide-vue-next'
 import BaseButton from '../ui/BaseButton.vue'
 
 const { locale, t } = useI18n()
+const route = useRoute()
 const isScrolled = ref(false)
 const isMobileMenuOpen = ref(false)
 const mobileSubmenuOpen = ref(null) // Tracks which mobile submenu is open
 const isDark = ref(true) // Default dark as per current design
+
+const isSpecialPage = computed(() => ['/spsb26', '/pbs26'].includes(route.path))
 
 const changeLanguage = (lang) => {
   locale.value = lang.toLowerCase()
@@ -142,14 +146,25 @@ const toggleMobileSubmenu = (name) => {
           </router-link>
         </div>
 
-        <!-- Mobile Hamburger -->
-        <button 
-          class="lg:hidden text-white p-2"
-          @click="isMobileMenuOpen = !isMobileMenuOpen"
-        >
-          <Menu v-if="!isMobileMenuOpen" :size="28" />
-          <X v-else :size="28" />
-        </button>
+        <!-- Mobile Buttons (Back & Hamburger) -->
+        <div class="lg:hidden flex items-center gap-2">
+          <router-link 
+            v-if="isSpecialPage && !isMobileMenuOpen" 
+            to="/" 
+            class="flex items-center gap-1.5 px-3 py-1.5 bg-white/5 border border-white/10 rounded-full text-white/80 hover:text-white transition-all active:scale-95"
+          >
+            <ArrowLeft :size="18" />
+            <span class="text-xs font-bold uppercase tracking-tight">Beranda</span>
+          </router-link>
+
+          <button 
+            class="text-white p-2 hover:bg-white/5 rounded-lg transition-colors"
+            @click="isMobileMenuOpen = !isMobileMenuOpen"
+          >
+            <Menu v-if="!isMobileMenuOpen" :size="28" />
+            <X v-else :size="28" />
+          </button>
+        </div>
       </div>
 
       <!-- Bottom Row: Navigation Links (Desktop) -->
