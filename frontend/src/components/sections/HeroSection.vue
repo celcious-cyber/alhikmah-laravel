@@ -121,7 +121,7 @@ onMounted(() => {
         <!-- Gold Medal Asset -->
         <img 
           src="/assets/images/gold-medal.png" 
-          class="absolute top-[10%] right-[10%] w-24 sm:w-32 lg:w-40 rotate-[12deg] z-30 animate-bounce-slow"
+          class="absolute top-[20%] left-[5%] w-24 sm:w-32 lg:w-40 rotate-[-12deg] z-30 animate-bounce-slow"
           alt="gold-medal"
         />
       </div>
