@@ -65,4 +65,6 @@ app.get('*', (req, res) => {
 
 app.listen(PORT, () => {
   console.log(`🚀 Server berjalan di port ${PORT}`)
+  console.log(`📂 Serving frontend from: ${distPath}`)
+  console.log(`✅ Uploads directory: ${uploadsDir}`)
 })
