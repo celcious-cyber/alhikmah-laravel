@@ -7,6 +7,7 @@
     "build": "cd frontend && npm install --no-audit --no-fund && npm run build && rm -rf ../backend/dist ../dist && cp -r dist ../backend/ && cp -r dist ../ && cd ../backend && npm install --no-audit --no-fund && npx prisma@5 generate",
     "start": "bash -c 'cd backend && (npx prisma@5 db push || true) && (node prisma/seed.js || true) && node src/index.js'",
     "seed": "cd backend && node prisma/seed.js",
-    "db:push": "cd backend && npx prisma db push"
+    "db:push": "cd backend && npx prisma db push",
+    "postinstall": "npm run build"
   }
 }
