@@ -1,9 +1,13 @@
 <script setup>
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, computed } from 'vue'
+import { useRoute } from 'vue-router'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import TheNavbar from './components/layout/TheNavbar.vue'
 import TheFooter from './components/layout/TheFooter.vue'
+
+const route = useRoute()
+const isAdminPage = computed(() => route.path.startsWith('/admin'))
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -75,9 +79,9 @@ onMounted(() => {
     </div>
 
     <div class="relative z-10">
-      <TheNavbar />
+      <TheNavbar v-if="!isAdminPage" />
       <router-view />
-      <TheFooter />
+      <TheFooter v-if="!isAdminPage" />
     </div>
   </div>
 </template>
