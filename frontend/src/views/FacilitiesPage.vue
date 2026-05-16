@@ -37,8 +37,8 @@ const closeLightbox = () => {
         subtitle="Kami berkomitmen menyediakan sarana dan prasarana terbaik untuk menunjang kenyamanan serta kualitas belajar mengajar para santri."
       />
 
-      <!-- Grid -->
-      <div class="columns-1 md:columns-2 lg:columns-3 xl:columns-4 gap-6 space-y-6 mt-12" data-aos="fade-up">
+      <!-- Grid (3 Columns on Mobile) -->
+      <div class="columns-3 md:columns-2 lg:columns-3 xl:columns-4 gap-2 md:gap-6 space-y-2 md:space-y-6 mt-12" data-aos="fade-up">
         <div 
           v-for="img in images" 
           :key="img.id"
