@@ -77,6 +77,47 @@ app.use('/api/registrations', adminRegistrationRoutes)
 app.use('/api/beasiswa', scholarshipRoutes)
 app.use('/api/admin/beasiswa', scholarshipsAdminRoutes)
 
+// OG Meta Tags untuk halaman berita (agar thumbnail muncul di WhatsApp/Facebook)
+app.get('/berita/:slug', async (req, res) => {
+  try {
+    const indexPath = path.join(distPath, 'index.html')
+    let html = fs.readFileSync(indexPath, 'utf8')
+    
+    // Import db di sini agar tidak error jika db belum siap
+    const { default: db } = await import('./db.js')
+    const [rows] = await db.execute('SELECT title, excerpt, thumbnail FROM News WHERE slug = ?', [req.params.slug])
+    const news = rows[0]
+    
+    if (news) {
+      const siteUrl = 'https://alhikmahutan.ponpes.id'
+      const fullThumbnail = news.thumbnail 
+        ? (news.thumbnail.startsWith('http') ? news.thumbnail : `${siteUrl}${news.thumbnail}`)
+        : `${siteUrl}/og-image.jpg`
+      const title = news.title || 'Berita Al-Hikmah'
+      const description = news.excerpt || 'Baca berita terbaru dari Pondok Modern Al-Hikmah Utan'
+      const pageUrl = `${siteUrl}/berita/${req.params.slug}`
+      
+      // Replace meta tags
+      html = html.replace(/<meta property="og:title"[^>]*>/, `<meta property="og:title" content="${title}" />`)
+      html = html.replace(/<meta property="og:description"[^>]*>/, `<meta property="og:description" content="${description}" />`)
+      html = html.replace(/<meta property="og:image"[^>]*>/, `<meta property="og:image" content="${fullThumbnail}" />`)
+      html = html.replace(/<meta property="og:url"[^>]*>/, `<meta property="og:url" content="${pageUrl}" />`)
+      html = html.replace(/<meta property="twitter:title"[^>]*>/, `<meta property="twitter:title" content="${title}" />`)
+      html = html.replace(/<meta property="twitter:description"[^>]*>/, `<meta property="twitter:description" content="${description}" />`)
+      html = html.replace(/<meta property="twitter:image"[^>]*>/, `<meta property="twitter:image" content="${fullThumbnail}" />`)
+      html = html.replace(/<meta property="twitter:url"[^>]*>/, `<meta property="twitter:url" content="${pageUrl}" />`)
+      html = html.replace(/<title>[^<]*<\/title>/, `<title>${title} | Al-Hikmah</title>`)
+    }
+    
+    res.send(html)
+  } catch (err) {
+    console.error('OG Meta Error:', err)
+    // Fallback: kirim index.html biasa
+    const indexPath = path.join(distPath, 'index.html')
+    res.sendFile(indexPath)
+  }
+})
+
 // Handle SPA routing - kirim index.html untuk semua rute non-API
 app.get('*', (req, res) => {
   // Jika ini adalah request ke API yang tidak ada, kirim JSON 404
@@ -96,6 +137,7 @@ app.get('*', (req, res) => {
     }
   })
 })
+
 
 app.listen(PORT, () => {
   console.log(`🚀 Server berjalan di port ${PORT}`)
