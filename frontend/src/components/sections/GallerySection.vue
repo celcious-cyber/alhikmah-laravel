@@ -60,8 +60,8 @@ const images = [
       <div data-aos="fade-up">
         <Swiper
           :modules="[Autoplay, Navigation, Pagination]"
-          :slides-per-view="1"
-          :space-between="24"
+          :slides-per-view="3"
+          :space-between="12"
           :pagination="{ clickable: true }"
           :navigation="{
             prevEl: prev,
@@ -69,9 +69,8 @@ const images = [
           }"
           :autoplay="{ delay: 5000 }"
           :breakpoints="{
-            '640': { slidesPerView: 2 },
-            '1024': { slidesPerView: 3 },
-            '1280': { slidesPerView: 4 }
+            '768': { slidesPerView: 3, spaceBetween: 24 },
+            '1024': { slidesPerView: 4, spaceBetween: 24 }
           }"
           class="!pb-16"
         >

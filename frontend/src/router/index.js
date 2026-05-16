@@ -6,6 +6,7 @@ import GalleryPage from '../views/GalleryPage.vue'
 import ScholarshipPage from '../views/ScholarshipPage.vue'
 import NewsListPage from '../views/NewsListPage.vue'
 import NewsDetailPage from '../views/NewsDetailPage.vue'
+import FacilitiesPage from '../views/FacilitiesPage.vue'
 
 // Admin pages
 import AdminLoginPage from '../views/admin/LoginPage.vue'
@@ -26,6 +27,7 @@ const routes = [
   { path: '/gallery', name: 'gallery', component: GalleryPage },
   { path: '/berita', name: 'news-list', component: NewsListPage },
   { path: '/berita/:slug', name: 'news-detail', component: NewsDetailPage },
+  { path: '/facilities', name: 'facilities', component: FacilitiesPage },
 
   // Admin Routes
   { path: '/admin/login', name: 'admin-login', component: AdminLoginPage },

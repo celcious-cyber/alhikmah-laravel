@@ -8,6 +8,7 @@ import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import SectionHeading from '../ui/SectionHeading.vue'
+import BaseButton from '../ui/BaseButton.vue'
 
 const { t, tm } = useI18n()
 
@@ -39,22 +40,30 @@ const facilities = computed(() => {
           class="!mb-0 !text-center md:!text-left"
         />
 
-        <!-- Navigation Buttons -->
-        <div class="hidden md:flex gap-2">
-          <button ref="prev" class="p-3 glassmorphism rounded-xl text-white hover:bg-secondary hover:text-primary transition-all duration-300 disabled:opacity-20">
-            <ChevronLeft :size="20" />
-          </button>
-          <button ref="next" class="p-3 glassmorphism rounded-xl text-white hover:bg-secondary hover:text-primary transition-all duration-300 disabled:opacity-20">
-            <ChevronRight :size="20" />
-          </button>
+        <!-- Navigation & Button -->
+        <div class="flex items-center gap-4">
+          <div class="hidden md:flex gap-2 mr-4">
+            <button ref="prev" class="p-3 glassmorphism rounded-xl text-white hover:bg-secondary hover:text-primary transition-all duration-300 disabled:opacity-20">
+              <ChevronLeft :size="20" />
+            </button>
+            <button ref="next" class="p-3 glassmorphism rounded-xl text-white hover:bg-secondary hover:text-primary transition-all duration-300 disabled:opacity-20">
+              <ChevronRight :size="20" />
+            </button>
+          </div>
+
+          <router-link to="/facilities">
+            <BaseButton variant="primary" size="md" class="!bg-secondary !text-primary px-8 py-3 !rounded-2xl font-bold">
+              Jelajahi Semua Fasilitas
+            </BaseButton>
+          </router-link>
         </div>
       </div>
 
       <div data-aos="fade-up">
         <Swiper
           :modules="[Autoplay, Navigation, Pagination]"
-          :slides-per-view="1"
-          :space-between="24"
+          :slides-per-view="3"
+          :space-between="12"
           :pagination="{ clickable: true }"
           :navigation="{
             prevEl: prev,
@@ -62,9 +71,8 @@ const facilities = computed(() => {
           }"
           :autoplay="{ delay: 4000 }"
           :breakpoints="{
-            '640': { slidesPerView: 2 },
-            '1024': { slidesPerView: 3 },
-            '1280': { slidesPerView: 4 }
+            '768': { slidesPerView: 3, spaceBetween: 24 },
+            '1024': { slidesPerView: 4, spaceBetween: 24 }
           }"
           class="!pb-16"
         >
