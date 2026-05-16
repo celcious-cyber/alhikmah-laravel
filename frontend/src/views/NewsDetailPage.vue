@@ -12,11 +12,39 @@ const item = ref(null)
 const loading = ref(true)
 const error = ref(null)
 
+const updateMetaTags = (news) => {
+  if (!news) return
+  
+  // Update Title
+  document.title = `${news.title} | Al-Hikmah`
+  
+  // Update OG Tags
+  const fullThumbnail = news.thumbnail ? (news.thumbnail.startsWith('http') ? news.thumbnail : `https://alhikmahutan.ponpes.id${news.thumbnail}`) : 'https://alhikmahutan.ponpes.id/og-image.jpg'
+  
+  const metaTags = {
+    'og:title': news.title,
+    'og:description': news.excerpt,
+    'og:image': fullThumbnail,
+    'og:url': window.location.href,
+    'twitter:title': news.title,
+    'twitter:description': news.excerpt,
+    'twitter:image': fullThumbnail
+  }
+
+  for (const [property, content] of Object.entries(metaTags)) {
+    let element = document.querySelector(`meta[property="${property}"]`) || document.querySelector(`meta[name="${property}"]`)
+    if (element) {
+      element.setAttribute('content', content)
+    }
+  }
+}
+
 const fetchDetail = async () => {
   loading.value = true
   try {
     const res = await axios.get(`${API_URL}/api/news/${route.params.slug}`)
     item.value = res.data
+    updateMetaTags(res.data)
   } catch (err) {
     console.error('Gagal mengambil detail berita:', err)
     error.value = err.response?.data?.message || 'Gagal mengambil detail berita.'
