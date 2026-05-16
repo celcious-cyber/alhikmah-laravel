@@ -64,7 +64,7 @@ onMounted(fetchNews)
           <!-- Thumbnail -->
           <div class="relative aspect-[16/10] overflow-hidden">
             <img 
-              :src="item.thumbnail ? (item.thumbnail.startsWith('http') ? item.thumbnail : `${API_URL}${item.thumbnail}`) : 'https://picsum.photos/seed/alhikmah/800/500'" 
+              :src="item.thumbnail ? (item.thumbnail.startsWith('http') ? item.thumbnail : `${API_URL}${item.thumbnail}`) : 'https://placehold.co/800x500/154D6E/FFFFFF?text=Berita+Al-Hikmah'" 
               :alt="item.title"
               class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
             />

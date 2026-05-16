@@ -13,19 +13,19 @@ const { tm, t } = useI18n()
 
 // Images for programs
 const programImages = [
-  'https://picsum.photos/seed/tahfidz/600/400',
-  'https://picsum.photos/seed/speech/600/400',
-  'https://picsum.photos/seed/art/600/400',
-  'https://picsum.photos/seed/skill/600/400',
-  'https://picsum.photos/seed/sport/600/400',
-  'https://picsum.photos/seed/kitab/600/400',
-  'https://picsum.photos/seed/scout/600/400',
-  'https://picsum.photos/seed/org/600/400',
-  'https://picsum.photos/seed/study/600/400',
-  'https://picsum.photos/seed/teach/600/400',
-  'https://picsum.photos/seed/library/600/400',
-  'https://picsum.photos/seed/tour/600/400',
-  'https://picsum.photos/seed/imam/600/400'
+  'https://placehold.co/600x400/154D6E/FFFFFF?text=Tahfidz',
+  'https://placehold.co/600x400/154D6E/FFFFFF?text=Bahasa',
+  'https://placehold.co/600x400/154D6E/FFFFFF?text=Seni',
+  'https://placehold.co/600x400/154D6E/FFFFFF?text=Keterampilan',
+  'https://placehold.co/600x400/154D6E/FFFFFF?text=Olahraga',
+  'https://placehold.co/600x400/154D6E/FFFFFF?text=Kitab',
+  'https://placehold.co/600x400/154D6E/FFFFFF?text=Pramuka',
+  'https://placehold.co/600x400/154D6E/FFFFFF?text=Organisasi',
+  'https://placehold.co/600x400/154D6E/FFFFFF?text=Belajar',
+  'https://placehold.co/600x400/154D6E/FFFFFF?text=Pengabdian',
+  'https://placehold.co/600x400/154D6E/FFFFFF?text=Literasi',
+  'https://placehold.co/600x400/154D6E/FFFFFF?text=Rihlah',
+  'https://placehold.co/600x400/154D6E/FFFFFF?text=Dakwah'
 ]
 
 const tabs = computed(() => [
@@ -123,6 +123,7 @@ const filteredPrograms = computed(() => {
                   :src="program.image" 
                   :alt="program.title"
                   class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  loading="lazy"
                 />
                 <div class="absolute top-4 left-4">
                   <span class="px-4 py-1.5 bg-secondary text-primary text-xs font-bold rounded-full shadow-lg">

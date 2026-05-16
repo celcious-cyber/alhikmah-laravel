@@ -7,21 +7,21 @@ const activeFilter = ref('Semua')
 const filters = ['Semua', 'Kegiatan', 'Prestasi', 'Wisuda', 'Fasilitas']
 
 const images = [
-  { id: 1, category: 'Kegiatan', caption: 'Pelajaran Kitab Kuning', image: 'https://picsum.photos/seed/p1/800/1200' },
-  { id: 2, category: 'Prestasi', caption: 'Juara MTQ Nasional', image: 'https://picsum.photos/seed/p2/800/600' },
-  { id: 3, category: 'Kegiatan', caption: 'Ekstrakurikuler Memanah', image: 'https://picsum.photos/seed/p3/800/1000' },
-  { id: 4, category: 'Wisuda', caption: 'Haflah Akhirussanah 2025', image: 'https://picsum.photos/seed/p4/800/500' },
-  { id: 5, category: 'Kegiatan', caption: 'Praktik Laboratorium IPA', image: 'https://picsum.photos/seed/p5/800/1400' },
-  { id: 6, category: 'Prestasi', caption: 'Lomba Pidato Bahasa Arab', image: 'https://picsum.photos/seed/p6/800/700' },
-  { id: 7, category: 'Wisuda', caption: 'Prosesi Wisuda Tahfidz', image: 'https://picsum.photos/seed/p7/800/1100' },
-  { id: 8, category: 'Kegiatan', caption: 'Shalat Berjamaah', image: 'https://picsum.photos/seed/p8/800/900' },
-  { id: 9, category: 'Fasilitas', caption: 'Asrama Putra Modern', image: 'https://picsum.photos/seed/p9/800/600' },
-  { id: 10, category: 'Kegiatan', caption: 'Latihan Muhadharah', image: 'https://picsum.photos/seed/p10/800/1300' },
-  { id: 11, category: 'Fasilitas', caption: 'Perpustakaan Digital', image: 'https://picsum.photos/seed/p11/800/800' },
-  { id: 12, category: 'Prestasi', caption: 'Medali Emas Pencak Silat', image: 'https://picsum.photos/seed/p12/800/1000' },
-  { id: 13, category: 'Kegiatan', caption: 'Kajian Subuh', image: 'https://picsum.photos/seed/p13/800/700' },
-  { id: 14, category: 'Fasilitas', caption: 'Masjid Jami Al-Hikmah', image: 'https://picsum.photos/seed/p14/800/1200' },
-  { id: 15, category: 'Prestasi', caption: 'Olimpiade Sains', image: 'https://picsum.photos/seed/p15/800/600' },
+  { id: 1, category: 'Kegiatan', caption: 'Pelajaran Kitab Kuning', image: 'https://placehold.co/800x1200/154D6E/FFFFFF?text=Kegiatan+1' },
+  { id: 2, category: 'Prestasi', caption: 'Juara MTQ Nasional', image: 'https://placehold.co/800x600/154D6E/FFFFFF?text=Prestasi+1' },
+  { id: 3, category: 'Kegiatan', caption: 'Ekstrakurikuler Memanah', image: 'https://placehold.co/800x1000/154D6E/FFFFFF?text=Kegiatan+2' },
+  { id: 4, category: 'Wisuda', caption: 'Haflah Akhirussanah 2025', image: 'https://placehold.co/800x500/154D6E/FFFFFF?text=Wisuda+1' },
+  { id: 5, category: 'Kegiatan', caption: 'Praktik Laboratorium IPA', image: 'https://placehold.co/800x1400/154D6E/FFFFFF?text=Kegiatan+3' },
+  { id: 6, category: 'Prestasi', caption: 'Lomba Pidato Bahasa Arab', image: 'https://placehold.co/800x700/154D6E/FFFFFF?text=Prestasi+2' },
+  { id: 7, category: 'Wisuda', caption: 'Prosesi Wisuda Tahfidz', image: 'https://placehold.co/800x1100/154D6E/FFFFFF?text=Wisuda+2' },
+  { id: 8, category: 'Kegiatan', caption: 'Shalat Berjamaah', image: 'https://placehold.co/800x900/154D6E/FFFFFF?text=Kegiatan+4' },
+  { id: 9, category: 'Fasilitas', caption: 'Asrama Putra Modern', image: 'https://placehold.co/800x600/154D6E/FFFFFF?text=Fasilitas+1' },
+  { id: 10, category: 'Kegiatan', caption: 'Latihan Muhadharah', image: 'https://placehold.co/800x1300/154D6E/FFFFFF?text=Kegiatan+5' },
+  { id: 11, category: 'Fasilitas', caption: 'Perpustakaan Digital', image: 'https://placehold.co/800x800/154D6E/FFFFFF?text=Fasilitas+2' },
+  { id: 12, category: 'Prestasi', caption: 'Medali Emas Pencak Silat', image: 'https://placehold.co/800x1000/154D6E/FFFFFF?text=Prestasi+3' },
+  { id: 13, category: 'Kegiatan', caption: 'Kajian Subuh', image: 'https://placehold.co/800x700/154D6E/FFFFFF?text=Kegiatan+6' },
+  { id: 14, category: 'Fasilitas', caption: 'Masjid Jami Al-Hikmah', image: 'https://placehold.co/800x1200/154D6E/FFFFFF?text=Fasilitas+3' },
+  { id: 15, category: 'Prestasi', caption: 'Olimpiade Sains', image: 'https://placehold.co/800x600/154D6E/FFFFFF?text=Prestasi+4' },
 ]
 
 const filteredImages = computed(() => {

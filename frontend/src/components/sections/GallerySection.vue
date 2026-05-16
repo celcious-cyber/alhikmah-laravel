@@ -58,19 +58,18 @@ const images = [
 
       <!-- Swiper Carousel -->
       <div data-aos="fade-up">
-        <Swiper
-          :modules="[Autoplay, Navigation, Pagination]"
-          :slides-per-view="3"
-          :space-between="12"
+        <Swiper 
+          :modules="[Autoplay, Navigation, Pagination]" 
+          :slides-per-view="1.5"
+          :space-between="16"
+          :navigation="{ prevEl: prev, nextEl: next }"
           :pagination="{ clickable: true }"
-          :navigation="{
-            prevEl: prev,
-            nextEl: next,
-          }"
           :autoplay="{ delay: 5000 }"
+          :lazy="true"
           :breakpoints="{
-            '768': { slidesPerView: 3, spaceBetween: 24 },
-            '1024': { slidesPerView: 4, spaceBetween: 24 }
+            640: { slidesPerView: 2.2, spaceBetween: 24 },
+            1024: { slidesPerView: 3.2, spaceBetween: 30 },
+            1280: { slidesPerView: 4.2, spaceBetween: 40 }
           }"
           class="!pb-16"
         >
@@ -79,6 +78,7 @@ const images = [
               <img 
                 :src="img.image" 
                 :alt="img.caption"
+                loading="lazy"
                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
               

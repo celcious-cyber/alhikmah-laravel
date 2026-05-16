@@ -4,16 +4,16 @@ import SectionHeading from '../components/ui/SectionHeading.vue'
 import { Search, X } from 'lucide-vue-next'
 
 const images = [
-  { id: 1, category: 'Fasilitas', caption: 'Masjid Jami Al-Hikmah', image: 'https://picsum.photos/seed/fac1/800/1200' },
-  { id: 2, category: 'Fasilitas', caption: 'Asrama Putra Modern', image: 'https://picsum.photos/seed/fac2/800/600' },
-  { id: 3, category: 'Fasilitas', caption: 'Perpustakaan Digital', image: 'https://picsum.photos/seed/fac3/800/1000' },
-  { id: 4, category: 'Fasilitas', caption: 'Laboratorium IPA', image: 'https://picsum.photos/seed/fac4/800/800' },
-  { id: 5, category: 'Fasilitas', caption: 'Lapangan Olahraga Utama', image: 'https://picsum.photos/seed/fac5/800/600' },
-  { id: 6, category: 'Fasilitas', caption: 'Asrama Putri Sakinah', image: 'https://picsum.photos/seed/fac6/800/1000' },
-  { id: 7, category: 'Fasilitas', caption: 'Ruang Makan Bersama', image: 'https://picsum.photos/seed/fac7/800/700' },
-  { id: 8, category: 'Fasilitas', caption: 'Gedung Kesenian', image: 'https://picsum.photos/seed/fac8/800/900' },
-  { id: 9, category: 'Fasilitas', caption: 'Area Parkir Luas', image: 'https://picsum.photos/seed/fac9/800/600' },
-  { id: 10, category: 'Fasilitas', caption: 'Kantin Sehat', image: 'https://picsum.photos/seed/fac10/800/800' },
+  { id: 1, category: 'Fasilitas', caption: 'Masjid Jami Al-Hikmah', image: 'https://placehold.co/800x1200/154D6E/FFFFFF?text=Masjid' },
+  { id: 2, category: 'Fasilitas', caption: 'Asrama Putra Modern', image: 'https://placehold.co/800x600/154D6E/FFFFFF?text=Asrama+Putra' },
+  { id: 3, category: 'Fasilitas', caption: 'Perpustakaan Digital', image: 'https://placehold.co/800x1000/154D6E/FFFFFF?text=Perpustakaan' },
+  { id: 4, category: 'Fasilitas', caption: 'Laboratorium IPA', image: 'https://placehold.co/800x800/154D6E/FFFFFF?text=Lab+IPA' },
+  { id: 5, category: 'Fasilitas', caption: 'Lapangan Olahraga Utama', image: 'https://placehold.co/800x600/154D6E/FFFFFF?text=Lapangan' },
+  { id: 6, category: 'Fasilitas', caption: 'Asrama Putri Sakinah', image: 'https://placehold.co/800x1000/154D6E/FFFFFF?text=Asrama+Putri' },
+  { id: 7, category: 'Fasilitas', caption: 'Ruang Makan Bersama', image: 'https://placehold.co/800x700/154D6E/FFFFFF?text=Ruang+Makan' },
+  { id: 8, category: 'Fasilitas', caption: 'Gedung Kesenian', image: 'https://placehold.co/800x900/154D6E/FFFFFF?text=Gedung+Seni' },
+  { id: 9, category: 'Fasilitas', caption: 'Area Parkir Luas', image: 'https://placehold.co/800x600/154D6E/FFFFFF?text=Parkir' },
+  { id: 10, category: 'Fasilitas', caption: 'Kantin Sehat', image: 'https://placehold.co/800x800/154D6E/FFFFFF?text=Kantin' },
 ]
 
 const selectedImage = ref(null)

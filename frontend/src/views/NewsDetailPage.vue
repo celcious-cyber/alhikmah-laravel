@@ -117,7 +117,7 @@ onMounted(fetchDetail)
           <!-- Featured Image -->
           <div class="aspect-[16/9] rounded-[40px] overflow-hidden border border-white/10 shadow-2xl" data-aos="zoom-in" data-aos-delay="200">
             <img 
-              :src="item.thumbnail ? (item.thumbnail.startsWith('http') ? item.thumbnail : `${API_URL}${item.thumbnail}`) : 'https://picsum.photos/seed/alhikmah/1200/800'" 
+              :src="item.thumbnail ? (item.thumbnail.startsWith('http') ? item.thumbnail : `${API_URL}${item.thumbnail}`) : 'https://placehold.co/1200x800/154D6E/FFFFFF?text=Berita+Al-Hikmah'" 
               :alt="item.title"
               class="w-full h-full object-cover"
             />
