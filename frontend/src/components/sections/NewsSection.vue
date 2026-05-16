@@ -52,7 +52,7 @@ onMounted(fetchNews)
 
       <!-- Loading State -->
       <div v-if="loading" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <div v-for="i in 3" :key="i" class="glassmorphism rounded-[32px] h-[450px] animate-pulse overflow-hidden border border-white/5">
+        <div v-for="i in 3" :key="i" class="glassmorphism rounded-2xl md:rounded-[32px] h-[450px] animate-pulse overflow-hidden border border-white/5">
           <div class="aspect-[16/10] bg-white/5"></div>
           <div class="p-8 space-y-4">
             <div class="w-1/3 h-3 bg-white/5 rounded"></div>
@@ -64,7 +64,7 @@ onMounted(fetchNews)
       </div>
 
       <!-- Empty State -->
-      <div v-else-if="news.length === 0" class="text-center py-20 glassmorphism rounded-[40px] border border-white/5">
+      <div v-else-if="news.length === 0" class="text-center py-20 glassmorphism rounded-2xl md:rounded-[40px] border border-white/5">
         <Newspaper :size="48" class="mx-auto mb-4 text-white/10" />
         <p class="text-white/30">Belum ada berita terbaru saat ini.</p>
       </div>
@@ -74,7 +74,7 @@ onMounted(fetchNews)
         <div 
           v-for="(item, index) in news" 
           :key="item.id"
-          class="glassmorphism rounded-[32px] overflow-hidden group shadow-xl hover:-translate-y-3 transition-all duration-500 border border-white/5 hover:border-secondary/30"
+          class="glassmorphism rounded-2xl md:rounded-[32px] overflow-hidden group shadow-xl hover:-translate-y-3 transition-all duration-500 border border-white/5 hover:border-secondary/30"
           data-aos="fade-up"
           :data-aos-delay="index * 100"
         >

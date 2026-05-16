@@ -75,7 +75,7 @@ const images = [
           class="!pb-16"
         >
           <SwiperSlide v-for="img in images" :key="img.id">
-            <div class="relative group aspect-[3/4] overflow-hidden rounded-[32px] shadow-xl">
+            <div class="relative group aspect-[3/4] overflow-hidden rounded-2xl md:rounded-[32px] shadow-xl">
               <img 
                 :src="img.image" 
                 :alt="img.caption"

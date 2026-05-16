@@ -69,7 +69,7 @@ const closeLightbox = () => {
           v-for="img in filteredImages" 
           :key="img.id"
           @click="openLightbox(img)"
-          class="relative group overflow-hidden rounded-[32px] break-inside-avoid cursor-pointer shadow-xl"
+          class="relative group overflow-hidden rounded-2xl md:rounded-[32px] break-inside-avoid cursor-pointer shadow-xl"
         >
           <img 
             :src="img.image" 

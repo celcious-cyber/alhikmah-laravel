@@ -77,7 +77,7 @@ const facilities = computed(() => {
           class="!pb-16"
         >
           <SwiperSlide v-for="(facility, index) in facilities" :key="index">
-            <div class="relative group aspect-[3/4] overflow-hidden rounded-[32px] shadow-xl">
+            <div class="relative group aspect-[3/4] overflow-hidden rounded-2xl md:rounded-[32px] shadow-xl">
               <img 
                 :src="facility.image" 
                 :alt="facility.name"
