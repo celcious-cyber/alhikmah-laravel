@@ -81,20 +81,26 @@ const submit = async () => {
       fd.append('thumbnail', form.value.thumbnail)
     }
 
-    if (isEdit.value) {
-      await axios.put(`${API_URL}/api/news/${form.value.id}`, fd, {
-        headers
-      })
-    } else {
-      await axios.post(`${API_URL}/api/news`, fd, {
-        headers
-      })
+    const token = localStorage.getItem('admin_token')
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
     }
+
+    if (isEdit.value) {
+      await axios.put(`${API_URL}/api/news/${form.value.id}`, fd, config)
+    } else {
+      await axios.post(`${API_URL}/api/news`, fd, config)
+    }
+    
+    alert('Berita berhasil disimpan!')
     closeModal()
     fetchNews()
   } catch (err) {
-    console.error(err)
-    alert(err.response?.data?.message || 'Gagal menyimpan berita')
+    console.error('❌ Error Submit:', err)
+    const errorMsg = err.response?.data?.message || err.message || 'Gagal menyimpan berita'
+    alert(errorMsg)
   } finally {
     submitting.value = false
   }

@@ -28,19 +28,27 @@ const upload = multer({
 })
 
 // Helper: Process and Save Image as WebP
-async function processImage(buffer, originalName) {
-  const dir = path.join(__dirname, '../../uploads/news')
-  if (!fs.existsSync(dir)) {
-    fs.mkdirSync(dir, { recursive: true })
+  try {
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir, { recursive: true })
+    }
+  } catch (e) {
+    console.error('❌ Folder Permission Error:', e)
+    throw new Error('Server tidak memiliki izin untuk membuat folder uploads. Silakan buat folder /uploads/news secara manual.')
   }
 
   const fileName = `news-${Date.now()}-${Math.round(Math.random() * 1e9)}.webp`
   const filePath = path.join(dir, fileName)
 
-  await sharp(buffer)
-    .resize(1200, 750, { fit: 'cover', withoutEnlargement: true }) // Resize ke ukuran ideal
-    .webp({ quality: 80 }) // Konversi ke WebP dengan kualitas 80%
-    .toFile(filePath)
+  try {
+    await sharp(buffer)
+      .resize(1200, 750, { fit: 'cover', withoutEnlargement: true })
+      .webp({ quality: 80 })
+      .toFile(filePath)
+  } catch (e) {
+    console.error('❌ Sharp Processing Error:', e)
+    throw new Error('Gagal memproses gambar: ' + e.message)
+  }
 
   return `/uploads/news/${fileName}`
 }
