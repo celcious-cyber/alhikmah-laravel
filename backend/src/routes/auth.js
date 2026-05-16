@@ -1,11 +1,10 @@
 import express from 'express'
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
-import { PrismaClient } from '@prisma/client'
+import db from '../db.js'
 import { authenticate } from '../middleware/auth.js'
 
 const router = express.Router()
-const prisma = new PrismaClient()
 const JWT_SECRET = process.env.JWT_SECRET || 'alhikmah-secret-key-2024'
 
 // POST /api/auth/login
@@ -17,7 +16,8 @@ router.post('/login', async (req, res) => {
   }
 
   try {
-    const admin = await prisma.admin.findUnique({ where: { username } })
+    const [rows] = await db.execute('SELECT * FROM Admin WHERE username = ?', [username])
+    const admin = rows[0]
 
     if (!admin) {
       return res.status(401).json({ message: 'Username atau password salah.' })

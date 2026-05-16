@@ -1,24 +1,19 @@
 import express from 'express'
-import { PrismaClient } from '@prisma/client'
+import db from '../db.js'
 import { authenticate } from '../middleware/auth.js'
 
 const router = express.Router()
-const prisma = new PrismaClient()
-
-// Helper untuk menangani BigInt saat JSON serialization
-const serialize = (data) => {
-  return JSON.parse(JSON.stringify(data, (key, value) =>
-    typeof value === 'bigint' ? value.toString() : value
-  ))
-}
 
 // GET /api/registrations - Ambil semua pendaftar (admin)
 router.get('/', authenticate, async (req, res) => {
   try {
-    const registrations = await prisma.pendaftaran.findMany({
-      orderBy: { created_at: 'desc' }
-    })
-    res.json(serialize(registrations))
+    const [registrations] = await db.execute('SELECT * FROM pendaftaran ORDER BY created_at DESC')
+    // Convert BigInt to string for JSON serialization
+    const serialized = registrations.map(r => ({
+      ...r,
+      id: r.id.toString()
+    }))
+    res.json(serialized)
   } catch (err) {
     console.error('Fetch Error:', err)
     res.status(500).json({ message: 'Gagal mengambil data pendaftaran.' })
@@ -28,11 +23,8 @@ router.get('/', authenticate, async (req, res) => {
 // GET /api/registrations/export - Export ke CSV (admin)
 router.get('/export', authenticate, async (req, res) => {
   try {
-    const data = await prisma.pendaftaran.findMany({
-      orderBy: { created_at: 'desc' }
-    })
+    const [data] = await db.execute('SELECT * FROM pendaftaran ORDER BY created_at DESC')
     
-    // Header CSV yang lebih lengkap
     const headers = [
       'No Registrasi', 'Nama Lengkap', 'Email', 'NISN', 'NIK', 'Tempat Lahir', 
       'Tanggal Lahir', 'Jenis Kelamin', 'Asal Sekolah', 'Nama Ayah', 'Nama Ibu', 
@@ -72,14 +64,13 @@ router.get('/export', authenticate, async (req, res) => {
 router.put('/:id/verify', authenticate, async (req, res) => {
   const { verified } = req.body
   try {
-    const reg = await prisma.pendaftaran.update({
-      where: { id: BigInt(req.params.id) },
-      data: { 
-        verified,
-        verified_by: req.user.username 
-      }
-    })
-    res.json(serialize(reg))
+    await db.execute(
+      'UPDATE pendaftaran SET verified = ?, verified_by = ?, updated_at = NOW() WHERE id = ?',
+      [verified ? 1 : 0, req.admin.username, req.params.id]
+    )
+    const [rows] = await db.execute('SELECT * FROM pendaftaran WHERE id = ?', [req.params.id])
+    const reg = rows[0]
+    res.json({ ...reg, id: reg.id.toString() })
   } catch (err) {
     console.error('Verify Error:', err)
     res.status(500).json({ message: 'Gagal mengubah status verifikasi.' })
@@ -89,9 +80,7 @@ router.put('/:id/verify', authenticate, async (req, res) => {
 // DELETE /api/registrations/:id - Hapus pendaftar (admin)
 router.delete('/:id', authenticate, async (req, res) => {
   try {
-    await prisma.pendaftaran.delete({
-      where: { id: BigInt(req.params.id) }
-    })
+    await db.execute('DELETE FROM pendaftaran WHERE id = ?', [req.params.id])
     res.json({ success: true, message: 'Pendaftaran berhasil dihapus' })
   } catch (err) {
     console.error('Delete Error:', err)

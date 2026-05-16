@@ -1,11 +1,10 @@
 import express from 'express'
-import { PrismaClient } from '@prisma/client'
+import db from '../db.js'
 import multer from 'multer'
 import path from 'path'
 import fs from 'fs'
 
 const router = express.Router()
-const prisma = new PrismaClient()
 
 // Konfigurasi Multer untuk Upload Dokumen Beasiswa
 const storage = multer.diskStorage({
@@ -24,7 +23,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({
   storage: storage,
-  limits: { fileSize: 5 * 1024 * 1024 }, // Max 5MB
+  limits: { fileSize: 5 * 1024 * 1024 },
   fileFilter: (req, file, cb) => {
     const allowedTypes = ['.jpg', '.jpeg', '.png', '.pdf']
     const ext = path.extname(file.originalname).toLowerCase()
@@ -35,13 +34,6 @@ const upload = multer({
     }
   }
 })
-
-// Helper untuk menangani BigInt saat JSON serialization
-const serialize = (data) => {
-  return JSON.parse(JSON.stringify(data, (key, value) =>
-    typeof value === 'bigint' ? value.toString() : value
-  ))
-}
 
 // POST /api/beasiswa - Pendaftaran Beasiswa Baru
 router.post('/', upload.fields([
@@ -55,7 +47,6 @@ router.post('/', upload.fields([
     const data = req.body
     const files = req.files
 
-    // Generate No Registrasi Beasiswa (BEA-2026-XXXX)
     const randomNum = Math.floor(1000 + Math.random() * 9000)
     const noRegistrasi = `BEA-2026-${randomNum}`
 
@@ -63,12 +54,12 @@ router.post('/', upload.fields([
       no_registrasi: noRegistrasi,
       jenis_beasiswa: data.jenis_beasiswa,
       nama_lengkap: data.nama_lengkap,
-      tempat_lahir: data.tempat_lahir,
-      tanggal_lahir: data.tanggal_lahir,
-      email_pendaftar: data.email_pendaftar,
-      telepon: data.telepon,
-      asal_sekolah: data.asal_sekolah,
-      prestasi_deskripsi: data.prestasi_deskripsi,
+      tempat_lahir: data.tempat_lahir || null,
+      tanggal_lahir: data.tanggal_lahir || null,
+      email_pendaftar: data.email_pendaftar || null,
+      telepon: data.telepon || null,
+      asal_sekolah: data.asal_sekolah || null,
+      prestasi_deskripsi: data.prestasi_deskripsi || null,
       file_sertifikat: files['file_sertifikat'] ? `/uploads/beasiswa/${files['file_sertifikat'][0].filename}` : null,
       file_sk_hafalan: files['file_sk_hafalan'] ? `/uploads/beasiswa/${files['file_sk_hafalan'][0].filename}` : null,
       file_sktm: files['file_sktm'] ? `/uploads/beasiswa/${files['file_sktm'][0].filename}` : null,
@@ -76,14 +67,21 @@ router.post('/', upload.fields([
       file_komitmen: files['file_komitmen'] ? `/uploads/beasiswa/${files['file_komitmen'][0].filename}` : null,
     }
 
-    const beasiswa = await prisma.beasiswa.create({
-      data: beasiswaData
-    })
+    const columns = Object.keys(beasiswaData)
+    columns.push('created_at', 'updated_at')
+    const placeholders = columns.map(() => '?').join(', ')
+    const values = Object.values(beasiswaData)
+    values.push(new Date(), new Date())
+
+    const [result] = await db.execute(
+      `INSERT INTO beasiswa (${columns.join(', ')}) VALUES (${placeholders})`,
+      values
+    )
 
     res.status(201).json({
       success: true,
       message: 'Pendaftaran beasiswa berhasil terkirim!',
-      data: serialize(beasiswa)
+      data: { id: result.insertId.toString(), no_registrasi: noRegistrasi }
     })
   } catch (err) {
     console.error('Scholarship Error:', err)

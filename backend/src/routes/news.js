@@ -1,5 +1,5 @@
 import express from 'express'
-import { PrismaClient } from '@prisma/client'
+import db from '../db.js'
 import { authenticate } from '../middleware/auth.js'
 import multer from 'multer'
 import path from 'path'
@@ -8,7 +8,6 @@ import { fileURLToPath } from 'url'
 import sharp from 'sharp'
 
 const router = express.Router()
-const prisma = new PrismaClient()
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -36,30 +35,24 @@ async function processImage(buffer, originalName) {
     }
   } catch (e) {
     console.error('❌ Folder Permission Error:', e)
-    throw new Error('Server tidak memiliki izin untuk membuat folder uploads. Silakan buat folder /uploads/news secara manual.')
+    throw new Error('Server tidak memiliki izin untuk membuat folder uploads.')
   }
 
   const fileName = `news-${Date.now()}-${Math.round(Math.random() * 1e9)}.webp`
   const filePath = path.join(dir, fileName)
 
   try {
-    // Batasi concurrency untuk Shared Hosting (Hostinger)
     sharp.concurrency(1)
-    
     await sharp(buffer)
       .resize(1200, 750, { fit: 'cover', withoutEnlargement: true })
       .webp({ quality: 80 })
       .toFile(filePath)
-    
     return `/uploads/news/${fileName}`
   } catch (e) {
-    console.error('⚠️ Sharp Processing Failed, falling back to original file:', e)
-    
-    // Jika Sharp gagal (misal karena limit Hostinger), simpan file asli
+    console.error('⚠️ Sharp Failed, falling back to original file:', e)
     const ext = path.extname(originalName) || '.jpg'
     const fallbackName = `news-fallback-${Date.now()}${ext}`
     const fallbackPath = path.join(dir, fallbackName)
-    
     fs.writeFileSync(fallbackPath, buffer)
     return `/uploads/news/${fallbackName}`
   }
@@ -78,11 +71,9 @@ function generateSlug(title) {
 // GET /api/news - Ambil berita yang dipublish (publik)
 router.get('/', async (req, res) => {
   try {
-    const news = await prisma.news.findMany({
-      where: { isPublished: true },
-      orderBy: { createdAt: 'desc' },
-      select: { id: true, title: true, slug: true, excerpt: true, thumbnail: true, createdAt: true }
-    })
+    const [news] = await db.execute(
+      'SELECT id, title, slug, excerpt, thumbnail, createdAt FROM News WHERE isPublished = true ORDER BY createdAt DESC'
+    )
     res.json(news)
   } catch (err) {
     console.error(err)
@@ -93,9 +84,7 @@ router.get('/', async (req, res) => {
 // GET /api/news/all - Ambil semua berita termasuk draft (admin)
 router.get('/all', authenticate, async (req, res) => {
   try {
-    const news = await prisma.news.findMany({
-      orderBy: { createdAt: 'desc' }
-    })
+    const [news] = await db.execute('SELECT * FROM News ORDER BY createdAt DESC')
     res.json(news)
   } catch (err) {
     console.error(err)
@@ -106,12 +95,10 @@ router.get('/all', authenticate, async (req, res) => {
 // GET /api/news/:slug - Detail berita (publik)
 router.get('/:slug', async (req, res) => {
   try {
-    const news = await prisma.news.findUnique({
-      where: { slug: req.params.slug }
-    })
+    const [rows] = await db.execute('SELECT * FROM News WHERE slug = ?', [req.params.slug])
+    const news = rows[0]
     if (!news) return res.status(404).json({ message: 'Berita tidak ditemukan.' })
     
-    // Jika belum dipublish, hanya admin yang boleh lihat
     if (!news.isPublished) {
       return res.status(404).json({ message: 'Berita belum dipublikasikan.' })
     }
@@ -142,20 +129,16 @@ router.post('/', authenticate, upload.single('thumbnail'), async (req, res) => {
   }
 
   try {
-    const news = await prisma.news.create({
-      data: {
-        title,
-        slug: generateSlug(title),
-        excerpt,
-        content,
-        thumbnail: thumbnail || null,
-        // FormData mengirimkan boolean sebagai string 'true' atau 'false'
-        isPublished: String(isPublished) === 'true',
-      }
-    })
-    res.status(201).json(news)
+    const slug = generateSlug(title)
+    const published = String(isPublished) === 'true' ? 1 : 0
+    const [result] = await db.execute(
+      'INSERT INTO News (title, slug, excerpt, content, thumbnail, isPublished, createdAt, updatedAt) VALUES (?, ?, ?, ?, ?, ?, NOW(), NOW())',
+      [title, slug, excerpt, content, thumbnail || null, published]
+    )
+    const [rows] = await db.execute('SELECT * FROM News WHERE id = ?', [result.insertId])
+    res.status(201).json(rows[0])
   } catch (err) {
-    console.error('❌ Prisma Error (POST):', err)
+    console.error('❌ DB Error (POST):', err)
     res.status(500).json({ message: 'Gagal menyimpan ke database: ' + err.message })
   }
 })
@@ -175,20 +158,23 @@ router.put('/:id', authenticate, upload.single('thumbnail'), async (req, res) =>
   }
 
   try {
-    const dataToUpdate = {}
-    if (title !== undefined) dataToUpdate.title = title
-    if (excerpt !== undefined) dataToUpdate.excerpt = excerpt
-    if (content !== undefined) dataToUpdate.content = content
-    if (thumbnail !== undefined) dataToUpdate.thumbnail = thumbnail || null
-    if (isPublished !== undefined) dataToUpdate.isPublished = String(isPublished) === 'true'
+    const fields = []
+    const values = []
+    
+    if (title !== undefined) { fields.push('title = ?'); values.push(title) }
+    if (excerpt !== undefined) { fields.push('excerpt = ?'); values.push(excerpt) }
+    if (content !== undefined) { fields.push('content = ?'); values.push(content) }
+    if (thumbnail !== undefined) { fields.push('thumbnail = ?'); values.push(thumbnail || null) }
+    if (isPublished !== undefined) { fields.push('isPublished = ?'); values.push(String(isPublished) === 'true' ? 1 : 0) }
+    
+    fields.push('updatedAt = NOW()')
+    values.push(parseInt(req.params.id))
 
-    const news = await prisma.news.update({
-      where: { id: parseInt(req.params.id) },
-      data: dataToUpdate
-    })
-    res.json(news)
+    await db.execute(`UPDATE News SET ${fields.join(', ')} WHERE id = ?`, values)
+    const [rows] = await db.execute('SELECT * FROM News WHERE id = ?', [parseInt(req.params.id)])
+    res.json(rows[0])
   } catch (err) {
-    console.error('❌ Prisma Error (PUT):', err)
+    console.error('❌ DB Error (PUT):', err)
     res.status(500).json({ message: 'Gagal mengubah berita: ' + err.message })
   }
 })
@@ -196,13 +182,14 @@ router.put('/:id', authenticate, upload.single('thumbnail'), async (req, res) =>
 // DELETE /api/news/:id - Hapus berita (admin)
 router.delete('/:id', authenticate, async (req, res) => {
   try {
-    const news = await prisma.news.findUnique({ where: { id: parseInt(req.params.id) } })
+    const [rows] = await db.execute('SELECT * FROM News WHERE id = ?', [parseInt(req.params.id)])
+    const news = rows[0]
     if (news && news.thumbnail && news.thumbnail.startsWith('/uploads/news/')) {
       const filePath = path.join(__dirname, '../../', news.thumbnail)
       if (fs.existsSync(filePath)) fs.unlinkSync(filePath)
     }
 
-    await prisma.news.delete({ where: { id: parseInt(req.params.id) } })
+    await db.execute('DELETE FROM News WHERE id = ?', [parseInt(req.params.id)])
     res.json({ message: 'Berita berhasil dihapus.' })
   } catch (err) {
     console.error(err)

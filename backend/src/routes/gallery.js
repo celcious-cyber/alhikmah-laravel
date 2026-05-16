@@ -1,11 +1,10 @@
 import express from 'express'
 import multer from 'multer'
 import path from 'path'
-import { PrismaClient } from '@prisma/client'
+import db from '../db.js'
 import { authenticate } from '../middleware/auth.js'
 
 const router = express.Router()
-const prisma = new PrismaClient()
 
 // Konfigurasi Multer untuk upload gambar
 const storage = multer.diskStorage({
@@ -33,9 +32,7 @@ const upload = multer({
 // GET /api/gallery - Ambil semua foto (publik)
 router.get('/', async (req, res) => {
   try {
-    const items = await prisma.gallery.findMany({
-      orderBy: [{ order: 'asc' }, { createdAt: 'desc' }]
-    })
+    const [items] = await db.execute('SELECT * FROM Gallery ORDER BY `order` ASC, createdAt DESC')
     res.json(items)
   } catch (err) {
     console.error(err)
@@ -52,15 +49,12 @@ router.post('/', authenticate, upload.single('image'), async (req, res) => {
   try {
     const baseUrl = process.env.BASE_URL || 'http://localhost:5000'
     const imageUrl = `${baseUrl}/uploads/gallery/${req.file.filename}`
-    const item = await prisma.gallery.create({
-      data: {
-        imageUrl,
-        caption: caption || null,
-        category: category || 'umum',
-        order: order ? parseInt(order) : 0,
-      }
-    })
-    res.status(201).json(item)
+    const [result] = await db.execute(
+      'INSERT INTO Gallery (imageUrl, caption, category, `order`, createdAt) VALUES (?, ?, ?, ?, NOW())',
+      [imageUrl, caption || null, category || 'umum', order ? parseInt(order) : 0]
+    )
+    const [rows] = await db.execute('SELECT * FROM Gallery WHERE id = ?', [result.insertId])
+    res.status(201).json(rows[0])
   } catch (err) {
     console.error(err)
     res.status(500).json({ message: 'Gagal menyimpan foto.' })
@@ -70,7 +64,7 @@ router.post('/', authenticate, upload.single('image'), async (req, res) => {
 // DELETE /api/gallery/:id - Hapus foto (admin)
 router.delete('/:id', authenticate, async (req, res) => {
   try {
-    await prisma.gallery.delete({ where: { id: parseInt(req.params.id) } })
+    await db.execute('DELETE FROM Gallery WHERE id = ?', [parseInt(req.params.id)])
     res.json({ message: 'Foto berhasil dihapus.' })
   } catch (err) {
     console.error(err)

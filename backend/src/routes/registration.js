@@ -1,12 +1,11 @@
 import express from 'express'
-import { PrismaClient } from '@prisma/client'
+import db from '../db.js'
 import multer from 'multer'
 import path from 'path'
 import fs from 'fs'
 import { fileURLToPath } from 'url'
 
 const router = express.Router()
-const prisma = new PrismaClient()
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -28,7 +27,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ 
   storage: storage,
-  limits: { fileSize: 5 * 1024 * 1024 }, // Limit 5MB
+  limits: { fileSize: 5 * 1024 * 1024 },
   fileFilter: (req, file, cb) => {
     const allowedTypes = /jpeg|jpg|png|pdf/
     const extname = allowedTypes.test(path.extname(file.originalname).toLowerCase())
@@ -39,7 +38,6 @@ const upload = multer({
   }
 })
 
-// Definisikan semua field file yang diizinkan
 const uploadFields = upload.fields([
   { name: 'foto_3x4', maxCount: 1 },
   { name: 'file_ijazah', maxCount: 1 },
@@ -53,38 +51,36 @@ const uploadFields = upload.fields([
   { name: 'file_foto_rapot', maxCount: 1 }
 ])
 
-// Helper untuk menangani BigInt saat JSON serialization
-const serialize = (data) => {
-  return JSON.parse(JSON.stringify(data, (key, value) =>
-    typeof value === 'bigint' ? value.toString() : value
-  ))
-}
-
 router.post('/', uploadFields, async (req, res) => {
   try {
     const data = { ...req.body }
     
-    // Tambahkan path file yang diunggah ke objek data
     if (req.files) {
       Object.keys(req.files).forEach(field => {
         data[field] = `/uploads/pendaftaran/${req.files[field][0].filename}`
       })
     }
 
-    // Generate Nomor Registrasi sederhana (ALH-TAHUN-RANDOM)
     const year = new Date().getFullYear()
     const random = Math.floor(1000 + Math.random() * 9000)
     data.no_registrasi = `ALH-${year}-${random}`
 
-    // Simpan ke database
-    const pendaftaran = await prisma.pendaftaran.create({
-      data: data
-    })
+    // Build dynamic INSERT
+    const columns = Object.keys(data)
+    columns.push('created_at', 'updated_at')
+    const placeholders = columns.map(() => '?').join(', ')
+    const values = Object.values(data)
+    values.push(new Date(), new Date())
+
+    const [result] = await db.execute(
+      `INSERT INTO pendaftaran (${columns.join(', ')}) VALUES (${placeholders})`,
+      values
+    )
     
     res.status(201).json({ 
       success: true, 
       message: 'Pendaftaran berhasil disimpan',
-      data: serialize(pendaftaran)
+      data: { id: result.insertId.toString(), no_registrasi: data.no_registrasi }
     })
   } catch (error) {
     console.error('Pendaftaran Error:', error)
