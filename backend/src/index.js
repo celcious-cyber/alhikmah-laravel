@@ -31,8 +31,10 @@ const __dirname = path.dirname(__filename)
 const app = express()
 const PORT = process.env.PORT || 5000
 
-// Buat folder uploads jika belum ada
-const uploadsDir = path.join(__dirname, '../uploads/gallery')
+// Konfigurasi Folder Upload (Penting untuk Hostinger agar foto tidak hilang saat redeploy)
+const PERSISTENT_PATH = process.env.UPLOAD_PATH || path.join(__dirname, '../uploads')
+const uploadsDir = path.join(PERSISTENT_PATH, 'gallery')
+
 if (!fs.existsSync(uploadsDir)) {
   fs.mkdirSync(uploadsDir, { recursive: true })
 }
@@ -51,7 +53,7 @@ if (!fs.existsSync(distPath)) {
   distPath = path.join(__dirname, '../../dist') // Coba di root repo
 }
 app.use(express.static(distPath))
-app.use('/uploads', express.static(path.join(__dirname, '../uploads')))
+app.use('/uploads', express.static(PERSISTENT_PATH))
 
 // Health check endpoint - untuk verifikasi server berjalan
 app.get('/api/health', (req, res) => {
