@@ -53,7 +53,7 @@ const facilities = computed(() => {
       <div data-aos="fade-up">
         <Swiper
           :modules="[Autoplay, Navigation, Pagination]"
-          :slides-per-view="1.2"
+          :slides-per-view="1"
           :space-between="24"
           :pagination="{ clickable: true }"
           :navigation="{
@@ -62,11 +62,11 @@ const facilities = computed(() => {
           }"
           :autoplay="{ delay: 4000 }"
           :breakpoints="{
-            '640': { slidesPerView: 2.2 },
-            '1024': { slidesPerView: 3.2 },
+            '640': { slidesPerView: 2 },
+            '1024': { slidesPerView: 3 },
             '1280': { slidesPerView: 4 }
           }"
-          class="!pb-16 !overflow-visible"
+          class="!pb-16"
         >
           <SwiperSlide v-for="(facility, index) in facilities" :key="index">
             <div class="relative group aspect-[3/4] overflow-hidden rounded-[32px] shadow-xl">
