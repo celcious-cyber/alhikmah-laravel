@@ -106,6 +106,7 @@ router.get('/:slug', async (req, res) => {
 // POST /api/news - Buat berita baru (admin)
 router.post('/', authenticate, upload.single('thumbnail'), async (req, res) => {
   const { title, excerpt, content, isPublished } = req.body
+  
   if (!title || !excerpt || !content) {
     return res.status(400).json({ message: 'Judul, ringkasan, dan isi berita wajib diisi.' })
   }
@@ -115,7 +116,8 @@ router.post('/', authenticate, upload.single('thumbnail'), async (req, res) => {
     try {
       thumbnail = await processImage(req.file.buffer, req.file.originalname)
     } catch (err) {
-      return res.status(500).json({ message: 'Gagal memproses gambar.' })
+      console.error('❌ Sharp Error:', err)
+      return res.status(500).json({ message: 'Gagal memproses gambar: ' + err.message })
     }
   }
 
@@ -127,13 +129,14 @@ router.post('/', authenticate, upload.single('thumbnail'), async (req, res) => {
         excerpt,
         content,
         thumbnail: thumbnail || null,
-        isPublished: isPublished === 'true' || isPublished === true,
+        // FormData mengirimkan boolean sebagai string 'true' atau 'false'
+        isPublished: String(isPublished) === 'true',
       }
     })
     res.status(201).json(news)
   } catch (err) {
-    console.error(err)
-    res.status(500).json({ message: 'Gagal membuat berita.' })
+    console.error('❌ Prisma Error (POST):', err)
+    res.status(500).json({ message: 'Gagal menyimpan ke database: ' + err.message })
   }
 })
 
@@ -146,25 +149,27 @@ router.put('/:id', authenticate, upload.single('thumbnail'), async (req, res) =>
     try {
       thumbnail = await processImage(req.file.buffer, req.file.originalname)
     } catch (err) {
-      return res.status(500).json({ message: 'Gagal memproses gambar.' })
+      console.error('❌ Sharp Error:', err)
+      return res.status(500).json({ message: 'Gagal memproses gambar: ' + err.message })
     }
   }
 
   try {
+    const dataToUpdate = {}
+    if (title !== undefined) dataToUpdate.title = title
+    if (excerpt !== undefined) dataToUpdate.excerpt = excerpt
+    if (content !== undefined) dataToUpdate.content = content
+    if (thumbnail !== undefined) dataToUpdate.thumbnail = thumbnail || null
+    if (isPublished !== undefined) dataToUpdate.isPublished = String(isPublished) === 'true'
+
     const news = await prisma.news.update({
       where: { id: parseInt(req.params.id) },
-      data: {
-        title,
-        excerpt,
-        content,
-        thumbnail: thumbnail !== undefined ? (thumbnail || null) : undefined,
-        isPublished: isPublished !== undefined ? (isPublished === 'true' || isPublished === true) : undefined,
-      }
+      data: dataToUpdate
     })
     res.json(news)
   } catch (err) {
-    console.error(err)
-    res.status(500).json({ message: 'Gagal mengubah berita.' })
+    console.error('❌ Prisma Error (PUT):', err)
+    res.status(500).json({ message: 'Gagal mengubah berita: ' + err.message })
   }
 })
 
