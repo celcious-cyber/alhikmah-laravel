@@ -4,6 +4,8 @@ import ActivitiesPage from '../views/ActivitiesPage.vue'
 import RegistrationPage from '../views/RegistrationPage.vue'
 import GalleryPage from '../views/GalleryPage.vue'
 import ScholarshipPage from '../views/ScholarshipPage.vue'
+import NewsListPage from '../views/NewsListPage.vue'
+import NewsDetailPage from '../views/NewsDetailPage.vue'
 
 // Admin pages
 import AdminLoginPage from '../views/admin/LoginPage.vue'
@@ -22,6 +24,8 @@ const routes = [
   { path: '/spsb26', name: 'spsb26', component: RegistrationPage },
   { path: '/pbs26', name: 'pbs26', component: ScholarshipPage },
   { path: '/gallery', name: 'gallery', component: GalleryPage },
+  { path: '/berita', name: 'news-list', component: NewsListPage },
+  { path: '/berita/:slug', name: 'news-detail', component: NewsDetailPage },
 
   // Admin Routes
   { path: '/admin/login', name: 'admin-login', component: AdminLoginPage },

@@ -1,9 +1,49 @@
 import express from 'express'
 import { PrismaClient } from '@prisma/client'
 import { authenticate } from '../middleware/auth.js'
+import multer from 'multer'
+import path from 'path'
+import fs from 'fs'
+import { fileURLToPath } from 'url'
+import sharp from 'sharp'
 
 const router = express.Router()
 const prisma = new PrismaClient()
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
+
+// Setup Multer for Thumbnail Uploads (Memory Storage for Processing)
+const storage = multer.memoryStorage()
+const upload = multer({ 
+  storage,
+  limits: { fileSize: 10 * 1024 * 1024 }, // 10MB
+  fileFilter: (req, file, cb) => {
+    const allowedTypes = /jpeg|jpg|png|webp/
+    const extname = allowedTypes.test(path.extname(file.originalname).toLowerCase())
+    const mimetype = allowedTypes.test(file.mimetype)
+    if (extname && mimetype) return cb(null, true)
+    cb(new Error('Hanya file gambar (jpg, png, webp) yang diperbolehkan!'))
+  }
+})
+
+// Helper: Process and Save Image as WebP
+async function processImage(buffer, originalName) {
+  const dir = path.join(__dirname, '../../uploads/news')
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true })
+  }
+
+  const fileName = `news-${Date.now()}-${Math.round(Math.random() * 1e9)}.webp`
+  const filePath = path.join(dir, fileName)
+
+  await sharp(buffer)
+    .resize(1200, 750, { fit: 'cover', withoutEnlargement: true }) // Resize ke ukuran ideal
+    .webp({ quality: 80 }) // Konversi ke WebP dengan kualitas 80%
+    .toFile(filePath)
+
+  return `/uploads/news/${fileName}`
+}
 
 // Helper: generate slug dari judul
 function generateSlug(title) {
@@ -12,7 +52,7 @@ function generateSlug(title) {
     .replace(/[^a-z0-9\s-]/g, '')
     .replace(/\s+/g, '-')
     .replace(/-+/g, '-')
-    .trim() + '-' + Date.now()
+    .trim() + '-' + Math.round(Math.random() * 10000)
 }
 
 // GET /api/news - Ambil berita yang dipublish (publik)
@@ -47,9 +87,15 @@ router.get('/all', authenticate, async (req, res) => {
 router.get('/:slug', async (req, res) => {
   try {
     const news = await prisma.news.findUnique({
-      where: { slug: req.params.slug, isPublished: true }
+      where: { slug: req.params.slug }
     })
     if (!news) return res.status(404).json({ message: 'Berita tidak ditemukan.' })
+    
+    // Jika belum dipublish, hanya admin yang boleh lihat
+    if (!news.isPublished) {
+      return res.status(404).json({ message: 'Berita belum dipublikasikan.' })
+    }
+    
     res.json(news)
   } catch (err) {
     console.error(err)
@@ -58,11 +104,21 @@ router.get('/:slug', async (req, res) => {
 })
 
 // POST /api/news - Buat berita baru (admin)
-router.post('/', authenticate, async (req, res) => {
-  const { title, excerpt, content, thumbnail, isPublished } = req.body
+router.post('/', authenticate, upload.single('thumbnail'), async (req, res) => {
+  const { title, excerpt, content, isPublished } = req.body
   if (!title || !excerpt || !content) {
     return res.status(400).json({ message: 'Judul, ringkasan, dan isi berita wajib diisi.' })
   }
+
+  let thumbnail = req.body.thumbnail 
+  if (req.file) {
+    try {
+      thumbnail = await processImage(req.file.buffer, req.file.originalname)
+    } catch (err) {
+      return res.status(500).json({ message: 'Gagal memproses gambar.' })
+    }
+  }
+
   try {
     const news = await prisma.news.create({
       data: {
@@ -71,7 +127,7 @@ router.post('/', authenticate, async (req, res) => {
         excerpt,
         content,
         thumbnail: thumbnail || null,
-        isPublished: isPublished || false,
+        isPublished: isPublished === 'true' || isPublished === true,
       }
     })
     res.status(201).json(news)
@@ -82,8 +138,18 @@ router.post('/', authenticate, async (req, res) => {
 })
 
 // PUT /api/news/:id - Edit berita (admin)
-router.put('/:id', authenticate, async (req, res) => {
-  const { title, excerpt, content, thumbnail, isPublished } = req.body
+router.put('/:id', authenticate, upload.single('thumbnail'), async (req, res) => {
+  const { title, excerpt, content, isPublished } = req.body
+  
+  let thumbnail = req.body.thumbnail
+  if (req.file) {
+    try {
+      thumbnail = await processImage(req.file.buffer, req.file.originalname)
+    } catch (err) {
+      return res.status(500).json({ message: 'Gagal memproses gambar.' })
+    }
+  }
+
   try {
     const news = await prisma.news.update({
       where: { id: parseInt(req.params.id) },
@@ -91,8 +157,8 @@ router.put('/:id', authenticate, async (req, res) => {
         title,
         excerpt,
         content,
-        thumbnail: thumbnail || null,
-        isPublished: isPublished !== undefined ? isPublished : undefined,
+        thumbnail: thumbnail !== undefined ? (thumbnail || null) : undefined,
+        isPublished: isPublished !== undefined ? (isPublished === 'true' || isPublished === true) : undefined,
       }
     })
     res.json(news)
@@ -105,6 +171,12 @@ router.put('/:id', authenticate, async (req, res) => {
 // DELETE /api/news/:id - Hapus berita (admin)
 router.delete('/:id', authenticate, async (req, res) => {
   try {
+    const news = await prisma.news.findUnique({ where: { id: parseInt(req.params.id) } })
+    if (news && news.thumbnail && news.thumbnail.startsWith('/uploads/news/')) {
+      const filePath = path.join(__dirname, '../../', news.thumbnail)
+      if (fs.existsSync(filePath)) fs.unlinkSync(filePath)
+    }
+
     await prisma.news.delete({ where: { id: parseInt(req.params.id) } })
     res.json({ message: 'Berita berhasil dihapus.' })
   } catch (err) {
