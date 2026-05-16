@@ -40,12 +40,12 @@ const facilities = computed(() => {
         />
 
         <!-- Navigation Buttons -->
-        <div class="flex gap-4">
-          <button ref="prev" class="p-4 glassmorphism rounded-2xl text-white hover:bg-secondary hover:text-primary transition-all duration-300 shadow-lg cursor-pointer disabled:opacity-30">
-            <ChevronLeft :size="24" />
+        <div class="hidden md:flex gap-2">
+          <button ref="prev" class="p-3 glassmorphism rounded-xl text-white hover:bg-secondary hover:text-primary transition-all duration-300 disabled:opacity-20">
+            <ChevronLeft :size="20" />
           </button>
-          <button ref="next" class="p-4 glassmorphism rounded-2xl text-white hover:bg-secondary hover:text-primary transition-all duration-300 shadow-lg cursor-pointer disabled:opacity-30">
-            <ChevronRight :size="24" />
+          <button ref="next" class="p-3 glassmorphism rounded-xl text-white hover:bg-secondary hover:text-primary transition-all duration-300 disabled:opacity-20">
+            <ChevronRight :size="20" />
           </button>
         </div>
       </div>
@@ -53,7 +53,7 @@ const facilities = computed(() => {
       <div data-aos="fade-up">
         <Swiper
           :modules="[Autoplay, Navigation, Pagination]"
-          :slides-per-view="1"
+          :slides-per-view="1.2"
           :space-between="24"
           :pagination="{ clickable: true }"
           :navigation="{
@@ -62,30 +62,26 @@ const facilities = computed(() => {
           }"
           :autoplay="{ delay: 4000 }"
           :breakpoints="{
-            '640': { slidesPerView: 2 },
-            '1024': { slidesPerView: 3 },
+            '640': { slidesPerView: 2.2 },
+            '1024': { slidesPerView: 3.2 },
             '1280': { slidesPerView: 4 }
           }"
           class="!pb-16 !overflow-visible"
         >
           <SwiperSlide v-for="(facility, index) in facilities" :key="index">
-            <div class="relative group aspect-[3/4] overflow-hidden rounded-[32px] cursor-pointer shadow-xl">
-              <!-- Image -->
+            <div class="relative group aspect-[3/4] overflow-hidden rounded-[32px] shadow-xl">
               <img 
                 :src="facility.image" 
                 :alt="facility.name"
                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
               
-              <!-- Overlay -->
-              <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-80 group-hover:opacity-100 group-hover:from-primary/90 transition-all duration-500"></div>
-              
-              <!-- Label -->
-              <div class="absolute bottom-0 left-0 p-8 w-full z-10">
-                <h4 class="text-2xl font-bold text-white transform transition-transform duration-500 group-hover:-translate-y-2">
+              <!-- Hover Overlay (Aligned with Gallery) -->
+              <div class="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/20 to-transparent opacity-80 group-hover:opacity-100 transition-all duration-300 flex flex-col justify-end p-8 backdrop-blur-[1px]">
+                <div class="h-1 w-12 bg-secondary mb-4 transform -translate-x-4 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-500"></div>
+                <h4 class="text-white font-bold text-2xl transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 leading-tight">
                   {{ facility.name }}
                 </h4>
-                <div class="h-1 w-0 bg-secondary transition-all duration-500 group-hover:w-16"></div>
               </div>
             </div>
           </SwiperSlide>
