@@ -83,11 +83,11 @@ const submit = async () => {
 
     if (isEdit.value) {
       await axios.put(`${API_URL}/api/news/${form.value.id}`, fd, {
-        headers: { ...headers, 'Content-Type': 'multipart/form-data' }
+        headers
       })
     } else {
       await axios.post(`${API_URL}/api/news`, fd, {
-        headers: { ...headers, 'Content-Type': 'multipart/form-data' }
+        headers
       })
     }
     closeModal()
