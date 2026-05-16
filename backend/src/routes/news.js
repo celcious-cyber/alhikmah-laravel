@@ -28,6 +28,8 @@ const upload = multer({
 })
 
 // Helper: Process and Save Image as WebP
+async function processImage(buffer, originalName) {
+  const dir = path.join(__dirname, '../../uploads/news')
   try {
     if (!fs.existsSync(dir)) {
       fs.mkdirSync(dir, { recursive: true })
