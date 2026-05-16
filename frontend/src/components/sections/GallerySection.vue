@@ -16,14 +16,14 @@ const prev = ref(null)
 const next = ref(null)
 
 const images = [
-  { id: 1, category: 'Kegiatan', caption: 'Pelajaran Kitab Kuning', image: 'https://picsum.photos/seed/gall1/800/1000' },
-  { id: 2, category: 'Prestasi', caption: 'Juara MTQ Nasional', image: 'https://picsum.photos/seed/gall2/800/1000' },
-  { id: 3, category: 'Kegiatan', caption: 'Ekstrakurikuler Memanah', image: 'https://picsum.photos/seed/gall3/800/1000' },
-  { id: 4, category: 'Wisuda', caption: 'Haflah Akhirussanah 2025', image: 'https://picsum.photos/seed/gall4/800/1000' },
-  { id: 5, category: 'Kegiatan', caption: 'Praktik Laboratorium IPA', image: 'https://picsum.photos/seed/gall5/800/1000' },
-  { id: 6, category: 'Prestasi', caption: 'Lomba Pidato Bahasa Arab', image: 'https://picsum.photos/seed/gall6/800/1000' },
-  { id: 7, category: 'Wisuda', caption: 'Prosesi Wisuda Tahfidz', image: 'https://picsum.photos/seed/gall7/800/1000' },
-  { id: 8, category: 'Kegiatan', caption: 'Shalat Berjamaah', image: 'https://picsum.photos/seed/gall8/800/1000' },
+  { id: 1, category: 'Kegiatan', caption: 'Pelajaran Kitab Kuning', image: 'https://placehold.co/800x1000/154D6E/FFFFFF?text=Kegiatan+1' },
+  { id: 2, category: 'Prestasi', caption: 'Juara MTQ Nasional', image: 'https://placehold.co/800x1000/154D6E/FFFFFF?text=Prestasi+1' },
+  { id: 3, category: 'Kegiatan', caption: 'Ekstrakurikuler Memanah', image: 'https://placehold.co/800x1000/154D6E/FFFFFF?text=Kegiatan+2' },
+  { id: 4, category: 'Wisuda', caption: 'Haflah Akhirussanah 2025', image: 'https://placehold.co/800x1000/154D6E/FFFFFF?text=Wisuda+1' },
+  { id: 5, category: 'Kegiatan', caption: 'Praktik Laboratorium IPA', image: 'https://placehold.co/800x1000/154D6E/FFFFFF?text=Kegiatan+3' },
+  { id: 6, category: 'Prestasi', caption: 'Lomba Pidato Bahasa Arab', image: 'https://placehold.co/800x1000/154D6E/FFFFFF?text=Prestasi+2' },
+  { id: 7, category: 'Wisuda', caption: 'Prosesi Wisuda Tahfidz', image: 'https://placehold.co/800x1000/154D6E/FFFFFF?text=Wisuda+2' },
+  { id: 8, category: 'Kegiatan', caption: 'Shalat Berjamaah', image: 'https://placehold.co/800x1000/154D6E/FFFFFF?text=Kegiatan+4' },
 ]
 </script>
 

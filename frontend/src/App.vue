@@ -1,62 +1,11 @@
 <script setup>
-import { onMounted, ref, computed } from 'vue'
+import { computed } from 'vue'
 import { useRoute } from 'vue-router'
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import TheNavbar from './components/layout/TheNavbar.vue'
 import TheFooter from './components/layout/TheFooter.vue'
 
 const route = useRoute()
 const isAdminPage = computed(() => route.path.startsWith('/admin'))
-
-gsap.registerPlugin(ScrollTrigger)
-
-const orb1 = ref(null)
-const orb2 = ref(null)
-const orb3 = ref(null)
-
-onMounted(() => {
-  // Animate Orbs based on Scroll - "Forward/Backward" effect
-  gsap.to(orb1.value, {
-    scale: 1.8,
-    y: 500,
-    x: 200,
-    opacity: 0.3,
-    filter: "blur(180px)",
-    scrollTrigger: {
-      trigger: "body",
-      start: "top top",
-      end: "bottom bottom",
-      scrub: 1
-    }
-  })
-
-  gsap.to(orb2.value, {
-    scale: 0.5,
-    y: -600,
-    x: -200,
-    opacity: 0.05,
-    filter: "blur(80px)",
-    scrollTrigger: {
-      trigger: "body",
-      start: "top top",
-      end: "bottom bottom",
-      scrub: 1.5
-    }
-  })
-
-  gsap.to(orb3.value, {
-    scale: 2.5,
-    y: -200,
-    opacity: 0.2,
-    scrollTrigger: {
-      trigger: "body",
-      start: "top top",
-      end: "bottom bottom",
-      scrub: 0.8
-    }
-  })
-})
 </script>
 
 <template>
@@ -72,10 +21,9 @@ onMounted(() => {
       <!-- Vignette Effect -->
       <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_20%,rgba(8,26,36,0.7)_100%)]"></div>
       
-      <!-- Animated Floating Glow Orbs (Purely Scroll Reactive) -->
-      <div ref="orb1" class="absolute top-[10%] left-[-10%] w-[800px] h-[800px] bg-primary/15 rounded-full blur-[140px]"></div>
-      <div ref="orb2" class="absolute bottom-[-10%] right-[-5%] w-[700px] h-[700px] bg-secondary/10 rounded-full blur-[120px]"></div>
-      <div ref="orb3" class="absolute top-[30%] right-[-10%] w-[500px] h-[500px] bg-secondary-dark/10 rounded-full blur-[100px]"></div>
+      <!-- Simplified Static/CSS Glows (Much lighter for performance) -->
+      <div class="absolute top-[-10%] left-[-5%] w-[500px] h-[500px] bg-primary/10 rounded-full blur-[100px] animate-drift"></div>
+      <div class="absolute bottom-[-5%] right-[-5%] w-[400px] h-[400px] bg-secondary/5 rounded-full blur-[80px] animate-drift-slow"></div>
     </div>
 
     <div class="relative z-10">

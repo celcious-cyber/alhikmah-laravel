@@ -1,100 +1,24 @@
 <script setup>
-import { onMounted, ref } from 'vue'
-import gsap from 'gsap'
 import BaseButton from '../ui/BaseButton.vue'
-
-const heroRef = ref(null)
-
-onMounted(() => {
-  const ctx = gsap.context(() => {
-    // 1. Entrance Animation for Text
-    const tl = gsap.timeline({ delay: 0.5 })
-
-    tl.from(".hero-title-line", {
-      y: 100,
-      opacity: 0,
-      duration: 1.2,
-      stagger: 0.15,
-      ease: "power4.out"
-    })
-    .from(".hero-p", {
-      y: 30,
-      opacity: 0,
-      duration: 1,
-      ease: "power3.out"
-    }, "-=0.8")
-    .from(".hero-btns", {
-      y: 20,
-      opacity: 0,
-      duration: 1,
-      ease: "power3.out"
-    }, "-=0.8")
-
-    // 2. Entrance Animation for Main Image
-    gsap.from(".hero-main-img", {
-      x: 100,
-      opacity: 0,
-      duration: 1.5,
-      ease: "power4.out",
-      delay: 0.8
-    })
-
-    // 3. Floating Assets (GSAP Floating)
-    gsap.to(".floating-asset", {
-      y: -20,
-      duration: 3,
-      repeat: -1,
-      yoyo: true,
-      ease: "sine.inOut",
-      stagger: {
-        each: 0.5,
-        from: "random"
-      }
-    })
-
-    // 4. Mouse Follow Parallax Effect
-    const handleMouseMove = (e) => {
-      const { clientX, clientY } = e
-      const xPos = (clientX / window.innerWidth - 0.5) * 30
-      const yPos = (clientY / window.innerHeight - 0.5) * 30
-
-      gsap.to(".parallax-layer-1", {
-        x: xPos,
-        y: yPos,
-        duration: 1.2,
-        ease: "power2.out"
-      })
-
-      gsap.to(".parallax-layer-2", {
-        x: -xPos * 1.5,
-        y: -yPos * 1.5,
-        duration: 1.8,
-        ease: "power2.out"
-      })
-    }
-
-    window.addEventListener('mousemove', handleMouseMove)
-  }, heroRef.value)
-})
 </script>
 
 <template>
-  <section id="hero" ref="heroRef" class="relative min-h-screen flex items-center pt-36 pb-20 overflow-hidden">
+  <section id="hero" class="relative min-h-screen flex items-center pt-36 pb-20 overflow-hidden">
     <div class="container-custom relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
       <!-- Text Side -->
       <div class="space-y-8 py-12 relative z-10 lg:z-20">
         <h1 class="text-4xl md:text-6xl lg:text-[4.8rem] font-extrabold text-white leading-[1.1] tracking-tight">
-          <div class="overflow-hidden py-1 w-fit"><span class="hero-title-line block whitespace-nowrap">{{ $t('hero.text1') }} <span class="text-secondary glitch" :data-text="$t('hero.text2')">{{ $t('hero.text2') }}</span></span></div>
-          <div class="overflow-hidden py-1 w-fit"><span class="hero-title-line block whitespace-nowrap"><span class="text-secondary glitch" :data-text="$t('hero.text3')">{{ $t('hero.text3') }}</span> {{ $t('hero.text4') }}</span></div>
-          <div class="overflow-hidden py-1 w-fit"><span class="hero-title-line block whitespace-nowrap">{{ $t('hero.text5') }}</span></div>
+          <div data-aos="fade-up" data-aos-delay="200">{{ $t('hero.text1') }} <span class="text-secondary glitch" :data-text="$t('hero.text2')">{{ $t('hero.text2') }}</span></div>
+          <div data-aos="fade-up" data-aos-delay="350"><span class="text-secondary glitch" :data-text="$t('hero.text3')">{{ $t('hero.text3') }}</span> {{ $t('hero.text4') }}</div>
+          <div data-aos="fade-up" data-aos-delay="500">{{ $t('hero.text5') }}</div>
         </h1>
 
-        <p class="hero-p text-lg md:text-xl text-white/70 max-w-xl leading-relaxed text-justify">
+        <p class="text-lg md:text-xl text-white/70 max-w-xl leading-relaxed text-justify" data-aos="fade-up" data-aos-delay="650">
           {{ $t('hero.subtitle') }}
         </p>
 
         <!-- CTA Buttons -->
-        <div class="hero-btns flex flex-wrap gap-3 pt-4 lg:pt-4 items-center relative z-30">
+        <div class="flex flex-wrap gap-3 pt-4 lg:pt-4 items-center relative z-30" data-aos="fade-up" data-aos-delay="800">
           <router-link to="/spsb26" class="w-full sm:w-auto">
             <BaseButton variant="primary" size="lg" class="!bg-secondary !text-[#2f2100] px-8 sm:px-10 hover:!bg-secondary-dark min-w-[200px] sm:min-w-[240px] justify-center h-12 sm:h-14 !rounded-full text-base sm:text-lg shadow-lg shadow-secondary/20 w-full sm:w-auto">
               Daftar Sekarang
@@ -115,7 +39,10 @@ onMounted(() => {
         <img 
           src="/assets/images/banner.png" 
           alt="Al-Hikmah Student" 
-          class="hero-main-img relative -left-[20px] z-24 w-full max-w-[622px] h-auto object-contain transition-transform duration-700 hover:scale-105 cursor-pointer drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
+          class="relative -left-[20px] z-24 w-full max-w-[622px] h-auto object-contain transition-transform duration-700 hover:scale-105 cursor-pointer drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
+          data-aos="fade-left"
+          data-aos-delay="900"
+          data-aos-duration="1500"
         />
 
         <!-- Gold Medal Asset -->
@@ -123,6 +50,8 @@ onMounted(() => {
           src="/assets/images/gold-medal.png" 
           class="absolute top-[20%] left-[5%] w-24 sm:w-32 lg:w-40 rotate-[-12deg] z-30 animate-bounce-slow"
           alt="gold-medal"
+          data-aos="zoom-in"
+          data-aos-delay="1200"
         />
       </div>
     </div>

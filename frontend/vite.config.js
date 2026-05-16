@@ -10,5 +10,18 @@ export default defineConfig({
   ],
   server: {
     port: 3000
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'vendor-vue': ['vue', 'vue-router', 'pinia', 'vue-i18n'],
+          'vendor-swiper': ['swiper'],
+          'vendor-utils': ['axios', 'aos'],
+          'vendor-icons': ['lucide-vue-next']
+        }
+      }
+    },
+    chunkSizeWarningLimit: 1000
   }
 })

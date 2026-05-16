@@ -18,14 +18,14 @@ const next = ref(null)
 const facilities = computed(() => {
   const items = tm('facilities.items')
   return [
-    { name: items[0] || 'Masjid Jami\'', image: 'https://picsum.photos/seed/mosque/800/1000' },
-    { name: items[1] || 'Asrama Putra', image: 'https://picsum.photos/seed/dormitory1/800/1000' },
-    { name: items[2] || 'Asrama Putri', image: 'https://picsum.photos/seed/dormitory2/800/1000' },
-    { name: items[3] || 'Laboratorium', image: 'https://picsum.photos/seed/lab/800/1000' },
-    { name: items[4] || 'Perpustakaan', image: 'https://picsum.photos/seed/library/800/1000' },
-    { name: items[5] || 'Lapangan Olahraga', image: 'https://picsum.photos/seed/sports/800/1000' },
-    { name: items[6] || 'Ruang Makan', image: 'https://picsum.photos/seed/dining/800/1000' },
-    { name: items[7] || 'Gedung Kesenian', image: 'https://picsum.photos/seed/art-hall/800/1000' },
+    { name: items[0] || 'Masjid Jami\'', image: 'https://placehold.co/800x1000/154D6E/FFFFFF?text=Masjid' },
+    { name: items[1] || 'Asrama Putra', image: 'https://placehold.co/800x1000/154D6E/FFFFFF?text=Asrama+Putra' },
+    { name: items[2] || 'Laboratorium', image: 'https://placehold.co/800x1000/154D6E/FFFFFF?text=Lab+IPA' },
+    { name: items[3] || 'Perpustakaan', image: 'https://placehold.co/800x1000/154D6E/FFFFFF?text=Perpustakaan' },
+    { name: items[4] || 'Asrama Putri', image: 'https://placehold.co/800x1000/154D6E/FFFFFF?text=Asrama+Putri' },
+    { name: items[5] || 'Lapangan Olahraga', image: 'https://placehold.co/800x1000/154D6E/FFFFFF?text=Lapangan' },
+    { name: items[6] || 'Ruang Makan', image: 'https://placehold.co/800x1000/154D6E/FFFFFF?text=Ruang+Makan' },
+    { name: items[7] || 'Gedung Kesenian', image: 'https://placehold.co/800x1000/154D6E/FFFFFF?text=Gedung+Kesenian' },
   ]
 })
 </script>
