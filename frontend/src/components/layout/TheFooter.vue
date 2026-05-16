@@ -1,5 +1,5 @@
 <script setup>
-import { Instagram, Facebook, Youtube, Send } from 'lucide-vue-next'
+import { Instagram, Facebook, Youtube, Send, MapPin, Phone, Mail } from 'lucide-vue-next'
 
 const quickLinks = [
   { name: 'Beranda', href: '#hero' },
@@ -43,12 +43,29 @@ const socialMedia = [
       <!-- Contact -->
       <div class="space-y-6">
         <h4 class="text-xl font-bold">Kontak</h4>
-        <ul class="space-y-3 text-white/60">
+        <ul class="space-y-4 text-white/60">
           <li class="flex gap-3">
-            <span>Jl. Lintas Sumbawa Tano, Stowe Brang, Kec. Utan, Kab. Sumbawa - NTB</span>
+            <MapPin :size="20" class="text-secondary shrink-0" />
+            <a 
+              href="https://maps.app.goo.gl/BKm93f7b5CPAh9B57" 
+              target="_blank" 
+              class="hover:text-secondary transition-colors"
+            >
+              Jl. Lintas Sumbawa Tano, Stowe Brang, Kec. Utan, Kab. Sumbawa - NTB
+            </a>
           </li>
-          <li>+62 859-5856-1289</li>
-          <li>sekretariat@alhikmahutan.ponpes.id</li>
+          <li class="flex gap-3 items-center">
+            <Phone :size="20" class="text-secondary shrink-0" />
+            <a href="tel:+6285958561289" class="hover:text-secondary transition-colors text-sm">
+              +62 859-5856-1289
+            </a>
+          </li>
+          <li class="flex gap-3 items-center">
+            <Mail :size="20" class="text-secondary shrink-0" />
+            <a href="mailto:sekretariat@alhikmahutan.ponpes.id" class="hover:text-secondary transition-colors text-xs sm:text-sm break-all">
+              sekretariat@alhikmahutan.ponpes.id
+            </a>
+          </li>
         </ul>
       </div>
 
