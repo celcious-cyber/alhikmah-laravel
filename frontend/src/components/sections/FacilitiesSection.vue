@@ -1,5 +1,6 @@
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
+import axios from 'axios'
 import { useI18n } from 'vue-i18n'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { Autoplay, Navigation, Pagination } from 'swiper/modules'
@@ -11,11 +12,31 @@ import SectionHeading from '../ui/SectionHeading.vue'
 import BaseButton from '../ui/BaseButton.vue'
 
 const { t, tm } = useI18n()
+const API_URL = import.meta.env.VITE_API_URL || ''
 
 const prev = ref(null)
 const next = ref(null)
+const dynamicFacilities = ref([])
+
+const fetchFacilities = async () => {
+  try {
+    const res = await axios.get(`${API_URL}/api/gallery`)
+    dynamicFacilities.value = res.data.filter(img => img.category?.toLowerCase() === 'fasilitas')
+  } catch (err) {
+    console.error('Error fetching facilities:', err)
+  }
+}
+
+onMounted(fetchFacilities)
 
 const facilities = computed(() => {
+  if (dynamicFacilities.value.length > 0) {
+    return dynamicFacilities.value.map(f => ({
+      name: f.caption,
+      image: f.imageUrl
+    }))
+  }
+
   const items = tm('facilities.items')
   return [
     { name: items[0] || 'Masjid Jami\'', image: 'https://placehold.co/800x1000/154D6E/FFFFFF?text=Masjid' },

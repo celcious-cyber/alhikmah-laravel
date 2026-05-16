@@ -22,6 +22,8 @@ import galleryRoutes from './routes/gallery.js'
 import adminRegistrationRoutes from './routes/registrations.js'
 import scholarshipRoutes from './routes/scholarship.js'
 import scholarshipsAdminRoutes from './routes/scholarships_admin.js'
+import settingsRoutes from './routes/settings.js'
+import programsRoutes from './routes/programs.js'
 
 dotenv.config()
 
@@ -78,6 +80,8 @@ app.use('/api/gallery', galleryRoutes)
 app.use('/api/registrations', adminRegistrationRoutes)
 app.use('/api/beasiswa', scholarshipRoutes)
 app.use('/api/admin/beasiswa', scholarshipsAdminRoutes)
+app.use('/api/settings', settingsRoutes)
+app.use('/api/programs', programsRoutes)
 
 // OG Meta Tags untuk halaman berita (agar thumbnail muncul di WhatsApp/Facebook)
 app.get('/berita/:slug', async (req, res) => {

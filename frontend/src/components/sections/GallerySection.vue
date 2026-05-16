@@ -1,5 +1,6 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
+import axios from 'axios'
 import { useI18n } from 'vue-i18n'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { Autoplay, Navigation, Pagination } from 'swiper/modules'
@@ -11,20 +12,26 @@ import SectionHeading from '../ui/SectionHeading.vue'
 import BaseButton from '../ui/BaseButton.vue'
 
 const { t } = useI18n()
+const API_URL = import.meta.env.VITE_API_URL || ''
 
 const prev = ref(null)
 const next = ref(null)
+const images = ref([])
+const loading = ref(true)
 
-const images = [
-  { id: 1, category: 'Kegiatan', caption: 'Pelajaran Kitab Kuning', image: 'https://placehold.co/800x1000/154D6E/FFFFFF?text=Kegiatan+1' },
-  { id: 2, category: 'Prestasi', caption: 'Juara MTQ Nasional', image: 'https://placehold.co/800x1000/154D6E/FFFFFF?text=Prestasi+1' },
-  { id: 3, category: 'Kegiatan', caption: 'Ekstrakurikuler Memanah', image: 'https://placehold.co/800x1000/154D6E/FFFFFF?text=Kegiatan+2' },
-  { id: 4, category: 'Wisuda', caption: 'Haflah Akhirussanah 2025', image: 'https://placehold.co/800x1000/154D6E/FFFFFF?text=Wisuda+1' },
-  { id: 5, category: 'Kegiatan', caption: 'Praktik Laboratorium IPA', image: 'https://placehold.co/800x1000/154D6E/FFFFFF?text=Kegiatan+3' },
-  { id: 6, category: 'Prestasi', caption: 'Lomba Pidato Bahasa Arab', image: 'https://placehold.co/800x1000/154D6E/FFFFFF?text=Prestasi+2' },
-  { id: 7, category: 'Wisuda', caption: 'Prosesi Wisuda Tahfidz', image: 'https://placehold.co/800x1000/154D6E/FFFFFF?text=Wisuda+2' },
-  { id: 8, category: 'Kegiatan', caption: 'Shalat Berjamaah', image: 'https://placehold.co/800x1000/154D6E/FFFFFF?text=Kegiatan+4' },
-]
+const fetchGallery = async () => {
+  try {
+    const res = await axios.get(`${API_URL}/api/gallery`)
+    // Filter out facilities to show only activities/general in gallery section
+    images.value = res.data.filter(img => img.category?.toLowerCase() !== 'fasilitas').slice(0, 10)
+  } catch (err) {
+    console.error('Error fetching gallery:', err)
+  } finally {
+    loading.value = false
+  }
+}
+
+onMounted(fetchGallery)
 </script>
 
 <template>
@@ -74,9 +81,9 @@ const images = [
           class="!pb-16"
         >
           <SwiperSlide v-for="img in images" :key="img.id">
-            <div class="relative group aspect-[3/4] overflow-hidden rounded-2xl md:rounded-[32px] shadow-xl">
+            <div class="relative group aspect-[3/4] overflow-hidden rounded-2xl md:rounded-[32px] shadow-xl bg-white/5">
               <img 
-                :src="img.image" 
+                :src="img.imageUrl" 
                 :alt="img.caption"
                 loading="lazy"
                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"

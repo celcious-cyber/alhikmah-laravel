@@ -1,5 +1,6 @@
 <script setup>
-import { ref, computed, watch } from 'vue'
+import { ref, computed, watch, onMounted } from 'vue'
+import axios from 'axios'
 import { useI18n } from 'vue-i18n'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { Autoplay, Pagination, Navigation } from 'swiper/modules'
@@ -10,23 +11,22 @@ import 'swiper/css/navigation'
 import SectionHeading from '../ui/SectionHeading.vue'
 
 const { tm, t } = useI18n()
+const API_URL = import.meta.env.VITE_API_URL || ''
 
-// Images for programs
-const programImages = [
-  'https://placehold.co/600x400/154D6E/FFFFFF?text=Tahfidz',
-  'https://placehold.co/600x400/154D6E/FFFFFF?text=Bahasa',
-  'https://placehold.co/600x400/154D6E/FFFFFF?text=Seni',
-  'https://placehold.co/600x400/154D6E/FFFFFF?text=Keterampilan',
-  'https://placehold.co/600x400/154D6E/FFFFFF?text=Olahraga',
-  'https://placehold.co/600x400/154D6E/FFFFFF?text=Kitab',
-  'https://placehold.co/600x400/154D6E/FFFFFF?text=Pramuka',
-  'https://placehold.co/600x400/154D6E/FFFFFF?text=Organisasi',
-  'https://placehold.co/600x400/154D6E/FFFFFF?text=Belajar',
-  'https://placehold.co/600x400/154D6E/FFFFFF?text=Pengabdian',
-  'https://placehold.co/600x400/154D6E/FFFFFF?text=Literasi',
-  'https://placehold.co/600x400/154D6E/FFFFFF?text=Rihlah',
-  'https://placehold.co/600x400/154D6E/FFFFFF?text=Dakwah'
-]
+const prev = ref(null)
+const next = ref(null)
+const dynamicPrograms = ref([])
+
+const fetchPrograms = async () => {
+  try {
+    const res = await axios.get(`${API_URL}/api/programs`)
+    dynamicPrograms.value = res.data
+  } catch (err) {
+    console.error('Error fetching programs:', err)
+  }
+}
+
+onMounted(fetchPrograms)
 
 const tabs = computed(() => [
   t('programs.tabs.all'),
@@ -40,20 +40,32 @@ watch(tabs, (newTabs) => {
   activeTab.value = newTabs[0]
 })
 
-const prev = ref(null)
-const next = ref(null)
-
 const programs = computed(() => {
+  if (dynamicPrograms.value.length > 0) {
+    return dynamicPrograms.value.map(p => ({
+      id: p.id,
+      title: p.title,
+      category: p.category,
+      desc: p.description,
+      image: p.imageUrl
+    }))
+  }
+
   const items = tm('programs.items')
-  return items.map((item, index) => {
-    return {
-      id: index + 1,
-      title: item.title,
-      category: index < 7 ? t('programs.tabs.extra') : t('programs.tabs.class'),
-      desc: item.desc,
-      image: programImages[index]
-    }
-  })
+  // Default images fallback
+  const programImages = [
+    'https://placehold.co/600x400/154D6E/FFFFFF?text=Tahfidz',
+    'https://placehold.co/600x400/154D6E/FFFFFF?text=Bahasa',
+    'https://placehold.co/600x400/154D6E/FFFFFF?text=Seni'
+  ]
+  
+  return items.map((item, index) => ({
+    id: index + 1,
+    title: item.title,
+    category: index < 7 ? t('programs.tabs.extra') : t('programs.tabs.class'),
+    desc: item.desc,
+    image: programImages[index % programImages.length]
+  }))
 })
 
 const filteredPrograms = computed(() => {
