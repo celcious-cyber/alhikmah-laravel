@@ -43,16 +43,26 @@ async function processImage(buffer, originalName) {
   const filePath = path.join(dir, fileName)
 
   try {
+    // Batasi concurrency untuk Shared Hosting (Hostinger)
+    sharp.concurrency(1)
+    
     await sharp(buffer)
       .resize(1200, 750, { fit: 'cover', withoutEnlargement: true })
       .webp({ quality: 80 })
       .toFile(filePath)
+    
+    return `/uploads/news/${fileName}`
   } catch (e) {
-    console.error('❌ Sharp Processing Error:', e)
-    throw new Error('Gagal memproses gambar: ' + e.message)
+    console.error('⚠️ Sharp Processing Failed, falling back to original file:', e)
+    
+    // Jika Sharp gagal (misal karena limit Hostinger), simpan file asli
+    const ext = path.extname(originalName) || '.jpg'
+    const fallbackName = `news-fallback-${Date.now()}${ext}`
+    const fallbackPath = path.join(dir, fallbackName)
+    
+    fs.writeFileSync(fallbackPath, buffer)
+    return `/uploads/news/${fallbackName}`
   }
-
-  return `/uploads/news/${fileName}`
 }
 
 // Helper: generate slug dari judul
