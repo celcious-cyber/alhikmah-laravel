@@ -11,9 +11,9 @@ const quickLinks = [
 ]
 
 const socialMedia = [
-  { icon: Instagram, href: '#' },
-  { icon: Facebook, href: '#' },
-  { icon: Youtube, href: '#' },
+  { icon: Instagram, href: 'https://www.instagram.com/ponpes_alhikmah.utan/' },
+  { icon: Facebook, href: 'https://web.facebook.com/ponpes.alhikmahutan?locale=id_ID' },
+  { icon: Youtube, href: 'https://www.youtube.com/@Alhikmahutan' },
 ]
 </script>
 
@@ -22,9 +22,9 @@ const socialMedia = [
     <div class="container-custom grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
       <!-- About -->
       <div class="space-y-6">
-        <h3 class="text-2xl font-extrabold text-white">Al-Hikmah</h3>
-        <p class="text-white/60 leading-relaxed">
-          Pondok Pesantren Modern yang berdedikasi untuk mencetak generasi Qur'ani yang unggul dalam ilmu agama dan inovasi modern.
+        <img src="/assets/images/logo.svg" alt="Al Hikmah" class="h-20 w-auto block mb-4" />
+        <p class="text-white/80 font-medium italic leading-relaxed">
+          "Berdiri di atas dan untuk semua golongan"
         </p>
       </div>
 
@@ -44,10 +44,11 @@ const socialMedia = [
       <div class="space-y-6">
         <h4 class="text-xl font-bold">Kontak</h4>
         <ul class="space-y-3 text-white/60">
-          <li>Jl. Raya Pesantren No. 123</li>
-          <li>Jawa Timur, Indonesia</li>
-          <li>+62 123 4567 890</li>
-          <li>info@alhikmah.id</li>
+          <li class="flex gap-3">
+            <span>Jl. Lintas Sumbawa Tano, Stowe Brang, Kec. Utan, Kab. Sumbawa - NTB</span>
+          </li>
+          <li>+62 859-5856-1289</li>
+          <li>sekretariat@alhikmahutan.ponpes.id</li>
         </ul>
       </div>
 
@@ -59,7 +60,8 @@ const socialMedia = [
             v-for="(social, index) in socialMedia" 
             :key="index" 
             :href="social.href"
-            class="p-2 bg-white/10 rounded-lg hover:bg-secondary transition-colors"
+            target="_blank"
+            class="p-2 bg-white/10 rounded-lg hover:bg-secondary transition-colors text-white"
           >
             <component :is="social.icon" :size="20" />
           </a>
