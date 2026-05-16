@@ -13,7 +13,8 @@ const __dirname = path.dirname(__filename)
 // Konfigurasi Multer untuk penyimpanan file
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    const dir = path.join(__dirname, '../../uploads/pendaftaran')
+    const rootDir = process.env.UPLOAD_PATH || path.join(__dirname, '../../uploads')
+    const dir = path.join(rootDir, 'pendaftaran')
     if (!fs.existsSync(dir)) {
       fs.mkdirSync(dir, { recursive: true })
     }

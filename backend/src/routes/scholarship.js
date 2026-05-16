@@ -9,7 +9,8 @@ const router = express.Router()
 // Konfigurasi Multer untuk Upload Dokumen Beasiswa
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    const dir = 'uploads/beasiswa'
+    const rootDir = process.env.UPLOAD_PATH || 'uploads'
+    const dir = path.join(rootDir, 'beasiswa')
     if (!fs.existsSync(dir)) {
       fs.mkdirSync(dir, { recursive: true })
     }
