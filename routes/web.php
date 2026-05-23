@@ -87,10 +87,22 @@ Route::get('/berita/{slug}', function ($slug) {
     
     // Share SEO metadata to the app view layout
     if ($news) {
-        $siteUrl = config('app.url', 'https://alhikmahutan.ponpes.id');
-        $thumbnail = $news->thumbnail 
-            ? (str_starts_with($news->thumbnail, 'http') ? $news->thumbnail : $siteUrl . $news->thumbnail)
-            : $siteUrl . '/og-image.jpg';
+        $siteUrl = rtrim(config('app.url', 'https://alhikmahutan.ponpes.id'), '/');
+        
+        $thumbnailPath = $news->thumbnail;
+        if ($thumbnailPath) {
+            if (str_starts_with($thumbnailPath, 'http')) {
+                $thumbnail = $thumbnailPath;
+            } else {
+                // Ensure it has /storage/ prefix
+                if (!str_starts_with($thumbnailPath, '/storage/') && !str_starts_with($thumbnailPath, 'storage/')) {
+                    $thumbnailPath = '/storage/' . ltrim($thumbnailPath, '/');
+                }
+                $thumbnail = $siteUrl . '/' . ltrim($thumbnailPath, '/');
+            }
+        } else {
+            $thumbnail = $siteUrl . '/og-image.jpg';
+        }
             
         config(['app.seo_title' => $news->title]);
         config(['app.seo_description' => $news->excerpt]);
