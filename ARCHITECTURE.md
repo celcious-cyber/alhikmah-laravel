@@ -10,9 +10,9 @@ Sistem web Al-Hikmah menggunakan arsitektur **Client-Server** yang terpisah namu
 
 ```mermaid
 graph TD
-    Client[Frontend: Vue 3 / Vite] <-->|HTTP REST API / FormData| Server[Backend: Node.js / Express]
-    Server <-->|mysql2 Connection Pool| Database[(Database: MySQL)]
-    Server <-->|Local Storage| Uploads[Uploads Directory: /uploads]
+    Client[Frontend: Vue 3 SPA] -->|"Inertia.js Protocol"| Laravel[Backend: Laravel Monolith]
+    Laravel -->|Eloquent ORM| Database[(Database: SQLite / MySQL)]
+    Laravel -->|Storage Link| Uploads[Uploads Directory: public/storage]
 ```
 
 *   **Frontend (Client):** Menggunakan **Vue 3** (Composition API) dengan **Vite** sebagai *bundler*. Frontend dirancang sebagai *Single Page Application* (SPA) dengan performa tinggi, pemuatan cepat, dan ramah seluler (*mobile-first*).

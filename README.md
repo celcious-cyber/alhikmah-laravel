@@ -22,24 +22,19 @@ graph TD
         InertiaClient["🟣 Inertia.js Client-Side Link"]
         Tailwind["🎨 Tailwind CSS v4"]
         
-        Browser <-->|Interaksi User| VueSPA
-        VueSPA <--> InertiaClient
+        Browser --> VueSPA
+        VueSPA --> InertiaClient
         VueSPA --- Tailwind
     end
 
     %% Network / Protocol
-    InertiaClient <-->|⚡ AJAX / JSON Protocol (Tanpa Reload)| InertiaServer
+    InertiaClient -->|"⚡ AJAX / JSON Protocol (Tanpa Reload)"| InertiaServer
 
     %% Server-side (Backend Laravel Monolith)
     subgraph Server ["Server-Side (Backend Monolith)"]
-        InertiaServer["🟣 Inertia.js Server-Side Middleware"]
-        LaravelControllers["⚙️ Laravel Controllers"]
-        FilamentCMS["🛠️ Filament v3 Admin CMS"]
-        Eloquent["💾 Eloquent ORM (Models)"]
-        
-        InertiaServer <--> LaravelControllers
-        LaravelControllers <--> Eloquent
-        FilamentCMS <--> Eloquent
+        InertiaServer --> LaravelControllers
+        LaravelControllers --> Eloquent
+        FilamentCMS --> Eloquent
     end
 
     %% Storage & Database
@@ -47,8 +42,8 @@ graph TD
         Database[("🗄️ SQLite / MySQL Database")]
         SymlinkStorage["📁 Public Storage Symlink"]
         
-        Eloquent <--> Database
-        Eloquent <--> SymlinkStorage
+        Eloquent --> Database
+        Eloquent --> SymlinkStorage
     end
 
     classDef client fill:#e8f8f5,stroke:#1abc9c,stroke-width:2px;
