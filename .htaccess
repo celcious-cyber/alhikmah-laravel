@@ -1,0 +1,15 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Kirim seluruh lalu lintas web secara transparan ke folder public/
+    RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>
+
+# Blokir akses publik ke berkas sensitif demi keamanan server
+<FilesMatch "^\.env|composer\.(json|lock)|package\.(json|lock)|vite\.config\.js|artisan|phpunit\.xml|README\.md">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Blokir akses ke direktori tersembunyi seperti .git
+RedirectMatch 404 /\..*$
