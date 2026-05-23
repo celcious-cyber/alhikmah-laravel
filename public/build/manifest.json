@@ -1,0 +1,317 @@
+{
+  "_NewsLayout-Dh260fWD.css": {
+    "file": "assets/NewsLayout-Dh260fWD.css",
+    "src": "_NewsLayout-Dh260fWD.css"
+  },
+  "_NewsLayout-_ax7x3Z-.js": {
+    "file": "assets/NewsLayout-_ax7x3Z-.js",
+    "name": "NewsLayout",
+    "imports": [
+      "resources/js/app.js",
+      "_vendor-vue-CF2bH2tK.js",
+      "_vendor-utils-BDJ4j27P.js"
+    ],
+    "css": [
+      "assets/NewsLayout-Dh260fWD.css"
+    ]
+  },
+  "_SectionHeading-s7qUKqIG.js": {
+    "file": "assets/SectionHeading-s7qUKqIG.js",
+    "name": "SectionHeading",
+    "imports": [
+      "_vendor-vue-CF2bH2tK.js"
+    ]
+  },
+  "_rolldown-runtime-QTnfLwEv.js": {
+    "file": "assets/rolldown-runtime-QTnfLwEv.js",
+    "name": "rolldown-runtime"
+  },
+  "_vendor-others-DRYQcRi2.js": {
+    "file": "assets/vendor-others-DRYQcRi2.js",
+    "name": "vendor-others"
+  },
+  "_vendor-swiper-CWnp4b1q.css": {
+    "file": "assets/vendor-swiper-CWnp4b1q.css",
+    "src": "_vendor-swiper-CWnp4b1q.css"
+  },
+  "_vendor-swiper-DXjdW6_q.js": {
+    "file": "assets/vendor-swiper-DXjdW6_q.js",
+    "name": "vendor-swiper",
+    "css": [
+      "assets/vendor-swiper-CWnp4b1q.css"
+    ]
+  },
+  "_vendor-utils-BDJ4j27P.js": {
+    "file": "assets/vendor-utils-BDJ4j27P.js",
+    "name": "vendor-utils",
+    "imports": [
+      "_rolldown-runtime-QTnfLwEv.js"
+    ],
+    "css": [
+      "assets/vendor-utils-PTugdkvS.css"
+    ]
+  },
+  "_vendor-utils-PTugdkvS.css": {
+    "file": "assets/vendor-utils-PTugdkvS.css",
+    "src": "_vendor-utils-PTugdkvS.css"
+  },
+  "_vendor-vue-CF2bH2tK.js": {
+    "file": "assets/vendor-vue-CF2bH2tK.js",
+    "name": "vendor-vue",
+    "imports": [
+      "_rolldown-runtime-QTnfLwEv.js",
+      "_vendor-others-DRYQcRi2.js",
+      "_vendor-swiper-DXjdW6_q.js"
+    ]
+  },
+  "resources/css/app.css": {
+    "file": "assets/app-CK4d_m8F.css",
+    "name": "app",
+    "names": [
+      "app.css"
+    ],
+    "src": "resources/css/app.css",
+    "isEntry": true
+  },
+  "resources/js/Pages/AchievementsPage.vue": {
+    "file": "assets/AchievementsPage-cDPxxHNy.js",
+    "name": "AchievementsPage",
+    "src": "resources/js/Pages/AchievementsPage.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_vendor-vue-CF2bH2tK.js",
+      "_vendor-utils-BDJ4j27P.js"
+    ]
+  },
+  "resources/js/Pages/ActivitiesPage.vue": {
+    "file": "assets/ActivitiesPage-LZZ8gUq5.js",
+    "name": "ActivitiesPage",
+    "src": "resources/js/Pages/ActivitiesPage.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.js",
+      "_vendor-vue-CF2bH2tK.js",
+      "_SectionHeading-s7qUKqIG.js"
+    ],
+    "css": [
+      "assets/ActivitiesPage-NT6bpw5U.css"
+    ]
+  },
+  "resources/js/Pages/AgendaPage.vue": {
+    "file": "assets/AgendaPage-DVoEsQAh.js",
+    "name": "AgendaPage",
+    "src": "resources/js/Pages/AgendaPage.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.js",
+      "_vendor-vue-CF2bH2tK.js",
+      "_vendor-utils-BDJ4j27P.js"
+    ],
+    "css": [
+      "assets/AgendaPage-B0IRz73P.css"
+    ]
+  },
+  "resources/js/Pages/CurriculumDetailPage.vue": {
+    "file": "assets/CurriculumDetailPage-DureCjsT.js",
+    "name": "CurriculumDetailPage",
+    "src": "resources/js/Pages/CurriculumDetailPage.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_vendor-vue-CF2bH2tK.js",
+      "_vendor-utils-BDJ4j27P.js",
+      "_vendor-swiper-DXjdW6_q.js"
+    ]
+  },
+  "resources/js/Pages/CurriculumPage.vue": {
+    "file": "assets/CurriculumPage-C3sUjy86.js",
+    "name": "CurriculumPage",
+    "src": "resources/js/Pages/CurriculumPage.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_vendor-vue-CF2bH2tK.js",
+      "_vendor-utils-BDJ4j27P.js"
+    ]
+  },
+  "resources/js/Pages/FacilitiesPage.vue": {
+    "file": "assets/FacilitiesPage-B4lLG_rH.js",
+    "name": "FacilitiesPage",
+    "src": "resources/js/Pages/FacilitiesPage.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.js",
+      "_vendor-vue-CF2bH2tK.js",
+      "_vendor-utils-BDJ4j27P.js",
+      "_SectionHeading-s7qUKqIG.js"
+    ],
+    "css": [
+      "assets/FacilitiesPage-Doew27y-.css"
+    ]
+  },
+  "resources/js/Pages/GalleryPage.vue": {
+    "file": "assets/GalleryPage-1RhKQWNZ.js",
+    "name": "GalleryPage",
+    "src": "resources/js/Pages/GalleryPage.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.js",
+      "_vendor-vue-CF2bH2tK.js",
+      "_vendor-utils-BDJ4j27P.js",
+      "_SectionHeading-s7qUKqIG.js"
+    ],
+    "css": [
+      "assets/GalleryPage-BWgnOITD.css"
+    ]
+  },
+  "resources/js/Pages/HomePage.vue": {
+    "file": "assets/HomePage-BXWEcXo-.js",
+    "name": "HomePage",
+    "src": "resources/js/Pages/HomePage.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.js",
+      "_vendor-vue-CF2bH2tK.js",
+      "_vendor-utils-BDJ4j27P.js",
+      "_vendor-swiper-DXjdW6_q.js",
+      "_SectionHeading-s7qUKqIG.js"
+    ],
+    "css": [
+      "assets/HomePage-2QFD0Ev5.css"
+    ]
+  },
+  "resources/js/Pages/IkphPage.vue": {
+    "file": "assets/IkphPage-40uhFAB9.js",
+    "name": "IkphPage",
+    "src": "resources/js/Pages/IkphPage.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_vendor-vue-CF2bH2tK.js",
+      "_vendor-utils-BDJ4j27P.js",
+      "_vendor-swiper-DXjdW6_q.js"
+    ]
+  },
+  "resources/js/Pages/NewsDetailPage.vue": {
+    "file": "assets/NewsDetailPage-Ck2R91mO.js",
+    "name": "NewsDetailPage",
+    "src": "resources/js/Pages/NewsDetailPage.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.js",
+      "_vendor-vue-CF2bH2tK.js",
+      "_vendor-utils-BDJ4j27P.js",
+      "_NewsLayout-_ax7x3Z-.js"
+    ],
+    "css": [
+      "assets/NewsDetailPage-CTdZvcHS.css"
+    ]
+  },
+  "resources/js/Pages/NewsListPage.vue": {
+    "file": "assets/NewsListPage-BLDGjCuv.js",
+    "name": "NewsListPage",
+    "src": "resources/js/Pages/NewsListPage.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.js",
+      "_vendor-vue-CF2bH2tK.js",
+      "_vendor-utils-BDJ4j27P.js",
+      "_NewsLayout-_ax7x3Z-.js",
+      "_SectionHeading-s7qUKqIG.js"
+    ],
+    "css": [
+      "assets/NewsListPage-C82zzVRR.css"
+    ]
+  },
+  "resources/js/Pages/ProfilePage.vue": {
+    "file": "assets/ProfilePage-BsBt01tl.js",
+    "name": "ProfilePage",
+    "src": "resources/js/Pages/ProfilePage.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_vendor-vue-CF2bH2tK.js",
+      "_vendor-utils-BDJ4j27P.js",
+      "_vendor-swiper-DXjdW6_q.js"
+    ]
+  },
+  "resources/js/Pages/ProgramDetailPage.vue": {
+    "file": "assets/ProgramDetailPage-DZrr_BjD.js",
+    "name": "ProgramDetailPage",
+    "src": "resources/js/Pages/ProgramDetailPage.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_vendor-vue-CF2bH2tK.js",
+      "_vendor-utils-BDJ4j27P.js"
+    ]
+  },
+  "resources/js/Pages/ProgramPage.vue": {
+    "file": "assets/ProgramPage-By6XV8GU.js",
+    "name": "ProgramPage",
+    "src": "resources/js/Pages/ProgramPage.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_vendor-vue-CF2bH2tK.js",
+      "_vendor-utils-BDJ4j27P.js"
+    ]
+  },
+  "resources/js/Pages/RegistrationPage.vue": {
+    "file": "assets/RegistrationPage-CpPATraz.js",
+    "name": "RegistrationPage",
+    "src": "resources/js/Pages/RegistrationPage.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.js",
+      "_vendor-vue-CF2bH2tK.js",
+      "_vendor-utils-BDJ4j27P.js",
+      "_SectionHeading-s7qUKqIG.js"
+    ],
+    "css": [
+      "assets/RegistrationPage-DBO47dqO.css"
+    ]
+  },
+  "resources/js/Pages/ScholarshipPage.vue": {
+    "file": "assets/ScholarshipPage-VDot4f7i.js",
+    "name": "ScholarshipPage",
+    "src": "resources/js/Pages/ScholarshipPage.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.js",
+      "_vendor-vue-CF2bH2tK.js",
+      "_vendor-utils-BDJ4j27P.js",
+      "_SectionHeading-s7qUKqIG.js"
+    ],
+    "css": [
+      "assets/ScholarshipPage-DM9_iEQB.css"
+    ]
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-BvgYDvED.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true,
+    "imports": [
+      "_rolldown-runtime-QTnfLwEv.js",
+      "_vendor-others-DRYQcRi2.js",
+      "_vendor-vue-CF2bH2tK.js",
+      "_vendor-utils-BDJ4j27P.js"
+    ],
+    "dynamicImports": [
+      "resources/js/Pages/AchievementsPage.vue",
+      "resources/js/Pages/ActivitiesPage.vue",
+      "resources/js/Pages/AgendaPage.vue",
+      "resources/js/Pages/CurriculumDetailPage.vue",
+      "resources/js/Pages/CurriculumPage.vue",
+      "resources/js/Pages/FacilitiesPage.vue",
+      "resources/js/Pages/GalleryPage.vue",
+      "resources/js/Pages/HomePage.vue",
+      "resources/js/Pages/IkphPage.vue",
+      "resources/js/Pages/NewsDetailPage.vue",
+      "resources/js/Pages/NewsListPage.vue",
+      "resources/js/Pages/ProfilePage.vue",
+      "resources/js/Pages/ProgramDetailPage.vue",
+      "resources/js/Pages/ProgramPage.vue",
+      "resources/js/Pages/RegistrationPage.vue",
+      "resources/js/Pages/ScholarshipPage.vue"
+    ],
+    "css": [
+      "assets/app-TvQXOXoY.css"
+    ]
+  }
+}
