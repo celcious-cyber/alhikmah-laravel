@@ -1,12 +1,25 @@
 {
-  "name": "al-hikmah-root",
-  "version": "1.0.0",
-  "type": "module",
-  "scripts": {
-    "install-all": "npm install --prefix backend && npm install --prefix frontend",
-    "build": "cd frontend && npm install --no-audit --no-fund && npm run build && rm -rf ../backend/dist ../dist && cp -r dist ../backend/ && cp -r dist ../ && cd ../backend && npm install --no-audit --no-fund",
-    "start": "bash -c 'cd backend && (node prisma/seed.js || true) && node src/index.js'",
-    "seed": "cd backend && node prisma/seed.js",
-    "postinstall": "npm run build"
-  }
+    "$schema": "https://www.schemastore.org/package.json",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "build": "vite build",
+        "dev": "vite"
+    },
+    "devDependencies": {
+        "@inertiajs/vue3": "^3.2.0",
+        "@tailwindcss/vite": "^4.0.0",
+        "@vitejs/plugin-vue": "^6.0.7",
+        "aos": "^2.3.4",
+        "axios": "^1.16.1",
+        "concurrently": "^9.0.1",
+        "laravel-vite-plugin": "^3.1",
+        "lucide-vue-next": "^1.0.0",
+        "pinia": "^3.0.4",
+        "swiper": "^12.1.4",
+        "tailwindcss": "^4.0.0",
+        "vite": "^8.0.0",
+        "vue": "^3.5.34",
+        "vue-i18n": "^11.4.4"
+    }
 }
