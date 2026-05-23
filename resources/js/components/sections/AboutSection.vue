@@ -17,7 +17,7 @@ const settings = computed(() => page.props.cmsSettings || {})
         <div class="relative" data-aos="fade-right">
 
           <img 
-            :src="settings.about_image ? '/storage/' + settings.about_image : 'https://placehold.co/800x1000/154D6E/FFFFFF?text=Pimpinan'" 
+            :src="settings.about_image ? (settings.about_image.startsWith('http') ? settings.about_image : '/storage/' + settings.about_image) : 'https://placehold.co/800x1000/154D6E/FFFFFF?text=Pimpinan'" 
             :alt="settings.founder_name || 'Pimpinan Pondok'" 
             class="w-full h-auto rounded-2xl shadow-2xl object-cover aspect-[4/5]"
           />
