@@ -15,7 +15,7 @@ return new class extends Migration
             $table->string('title')->nullable()->after('name');
         });
 
-        Schema::table('news', function (Blueprint $table) {
+        Schema::table('News', function (Blueprint $table) {
             $table->foreignId('author_id')->nullable()->constrained('users')->nullOnDelete()->after('id');
         });
     }
@@ -25,7 +25,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('news', function (Blueprint $table) {
+        Schema::table('News', function (Blueprint $table) {
             $table->dropForeign(['author_id']);
             $table->dropColumn('author_id');
         });
