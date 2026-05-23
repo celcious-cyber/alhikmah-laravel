@@ -1,24 +1,9 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
     
-    # Cegah loop tak terbatas: jangan rewrite jika request sudah mengarah ke folder public
+    # Cegah loop tak terbatas: jangan lakukan rewrite jika request sudah mengarah ke folder public
     RewriteCond %{REQUEST_URI} !^/public/
     
     # Kirim seluruh lalu lintas web secara transparan ke folder public/
     RewriteRule ^(.*)$ public/$1 [L]
 </IfModule>
-
-# Matikan indeks direktori untuk mencegah 403 Forbidden saat tidak ada file indeks langsung di root
-Options -Indexes
-
-# Tentukan berkas indeks default utama
-DirectoryIndex public/index.php
-
-# Blokir akses publik ke berkas sensitif demi keamanan server
-<FilesMatch "^\.env|composer\.(json|lock)|package\.(json|lock)|vite\.config\.js|artisan|phpunit\.xml|README\.md">
-    Order allow,deny
-    Deny from all
-</FilesMatch>
-
-# Blokir akses ke direktori tersembunyi seperti .git
-RedirectMatch 404 /\..*$
