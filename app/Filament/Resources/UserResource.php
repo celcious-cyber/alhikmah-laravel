@@ -54,6 +54,11 @@ class UserResource extends Resource
                     ->options([
                         'admin' => 'Administrator',
                         'penulis' => 'Penulis',
+                        'kmi' => 'Admin KMI',
+                        'smp' => 'Admin SMP',
+                        'ma' => 'Admin MA',
+                        'tpq' => 'Admin TPQ',
+                        'ikph' => 'Admin IKPH',
                     ])
                     ->required()
                     ->default('admin'),
@@ -102,6 +107,7 @@ class UserResource extends Resource
                     ->color(fn (string $state): string => match ($state) {
                         'admin' => 'danger',
                         'penulis' => 'warning',
+                        'kmi', 'smp', 'ma', 'tpq', 'ikph' => 'success',
                         default => 'primary',
                     }),
                 Tables\Columns\TextColumn::make('phone')

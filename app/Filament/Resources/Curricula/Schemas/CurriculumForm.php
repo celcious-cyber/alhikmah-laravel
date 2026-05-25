@@ -28,6 +28,7 @@ class CurriculumForm
                                 'kmi' => "KMI (Kulliyatul Mu'allimin Al-Islamiyah)",
                                 'smp' => 'SMP Al-Hikmah',
                                 'ma'  => 'MA Al-Hikmah (Madrasah Aliyah)',
+                                'tpq' => 'TPQ Al-Hikmah',
                             ]),
                         TextInput::make('name')
                             ->label('Nama Resmi Lembaga')
@@ -47,7 +48,7 @@ class CurriculumForm
                             ->label('Urutan Tampil')
                             ->required()
                             ->numeric()
-                            ->default(0),
+                            ->default(fn () => \App\Models\Curriculum::max('order') + 1),
                     ])->columns(2),
 
                 // ─── Kepala Lembaga ───────────────────────────────

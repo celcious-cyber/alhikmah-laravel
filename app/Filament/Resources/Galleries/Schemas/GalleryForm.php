@@ -37,6 +37,8 @@ class GalleryForm
                     ->required()
                     ->numeric()
                     ->default(0),
+                \Filament\Forms\Components\Hidden::make('author_id')
+                    ->default(fn () => auth()->id()),
             ]);
     }
 }

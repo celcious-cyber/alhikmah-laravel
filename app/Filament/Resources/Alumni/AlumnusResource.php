@@ -18,7 +18,7 @@ class AlumnusResource extends Resource
 {
     public static function canAccess(): bool
     {
-        return auth()->user()->isAdmin();
+        return auth()->user()->isAdmin() || auth()->user()->isIkph();
     }
 
     protected static ?string $model = Alumnus::class;

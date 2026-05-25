@@ -14,6 +14,8 @@ class CurriculaTable
     public static function configure(Table $table): Table
     {
         return $table
+            ->reorderable('order')
+            ->defaultSort('order')
             ->columns([
                 ImageColumn::make('thumbnail')
                     ->label('Banner'),

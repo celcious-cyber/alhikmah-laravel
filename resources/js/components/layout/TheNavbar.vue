@@ -32,9 +32,10 @@ const navLinks = computed(() => [
     name: 'Kurikulum', 
     to: '/kurikulum',
     submenu: [
-      { name: 'KMI', to: '/kurikulum' },
-      { name: 'SMP', to: '/kurikulum' },
-      { name: 'MA', to: '/kurikulum' },
+      { name: 'KMI', to: '/kurikulum/kmi' },
+      { name: 'SMP', to: '/kurikulum/smp' },
+      { name: 'MA', to: '/kurikulum/ma' },
+      { name: 'TPQ', to: '/kurikulum/tpq' },
     ]
   },
   { 

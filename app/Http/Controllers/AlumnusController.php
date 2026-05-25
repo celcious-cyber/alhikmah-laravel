@@ -22,11 +22,22 @@ class AlumnusController extends Controller
 
         // Featured alumni
         $featured = $alumni->where('is_featured', true)->values();
+        $totalPutra = \Illuminate\Support\Facades\DB::table('Settings')->where('key', 'total_alumni_putra')->value('value');
+        $totalPutri = \Illuminate\Support\Facades\DB::table('Settings')->where('key', 'total_alumni_putri')->value('value');
+
+        if ($totalPutra !== null && $totalPutri !== null) {
+            $totalAlumni = (int)$totalPutra + (int)$totalPutri;
+        } else {
+            $totalAlumni = $alumni->count();
+        }
 
         return response()->json([
             'alumni' => $alumni,
             'distribution' => $distribution,
             'featured' => $featured,
+            'total_count' => $totalAlumni,
+            'total_putra' => $totalPutra !== null ? (int)$totalPutra : null,
+            'total_putri' => $totalPutri !== null ? (int)$totalPutri : null,
         ]);
     }
 

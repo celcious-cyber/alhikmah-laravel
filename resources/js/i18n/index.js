@@ -14,7 +14,7 @@ const messages = {
       gallery: 'Galeri',
       elearning: 'E-Learning', 
       login: 'Masuk',
-      news: 'Berita & Acara',
+      news: 'Berita',
       agenda: 'Agenda Santri',
       register: 'Daftar Sekarang'
     },
@@ -109,7 +109,7 @@ const messages = {
       categories: { all: 'Semua', act: 'Kegiatan', ach: 'Prestasi', grad: 'Wisuda', fac: 'Fasilitas' }
     },
     news: {
-      title: 'Berita & Acara',
+      title: 'Berita',
       subtitle: 'Ikuti perkembangan terbaru, prestasi santri, dan jadwal kegiatan penting di lingkungan pesantren.',
       read_more: 'Baca Selengkapnya',
       load_more: 'Muat Lebih Banyak Berita',

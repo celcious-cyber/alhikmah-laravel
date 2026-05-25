@@ -13,12 +13,35 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 
 class CurriculumResource extends Resource
 {
     public static function canAccess(): bool
     {
+        return auth()->user()->isAdmin() || auth()->user()->isCurriculumAdmin();
+    }
+
+    public static function canCreate(): bool
+    {
         return auth()->user()->isAdmin();
+    }
+
+    public static function canDelete(Model $record): bool
+    {
+        return auth()->user()->isAdmin();
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        $query = parent::getEloquentQuery();
+
+        if (auth()->user()->isCurriculumAdmin()) {
+            return $query->where('type', auth()->user()->role);
+        }
+
+        return $query;
     }
 
     protected static ?string $model = Curriculum::class;
@@ -26,7 +49,7 @@ class CurriculumResource extends Resource
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedDocumentText;
     protected static string|\UnitEnum|null $navigationGroup = 'Profil Pesantren';
     protected static ?int $navigationSort = 3;
-    protected static ?string $navigationLabel = 'Kurikulum (KMI/SMP/MA)';
+    protected static ?string $navigationLabel = 'Kurikulum (KMI/SMP/MA/TPQ)';
     protected static ?string $pluralLabel = 'Kurikulum';
 
     public static function form(Schema $schema): Schema

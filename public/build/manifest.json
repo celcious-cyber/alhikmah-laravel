@@ -3,8 +3,8 @@
     "file": "assets/NewsLayout-Dh260fWD.css",
     "src": "_NewsLayout-Dh260fWD.css"
   },
-  "_NewsLayout-mFp4SJfo.js": {
-    "file": "assets/NewsLayout-mFp4SJfo.js",
+  "_NewsLayout-DmiCicnt.js": {
+    "file": "assets/NewsLayout-DmiCicnt.js",
     "name": "NewsLayout",
     "imports": [
       "resources/js/app.js",
@@ -84,7 +84,7 @@
     ]
   },
   "resources/js/Pages/ActivitiesPage.vue": {
-    "file": "assets/ActivitiesPage-BRxO5aaC.js",
+    "file": "assets/ActivitiesPage-KBVMWG6Q.js",
     "name": "ActivitiesPage",
     "src": "resources/js/Pages/ActivitiesPage.vue",
     "isDynamicEntry": true,
@@ -98,7 +98,7 @@
     ]
   },
   "resources/js/Pages/AgendaPage.vue": {
-    "file": "assets/AgendaPage-BxC3J3ye.js",
+    "file": "assets/AgendaPage-BxKuxW2a.js",
     "name": "AgendaPage",
     "src": "resources/js/Pages/AgendaPage.vue",
     "isDynamicEntry": true,
@@ -133,7 +133,7 @@
     ]
   },
   "resources/js/Pages/FacilitiesPage.vue": {
-    "file": "assets/FacilitiesPage-Dg-RBbiQ.js",
+    "file": "assets/FacilitiesPage-Djtrf_KZ.js",
     "name": "FacilitiesPage",
     "src": "resources/js/Pages/FacilitiesPage.vue",
     "isDynamicEntry": true,
@@ -148,7 +148,7 @@
     ]
   },
   "resources/js/Pages/GalleryPage.vue": {
-    "file": "assets/GalleryPage-DxnJ5XuO.js",
+    "file": "assets/GalleryPage-Clf-2nM8.js",
     "name": "GalleryPage",
     "src": "resources/js/Pages/GalleryPage.vue",
     "isDynamicEntry": true,
@@ -163,7 +163,7 @@
     ]
   },
   "resources/js/Pages/HomePage.vue": {
-    "file": "assets/HomePage-Cl95BHi4.js",
+    "file": "assets/HomePage-Cw6TenMs.js",
     "name": "HomePage",
     "src": "resources/js/Pages/HomePage.vue",
     "isDynamicEntry": true,
@@ -179,7 +179,7 @@
     ]
   },
   "resources/js/Pages/IkphPage.vue": {
-    "file": "assets/IkphPage-40uhFAB9.js",
+    "file": "assets/IkphPage-Bw2ipCnl.js",
     "name": "IkphPage",
     "src": "resources/js/Pages/IkphPage.vue",
     "isDynamicEntry": true,
@@ -190,7 +190,7 @@
     ]
   },
   "resources/js/Pages/NewsDetailPage.vue": {
-    "file": "assets/NewsDetailPage-DGESTOJK.js",
+    "file": "assets/NewsDetailPage-C6MwI5Mc.js",
     "name": "NewsDetailPage",
     "src": "resources/js/Pages/NewsDetailPage.vue",
     "isDynamicEntry": true,
@@ -198,14 +198,14 @@
       "resources/js/app.js",
       "_vendor-vue-CF2bH2tK.js",
       "_vendor-utils-BDJ4j27P.js",
-      "_NewsLayout-mFp4SJfo.js"
+      "_NewsLayout-DmiCicnt.js"
     ],
     "css": [
       "assets/NewsDetailPage-CTdZvcHS.css"
     ]
   },
   "resources/js/Pages/NewsListPage.vue": {
-    "file": "assets/NewsListPage-IbpdmbpW.js",
+    "file": "assets/NewsListPage-BYFo-W8c.js",
     "name": "NewsListPage",
     "src": "resources/js/Pages/NewsListPage.vue",
     "isDynamicEntry": true,
@@ -213,7 +213,7 @@
       "resources/js/app.js",
       "_vendor-vue-CF2bH2tK.js",
       "_vendor-utils-BDJ4j27P.js",
-      "_NewsLayout-mFp4SJfo.js",
+      "_NewsLayout-DmiCicnt.js",
       "_SectionHeading-s7qUKqIG.js"
     ],
     "css": [
@@ -252,7 +252,7 @@
     ]
   },
   "resources/js/Pages/RegistrationPage.vue": {
-    "file": "assets/RegistrationPage-drBiclIN.js",
+    "file": "assets/RegistrationPage-De-5s681.js",
     "name": "RegistrationPage",
     "src": "resources/js/Pages/RegistrationPage.vue",
     "isDynamicEntry": true,
@@ -267,7 +267,7 @@
     ]
   },
   "resources/js/Pages/ScholarshipPage.vue": {
-    "file": "assets/ScholarshipPage-BtDyCxIt.js",
+    "file": "assets/ScholarshipPage-ByEf72iV.js",
     "name": "ScholarshipPage",
     "src": "resources/js/Pages/ScholarshipPage.vue",
     "isDynamicEntry": true,
@@ -282,7 +282,7 @@
     ]
   },
   "resources/js/app.js": {
-    "file": "assets/app-BitvOuc8.js",
+    "file": "assets/app-CS2fW53A.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,
@@ -311,7 +311,7 @@
       "resources/js/Pages/ScholarshipPage.vue"
     ],
     "css": [
-      "assets/app-TvQXOXoY.css"
+      "assets/app-S90CiZeA.css"
     ]
   }
 }

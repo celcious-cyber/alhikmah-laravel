@@ -44,6 +44,36 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
         return $this->role === 'penulis';
     }
 
+    public function isCurriculumAdmin(): bool
+    {
+        return in_array($this->role, ['kmi', 'smp', 'ma', 'tpq']);
+    }
+
+    public function isKmi(): bool
+    {
+        return $this->role === 'kmi';
+    }
+
+    public function isSmp(): bool
+    {
+        return $this->role === 'smp';
+    }
+
+    public function isMa(): bool
+    {
+        return $this->role === 'ma';
+    }
+
+    public function isTpq(): bool
+    {
+        return $this->role === 'tpq';
+    }
+
+    public function isIkph(): bool
+    {
+        return $this->role === 'ikph';
+    }
+
     public function getFilamentAvatarUrl(): ?string
     {
         return $this->avatar_url ? '/storage/' . $this->avatar_url : null;

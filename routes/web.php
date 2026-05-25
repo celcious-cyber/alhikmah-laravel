@@ -49,6 +49,10 @@ Route::get('/kurikulum/ma', function () {
     return Inertia::render('CurriculumDetailPage', ['type' => 'ma']);
 });
 
+Route::get('/kurikulum/tpq', function () {
+    return Inertia::render('CurriculumDetailPage', ['type' => 'tpq']);
+});
+
 Route::get('/profil', function () {
     return Inertia::render('ProfilePage');
 });

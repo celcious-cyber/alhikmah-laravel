@@ -19,6 +19,9 @@ const API_URL = import.meta.env.VITE_API_URL || ''
 const alumni = ref([])
 const distribution = ref({})
 const featured = ref([])
+const totalAlumniCount = ref(0)
+const totalPutra = ref(null)
+const totalPutri = ref(null)
 const loading = ref(true)
 
 const searchQuery = ref('')
@@ -30,6 +33,9 @@ onMounted(async () => {
     alumni.value = res.data.alumni
     distribution.value = res.data.distribution
     featured.value = res.data.featured
+    totalAlumniCount.value = res.data.total_count
+    totalPutra.value = res.data.total_putra
+    totalPutri.value = res.data.total_putri
   } catch (err) {
     console.error('Failed to fetch alumni data:', err)
   } finally {
@@ -121,8 +127,13 @@ const filteredAlumni = computed(() => {
             <div class="glassmorphism p-6 rounded-3xl border border-white/10 text-center relative overflow-hidden group">
               <div class="absolute inset-0 bg-secondary/5 group-hover:bg-secondary/10 transition-colors"></div>
               <GraduationCap class="text-secondary mx-auto mb-4" :size="32" />
-              <h3 class="text-4xl font-extrabold text-white mb-2">{{ alumni.length }}</h3>
-              <p class="text-white/60 font-medium">Data Alumni</p>
+              <h3 class="text-4xl font-extrabold text-white mb-2">{{ totalAlumniCount }}</h3>
+              <p class="text-white/60 font-medium mb-1">Data Alumni</p>
+              <div v-if="totalPutra !== null || totalPutri !== null" class="flex justify-center gap-3 text-xs text-white/50 mt-2">
+                <span v-if="totalPutra !== null">Putra: <span class="text-white/80 font-bold">{{ totalPutra }}</span></span>
+                <span v-if="totalPutra !== null && totalPutri !== null">|</span>
+                <span v-if="totalPutri !== null">Putri: <span class="text-white/80 font-bold">{{ totalPutri }}</span></span>
+              </div>
             </div>
           </div>
         </div>

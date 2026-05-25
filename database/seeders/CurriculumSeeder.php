@@ -19,13 +19,7 @@ class CurriculumSeeder extends Seeder
                 'total_teachers'    => null,
                 'head_name'         => 'KH. Syihabuddin Muhammad',
                 'head_title'        => 'Pimpinan Pondok & Direktur KMI',
-                'npsn'              => null,
-                'nss'               => null,
-                'accreditation'     => null,
-                'accreditation_year'=> null,
-                'operational_permit'=> null,
-                'permit_date'       => null,
-                'permit_issuer'     => null,
+                'legalities'        => [],
                 'description'       => "Kulliyatul Mu'allimin Al-Islamiyah (KMI) adalah program inti Pondok Modern Al-Hikmah yang mengintegrasikan ilmu agama Islam (Dirasah Islamiyah) dengan ilmu umum secara seimbang dan terpadu. Kurikulum KMI mengacu pada sistem pendidikan Pondok Modern Darussalam Gontor yang telah terbukti melahirkan ulama, intelektual, dan pemimpin umat.",
                 'history'           => "KMI Al-Hikmah mulai beroperasi sejak pondok didirikan pada 27 Juli 2006 oleh KH. Syihabuddin Muhammad, alumni Pondok Modern Darussalam Gontor. Program ini menggunakan metode pengajaran berbasis bahasa Arab dan Inggris sebagai bahasa pengantar sehari-hari, sehingga lulusannya memiliki kemampuan komunikasi internasional yang kuat. Pada tahun 2012, pondok berpindah lokasi ke Dusun Bina Marga, Desa Stowe Brang, Kecamatan Utan, Kabupaten Sumbawa, untuk mengembangkan kapasitas dan kualitas pendidikan.",
                 'features'          => [
@@ -63,13 +57,9 @@ class CurriculumSeeder extends Seeder
                 'total_teachers'    => null,
                 'head_name'         => null,
                 'head_title'        => 'Kepala Sekolah SMP Al-Hikmah',
-                'npsn'              => null,
-                'nss'               => null,
-                'accreditation'     => null,
-                'accreditation_year'=> null,
-                'operational_permit'=> null,
-                'permit_date'       => null,
-                'permit_issuer'     => 'Dinas Pendidikan & Kebudayaan Kab. Sumbawa',
+                'legalities'        => [
+                    ['name' => 'Penerbit SK', 'value' => 'Dinas Pendidikan & Kebudayaan Kab. Sumbawa']
+                ],
                 'description'       => 'SMP Al-Hikmah mengacu pada Kurikulum Nasional (Kemdikbud) yang diperkaya dengan muatan lokal kepesantrenan dan nilai-nilai Islam. Santri memperoleh pendidikan formal setara dengan sekolah negeri, sekaligus dibimbing dengan program keagamaan pondok pesantren secara penuh.',
                 'history'           => 'SMP Al-Hikmah mulai beroperasi beberapa tahun setelah berdirinya pondok, sebagai jenjang pendidikan formal pertama yang dibuka untuk mengakomodasi santri lulusan SD/MI yang ingin mendapatkan ijazah formal setara Sekolah Menengah Pertama sekaligus menempuh pendidikan pesantren secara penuh.',
                 'features'          => [
@@ -104,13 +94,9 @@ class CurriculumSeeder extends Seeder
                 'total_teachers'    => null,
                 'head_name'         => null,
                 'head_title'        => 'Kepala Madrasah Aliyah Al-Hikmah',
-                'npsn'              => null,
-                'nss'               => null,
-                'accreditation'     => null,
-                'accreditation_year'=> null,
-                'operational_permit'=> null,
-                'permit_date'       => null,
-                'permit_issuer'     => 'Kementerian Agama (Kemenag) Kab. Sumbawa',
+                'legalities'        => [
+                    ['name' => 'Penerbit SK', 'value' => 'Kementerian Agama (Kemenag) Kab. Sumbawa']
+                ],
                 'description'       => 'Madrasah Aliyah (MA) Al-Hikmah mengacu pada Kurikulum Kementerian Agama (Kemenag) yang dipadukan dengan Kurikulum KMI Pondok Modern. Lulusannya dipersiapkan untuk dapat melanjutkan pendidikan ke perguruan tinggi negeri maupun luar negeri (Timur Tengah, Malaysia, dll) dengan bekal ilmu agama dan umum yang kuat.',
                 'history'           => 'MA Al-Hikmah didirikan sebagai jenjang lanjutan dari SMP Al-Hikmah untuk memberikan kesempatan kepada santri agar mendapatkan ijazah formal setingkat SMA/SMK yang diakui oleh Kemenag, sehingga lulusan dapat langsung mendaftar ke perguruan tinggi dalam dan luar negeri tanpa hambatan administratif.',
                 'features'          => [
@@ -137,6 +123,38 @@ class CurriculumSeeder extends Seeder
                 ],
                 'achievements'      => [],
                 'order'             => 3,
+            ],
+            [
+                'type'              => 'tpq',
+                'name'              => 'Taman Pendidikan Al-Qur\'an (TPQ) Al-Hikmah',
+                'tagline'           => 'Membangun Generasi Qur\'ani Sejak Usia Dini',
+                'year_established'  => 2015,
+                'total_students'    => null,
+                'total_teachers'    => null,
+                'head_name'         => null,
+                'head_title'        => 'Kepala TPQ Al-Hikmah',
+                'legalities'        => [
+                    ['name' => 'Penerbit SK', 'value' => 'Kementerian Agama (Kemenag) Kab. Sumbawa']
+                ],
+                'description'       => 'Taman Pendidikan Al-Qur\'an (TPQ) Al-Hikmah merupakan lembaga pendidikan non-formal yang berfokus pada pengajaran baca tulis Al-Qur\'an, hafalan surat-surat pendek, doa sehari-hari, serta pembentukan akhlak dasar bagi anak-anak usia dini hingga sekolah dasar.',
+                'history'           => 'TPQ Al-Hikmah didirikan untuk merespon tingginya antusiasme masyarakat sekitar pondok yang ingin membekali putra-putri mereka dengan ilmu Al-Qur\'an sejak usia dini. Program ini sekaligus menjadi wadah pengabdian bagi santri senior dalam mengajarkan Al-Qur\'an kepada masyarakat.',
+                'features'          => [
+                    ['item' => 'Metode Iqro & Tilawati yang Menyenangkan'],
+                    ['item' => 'Hafalan Surat Pendek (Juz Amma) & Doa Harian'],
+                    ['item' => 'Pendidikan Adab & Akhlak Anak Islami'],
+                    ['item' => 'Bimbingan Ibadah Praktis (Wudhu & Shalat)'],
+                    ['item' => 'Pengajar dari Asatidz & Santri Senior Berpengalaman'],
+                ],
+                'subjects'          => [
+                    ['name' => 'Tahsin & Tartil Al-Qur\'an', 'type' => 'agama'],
+                    ['name' => 'Hafalan Juz Amma', 'type' => 'agama'],
+                    ['name' => 'Doa Sehari-hari', 'type' => 'agama'],
+                    ['name' => 'Fikih Ibadah Praktis', 'type' => 'agama'],
+                    ['name' => 'Aqidah & Akhlak', 'type' => 'agama'],
+                    ['name' => 'Kisah Nabi & Rasul', 'type' => 'agama'],
+                ],
+                'achievements'      => [],
+                'order'             => 4,
             ],
         ];
 
